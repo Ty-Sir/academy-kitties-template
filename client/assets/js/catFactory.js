@@ -16,10 +16,29 @@ function genColors(){
 
 //This function code needs to modified so that it works with Your cat code.
 function headColor(color,code) {
-    $('.cat__head, .cat__chest').css('background', '#' + color)  //This changes the color of the cat
-    $('#headcode').html('code: '+code) //This updates text of the badge next to the slider
+    $('.head, .body').css('background', '#' + color)  //This changes the color of the cat
+    $('#headcode').html('code: '+ code) //This updates text of the badge next to the slider
     $('#dnabody').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
+
+function mouthColor(color,code) {
+    $('.mouth').css('background', '#' + color)  //This changes the color of the cat
+    $('#mouthcode').html('code: '+ code) //This updates text of the badge next to the slider
+    $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function eyesColor(color,code) {
+    $('.iris').css('border-color', '#' + color)  //This changes the color of the cat
+    $('#eyecode').html('code: '+ code) //This updates text of the badge next to the slider
+    $('#dnaeyes').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
+function earsColor(color,code) {
+    $('.ear').css('background', '#' + color)  //This changes the color of the cat
+    $('#earscode').html('code: '+ code) //This updates text of the badge next to the slider
+    $('#dnaears').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+
 
 
 //###################################################
