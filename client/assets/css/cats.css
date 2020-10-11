@@ -1,15 +1,14 @@
 *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 html {
-    box-sizing: border-box;
-    overflow-y: scroll;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
 body {
-    background: #607d8b;
-
+  background: #607d8b;
 }
 
 .cat{
@@ -19,10 +18,10 @@ body {
 }
 
 .head{
-  background: linear-gradient(rgb(80,80,80), rgb(40, 40, 40));
+  background: #505050;
   width: 200px;
   height: 200px;
-  border-radius: 40% 40% 60% 60%;
+  border-radius: 40% 40% 50% 50%;
   top: 15px;
   position: relative;
   z-index: 6;
@@ -35,6 +34,46 @@ body {
   height: 20px;
   left: 95px;
   background: white;
+}
+
+.eyelashes-left, .eyelashes-right {
+  position: relative;
+}
+.eyelashes-left, .eyelashes-right, .eyelashes-left::after, .eyelashes-right::after, .eyelashes-left::before, .eyelashes-right::before {
+  width: 40px;
+  height: 2px;
+  background: #373737;
+}
+.eyelashes-left::before, .eyelashes-right::before, .eyelashes-left::after, .eyelashes-right::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+.eyelashes-left {
+  top: 35px;
+  left: 30px;
+  transform: rotate(90deg);
+}
+.eyelashes-left::before {
+  top: -16px;
+  transform: rotate(15deg);
+}
+.eyelashes-left::after {
+  top: 16px;
+  transform: rotate(-15deg);
+}
+.eyelashes-right {
+  top: 35px;
+  left: 130px;
+  transform: rotate(-90deg);
+}
+.eyelashes-right::before {
+  top: -16px;
+  transform: rotate(-15deg);
+}
+.eyelashes-right::after {
+  top: 16px;
+  transform: rotate(15deg);
 }
 
 .eyes{
@@ -51,40 +90,40 @@ body {
   margin: 25px;
   position: relative;
   z-index: 2;
-
 }
-
-.pupils{
-  background: black;
+.iris{
+  position: relative;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  position: absolute;
+  background: linear-gradient(#00e1ff, #0066ff);
   top: 10px;
-  left: 5px;
-  animation-name: felix;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-
+  left: 10px;
+    /* animation-name: felix;
+    animation-duration: 1s;
+    animation-iteration-count: infinite; */
 }
-
+/*
 @keyframes felix{
   0%{
-    left: 3px;
+    left: 2px;
   }
   50%{
     left: 18px;
   }
   100%{
-    left: 3px;
+    left: 2px;
   }
-}
+} */
 
-.iris{
-  width: 30px;
-  height: 30px;
+.pupils{
+  background: black;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  border: 4px solid #00e1ff;
+  position: relative;
+  margin: auto;
+  top: 2px;
 }
 
 .pupil_highlight{
@@ -93,15 +132,28 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  bottom: 30px;
+  bottom: 25px;
 }
 
-.eyelashes{
-  font-size: 30px;
-  position: relative;
-  bottom: 33px;
-  left: 5px;
-  font-family: sans-serif;
+
+.muzzle_left{
+  position: absolute;
+  background: #eee;
+  width: 50px;
+  height: 60px;
+  border-radius: 45%;
+  left: 60px;
+  transform: rotate(45deg);
+}
+
+.muzzle_right{
+  position: absolute;
+  background: #eee;
+  width: 50px;
+  height: 60px;
+  border-radius: 45%;
+  left: 90px;
+  transform: rotate(-45deg);
 }
 
 .nose{
@@ -115,8 +167,18 @@ body {
   z-index: 4;
 }
 
+.nose_point{
+  position: relative;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 8px solid black;
+  top: 6px;
+}
+
 .mouth{
-  background: #f8d4ff;
+  background: pink;
   width: 25px;
   height: 15px;
   border-radius: 10% 10% 50% 50%;
@@ -126,27 +188,31 @@ body {
   z-index: 5;
 }
 
-.whiskers{
-  color: lightgrey;
+.chin_hair{
   position: relative;
-  display: flex;
-  font-size: 60px;
-  bottom: 60px;
-  right: 2px;
-  z-index: 3;
-  font-family: sans-serif;
+  background: white;
+  border-radius: 40% 40% 20% 20%;
 }
 
-.whisker{
-  margin: 25px;
+.chin_hair_left{
+  width: 4px;
+  height: 15px;
+  left: 90px;
+  top: 53px;
 }
 
-.left_whiskers{
-  transform: rotate(-90deg);
+.chin_hair_middle{
+  width: 5px;
+  height: 23px;
+  left: 98px;
+  top: 30px;
 }
 
-.right_whiskers{
-  transform: rotate(90deg);
+.chin_hair_right{
+  width: 4px;
+  height: 15px;
+  left: 107px;
+  top: 15px;
 }
 
 .ears{
@@ -165,11 +231,11 @@ body {
   transform: scale(1,-1);
   left:-20px;
   top: -20px;
-  background: linear-gradient(rgb(40, 40, 40), rgb(80, 80, 80));
+  background: #505050;
 }
 
 .right_ear{
-  background: linear-gradient(rgb(80, 80, 80), rgb(40, 40, 40));
+  background: #505050;
   left: 75px;
   top: -20px;
 }
@@ -183,39 +249,127 @@ body {
 }
 
 .left_inner_ear{
-  top: 75px;
+  top: 60px;
+  left: 15px;
 }
 
 .right_inner_ear{
-  left: 75px;
+  left: 60px;
+  top: 15px;
 }
 
-.ear_hair{
-  position: relative;
-  color: black;
-  font-size: 25px;
-  font-family: sans-serif;
+.cat__whiskers-left, .cat__whiskers-right {
+    position: relative;
+    z-index: 3;
+}
+.cat__whiskers-left, .cat__whiskers-right, .cat__whiskers-left::after, .cat__whiskers-right::after, .cat__whiskers-left::before, .cat__whiskers-right::before {
+    width: 100px;
+    height: 1px;
+    background: #373737;
+}
+.cat__whiskers-left::before, .cat__whiskers-right::before, .cat__whiskers-left::after, .cat__whiskers-right::after {
+    content: '';
+    position: absolute;
+    left: 0;
+}
+.cat__whiskers-left {
+    top: 30px;
+    left: -25px;
+}
+.cat__whiskers-left::before {
+    top: -16px;
+    transform: rotate(15deg);
+}
+.cat__whiskers-left::after {
+    top: 16px;
+    transform: rotate(-15deg);
+}
+.cat__whiskers-right {
+    top: 30px;
+    left: 125px;
+}
+.cat__whiskers-right::before {
+    top: -16px;
+    transform: rotate(-15deg);
+}
+.cat__whiskers-right::after {
+    top: 16px;
+    transform: rotate(15deg);
 }
 
-.left_ear_hair{
-  transform: rotate(-135deg);
-  right: 20px;
-}
-
-.right_ear_hair{
-  transform: rotate(45deg);
-  top: 40px;
+.facemark_left{
+  position: absolute;
+  width: 20px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ccc;
+  transform: rotate(80deg);
+  bottom: 45px;
   left: 20px;
+  z-index: 1;
+}
+
+.facemark_right{
+  position: absolute;
+  width: 20px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ccc;
+  transform: rotate(-80deg);
+  bottom: 45px;
+  left: 160px;
+  z-index: 1;
 }
 
 .body{
   z-index: 2;
   width: 200px;
   height: 300px;
-  background: rgb(50, 50, 50);
+  background: #505050;
   position: relative;
   top: -65px;
   border-radius: 40% 40% 20% 20%;
+}
+
+.sidemark_left{
+  position: absolute;
+  width: 15px;
+  height: 60px;
+  background: #bbb;
+  top: 50px;
+  left: 5px;
+  transform: rotate(15deg);
+  border-radius: 80% 70% 70% 80%;
+}
+
+.sidemark_left_dot{
+  position: relative;
+  width: 10px;
+  height: 10px;
+  background: #bbb;
+  border-radius: 50%;
+  top: 65px;
+  left: 7px;
+}
+
+.sidemark_right{
+  position: absolute;
+  width: 15px;
+  height: 60px;
+  background: #bbb;
+  top: 50px;
+  left: 180px;
+  transform: rotate(-15deg);
+  border-radius: 80% 70% 70% 80%;
+}
+
+.sidemark_right_dot{
+  position: relative;
+  width: 10px;
+  height: 10px;
+  background: #bbb;
+  border-radius: 50%;
+  top: 65px;
 }
 
 .belly{
@@ -240,7 +394,7 @@ body {
   margin: 30px;
   border-radius: 90% 90% 30% 30%;
   bottom: 80px;
-  background-image: linear-gradient(rgb(50, 50, 50),rgb(66, 66, 66));
+  background: #505050;
 }
 
 .front_paw{
@@ -265,7 +419,7 @@ body {
   right: 295px;
   bottom: 100px;
   border-radius: 40%;
-  background: rgb(50, 50, 50);
+  background: #505050;
 }
 
 .back_paw{
@@ -279,19 +433,18 @@ body {
 }
 
 .tail{
-  margin: 0;
   z-index: 1;
   position: relative;
   width: 40px;
   height: 300px;
   border-radius: 50% 50%;
-  transform: rotate(33deg);
+  transform: rotate(13deg);
   bottom: 380px;
   left: 180px;
-  background: linear-gradient(rgb(40, 40, 40),rgb(100, 100, 100));
+  background: #505050;
   transition: transform .4s ease-out;
 }
 
 .tail:hover{
-  transform: rotate(10deg);
+  transform: rotate(30deg);
 }
