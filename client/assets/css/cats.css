@@ -8,7 +8,7 @@ html {
   overflow-y: scroll;
 }
 body {
-  background: #607d8b;
+  background: linear-gradient(145deg, #2eb0c7 0%, #254ea1 100%);
 }
 
 .cat{
@@ -99,22 +99,7 @@ body {
   background: linear-gradient(#00e1ff, #0066ff);
   top: 10px;
   left: 10px;
-    /* animation-name: felix;
-    animation-duration: 1s;
-    animation-iteration-count: infinite; */
 }
-/*
-@keyframes felix{
-  0%{
-    left: 2px;
-  }
-  50%{
-    left: 18px;
-  }
-  100%{
-    left: 2px;
-  }
-} */
 
 .pupils{
   background: black;
@@ -134,7 +119,6 @@ body {
   border-radius: 50%;
   bottom: 25px;
 }
-
 
 .muzzle_left{
   position: absolute;

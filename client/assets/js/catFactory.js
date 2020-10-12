@@ -14,7 +14,6 @@ function genColors(){
     return colors
 }
 
-//This function code needs to modified so that it works with Your cat code.
 function headColor(color,code) {
   $('.head, .body').css('background', '#' + color)  //This changes the color of the cat
   $('#headCode').html('code: '+ code) //This updates text of the badge next to the slider
@@ -22,33 +21,33 @@ function headColor(color,code) {
 }
 
 function mouthColor(color,code) {
-  $('.mouth, .belly, .tail').css('background', '#' + color)  //This changes the color of the cat
-  $('#mouthCode').html('code: '+ code) //This updates text of the badge next to the slider
-  $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
+  $('.mouth, .belly, .tail').css('background', '#' + color)
+  $('#mouthCode').html('code: '+ code)
+  $('#dnamouth').html(code)
 }
 
 function eyesColor(color,code) {
-  $('.iris').css('background', '#' + color)  //This changes the color of the cat
-  $('#eyeCode').html('code: '+ code) //This updates text of the badge next to the slider
-  $('#dnaeyes').html(code) //This updates the body color part of the DNA that is displayed below the cat
+  $('.iris').css('background', '#' + color)
+  $('#eyeCode').html('code: '+ code)
+  $('#dnaeyes').html(code)
 }
 
 function earsColor(color,code) {
-  $('.ear, .back_paw, .front_paw, .leg, .back_leg').css('background', '#' + color)  //This changes the color of the cat
-  $('#earsCode').html('code: '+ code) //This updates text of the badge next to the slider
-  $('#dnaears').html(code) //This updates the body color part of the DNA that is displayed below the cat
+  $('.ear, .back_paw, .front_paw, .leg, .back_leg').css('background', '#' + color)
+  $('#earsCode').html('code: '+ code)
+  $('#dnaears').html(code)
 }
 
 function decorationMidColor(color,code) {
-  $('.chin_hair_middle, .head_marking').css('background', '#' + color)  //This changes the color of the cat
-  $('#decorationMidCode').html('code: '+ code) //This updates text of the badge next to the slider
-  $('#dnadecorationMid').html(code) //This updates the body color part of the DNA that is displayed below the cat
+  $('.chin_hair_middle, .head_marking').css('background', '#' + color)
+  $('#decorationMidCode').html('code: '+ code)
+  $('#dnadecorationMid').html(code)
 }
 
 function decorationSidesColor(color,code) {
-  $('.chin_hair_left, .chin_hair_right, .facemark_left, .facemark_right, .sidemark_left, .sidemark_right, .sidemark_left_dot, .sidemark_right_dot').css('background', '#' + color)  //This changes the color of the cat
-  $('#decorationSidesCode').html('code: '+ code) //This updates text of the badge next to the slider
-  $('#dnadecorationSides').html(code) //This updates the body color part of the DNA that is displayed below the cat
+  $('.chin_hair_left, .chin_hair_right, .facemark_left, .facemark_right, .sidemark_left, .sidemark_right, .sidemark_left_dot, .sidemark_right_dot').css('background', '#' + color)
+  $('#decorationSidesCode').html('code: '+ code)
+  $('#dnadecorationSides').html(code)
 }
 
 function eyeVariation(num) {
@@ -141,65 +140,59 @@ function eyesType6(){
 function markingPattern(num) {
     $('#dnadecoration').html(num)
     switch (num) {
-      case 1:
+      case 0:
         normalMarking()
         $('#markingName').html('Chin Hair')
         break
-      case 2:
+      case 1:
         normalMarking()
         $('#markingName').html('Cheeky')
         markingType1()
         break
-      case 3:
+      case 2:
         normalMarking()
         $('#markingName').html('Shoulders')
         markingType2()
         break
-      case 4:
+      case 3:
         normalMarking()
-        $('#markingName').html('Chin Hair Sides')
+        $('#markingName').html('Naked')
         markingType3()
         break
-      case 5:
+      case 4:
         normalMarking()
         $('#markingName').html('Head Line')
         markingType4()
         break
-      case 6:
+      case 5:
         normalMarking()
         $('#markingName').html('All Head Markings')
         markingType5()
         break
-      case 7:
+      case 6:
         normalMarking()
         $('#markingName').html('Shoulders and Chin Hair')
         markingType6()
         break
-      case 8:
+      case 7:
         normalMarking()
         $('#markingName').html('Single Chin Hair')
         markingType7()
         break
-      case 9:
+      case 8:
         normalMarking()
         $('#markingName').html('Single Chin Hair and Head Line')
         markingType8()
         break
-      case 10:
+      case 9:
         normalMarking()
         $('#markingName').html('All Markings')
         markingType9()
-        break
-      case 11:
-        normalMarking()
-        $('#markingName').html('Naked')
-        markingType10()
         break
     }
 }
 
 let headmarking = $('.head_marking');
-let belly = $('.belly');
 let chin_hair = $('.chin_hair');
 let chin_hair_left = $('.chin_hair_left');
 let chin_hair_middle = $('.chin_hair_middle');
@@ -235,13 +228,13 @@ function markingType2(){
 }
 
 function markingType3(){
-  $('.head').find(chin_hair_middle).css({'display': 'none'});
-  $('.head').find(chin_hair_left).css({'display': 'block'});
-  $('.head').find(chin_hair_right).css({'display': 'block', 'top': '38px'});
+  normalMarking();
+  $('.head').find(chin_hair).css({'display': 'none'});
 }
 
 function markingType4(){
   $('.head').find(headmarking).css({'display': 'block', 'height': "70px"});
+  $('.head').find(chin_hair).css({'display': 'none'});
 }
 
 function markingType5(){
@@ -271,9 +264,4 @@ function markingType8() {
 function markingType9() {
   markingType2();
   markingType5();
-}
-
-function markingType10() {
-  normalMarking();
-  $('.head').find(chin_hair).css({'display': 'none'});
 }

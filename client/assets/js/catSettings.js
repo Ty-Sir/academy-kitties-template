@@ -7,7 +7,7 @@ var defaultDNA = {
   "earsColor" : 10,
   //Cattributes
   "eyesShape" : 1,
-  "decorationPattern" : 1,
+  "decorationPattern" : 0,
   "decorationMidColor" : 62,
   "decorationSidesColor" : 25,
   "animation" :  1,
@@ -102,17 +102,17 @@ $('#eyeShape').change(()=>{
 
 //changing marking Pattern
 $('#markingShape').change(()=>{
-  var pattern = parseInt($('#markingShape').val()) //between 1 and 10
+  var pattern = parseInt($('#markingShape').val()) //between 0 and 9
   markingPattern(pattern)
 })
 
-//changing middle marks
+//changing middle marks color
 $('#decorationMidColor').change(()=>{
   var colorVal = $('#decorationMidColor').val()
   decorationMidColor(colors[colorVal],colorVal)
 })
 
-// changing side marks
+// changing side marks color
 $('#decorationSidesColor').change(()=>{
   var colorVal = $('#decorationSidesColor').val()
   decorationSidesColor(colors[colorVal],colorVal)
