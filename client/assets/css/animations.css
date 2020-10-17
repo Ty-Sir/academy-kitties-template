@@ -1,0 +1,217 @@
+.pulsingEyes{
+  animation: pulsingEyes 4s infinite;
+}
+
+@keyframes pulsingEyes {
+  0%, 8%, 16%, 24%{
+    transform: scale(1);
+    box-shadow: 0 0 0 0;
+  }
+  2%, 6%, 10%, 14%, 18%, 22%{
+    transform: scale(1.1);
+    box-shadow: 0 2px 2px -2px;
+  }
+  4%, 12%, 20%{
+    transform: scale(1.2);
+    box-shadow: 0 3px 3px -3px;
+  }
+}
+
+.ping{
+  animation: ping 10s infinite cubic-bezier(.36, .11, .89, .32);
+}
+
+@keyframes ping {
+  0%{
+    transform: scale(.5, .5);
+    opacity: .5;
+  }
+  50%{
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+  }
+}
+
+.left_ear_wiggle{
+  animation: left_ear_wiggle 5s infinite;
+}
+
+@keyframes left_ear_wiggle {
+  0%, 30%{
+    transform: rotate(90deg);
+  }
+  10%{
+    transform: rotate(100deg);
+  }
+  20%{
+    transform: rotate(80deg);
+  }
+}
+
+.right_ear_wiggle{
+  animation: right_ear_wiggle 5s infinite;
+}
+
+@keyframes right_ear_wiggle {
+  0%, 30%{
+    transform: rotate(0deg);
+  }
+  10%{
+    transform: rotate(-10deg);
+  }
+  20%{
+    transform: rotate(10deg);
+  }
+}
+
+.headWobble{
+  animation: headWobble 6s infinite;
+}
+
+@keyframes headWobble {
+  0%, 30%{
+    transform: rotate(0deg);
+  }
+  10%{
+    transform: rotate(-5deg);
+  }
+  20%{
+    transform: rotate(8deg);
+  }
+}
+
+.leftEarWobble{
+  animation: leftEarWobble 6s infinite;
+}
+
+@keyframes leftEarWobble {
+  0%, 30%{
+    transform: rotate(90deg);
+  }
+  10%{
+    transform: rotate(85deg);
+  }
+  20%{
+    transform: rotate(98deg);
+  }
+}
+
+.rightEarWobble{
+  animation: rightEarWobble 6s infinite;
+}
+
+@keyframes rightEarWobble {
+  0%, 30%{
+    transform: rotate(0deg);
+  }
+  10%{
+    transform: rotate(-5deg);
+  }
+  20%{
+    transform: rotate(8deg);
+  }
+}
+
+.tailWag{
+  animation: tailWag 10s ease-in-out infinite;
+}
+
+@keyframes tailWag {
+  0%, 65%{
+    transform: rotate(13deg);
+  }
+  25%{
+    transform: rotate(30deg);
+  }
+  45%{
+    transform: rotate(2deg);
+  }
+}
+
+.levitate{
+  animation: levitate 6s ease-out infinite;
+}
+
+@keyframes levitate {
+  25% {
+    transform: translateY(-20px);
+  }
+  50%{
+    transform: translateY(0);
+  }
+}
+
+.levitateMouth{
+  animation: levitateMouth 6s ease-out infinite;
+}
+
+@keyframes levitateMouth {
+  0%, 50%{
+    border-radius: 10% 10% 50% 50%;
+  }
+  25%{
+    border-radius: 50%;
+  }
+}
+
+.levitateLeftEar{
+  animation: levitateLeftEar 6s ease-out infinite;
+}
+
+@keyframes levitateLeftEar {
+  0%, 50%{
+    transform: rotate(90deg);
+  }
+  25%{
+    transform: rotate(75deg);
+  }
+}
+
+.levitateRightEar{
+  animation: levitateRightEar 6s ease-out infinite;
+}
+
+@keyframes levitateRightEar {
+  0%, 50%{
+    transform: rotate(0deg);
+  }
+  25%{
+    transform: rotate(15deg);
+  }
+}
+
+.blink{
+  animation: blink 5s infinite;
+}
+
+@keyframes blink {
+  0%, 4%, 5%, 9%{
+    border-top: 0;
+    border-bottom: 0;
+  }
+  1%, 6%{
+    border-top: 10px solid;
+    border-bottom: 2px solid;
+  }
+  2%, 7%{
+    border-top: 20px solid;
+    border-bottom: 8px solid;
+  }
+  3%, 8%{
+    border-top: 35px solid;
+    border-bottom: 15px solid;
+  }
+}
+
+.blinkEdit{
+  animation: blinkEdit 5s infinite;
+}
+
+@keyframes blinkEdit {
+  1%, 3%, 5%, 9%{
+    opacity: 0;
+  }
+  4%, 10%{
+    opacity: 1;
+  }
+}

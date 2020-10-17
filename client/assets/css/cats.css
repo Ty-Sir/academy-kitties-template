@@ -3,10 +3,12 @@
   padding: 0;
   box-sizing: inherit;
 }
+
 html {
   box-sizing: border-box;
   overflow-y: scroll;
 }
+
 body {
   background: linear-gradient(145deg, #2eb0c7 0%, #254ea1 100%);
 }
@@ -24,14 +26,15 @@ body {
   border-radius: 40% 40% 50% 50%;
   top: 15px;
   position: relative;
-  z-index: 6;
+  z-index: 3;
+  box-shadow: 0 1px 1px -1px;
 }
 
 .head_marking{
   position: absolute;
   border-radius: 0 0 50% 50%;
   width: 10px;
-  height: 20px;
+  height: 70px;
   left: 95px;
   background: white;
 }
@@ -41,7 +44,7 @@ body {
 }
 .eyelashes-left, .eyelashes-right, .eyelashes-left::after, .eyelashes-right::after, .eyelashes-left::before, .eyelashes-right::before {
   width: 40px;
-  height: 2px;
+  height: 1px;
   background: #373737;
 }
 .eyelashes-left::before, .eyelashes-right::before, .eyelashes-left::after, .eyelashes-right::after {
@@ -50,16 +53,16 @@ body {
   left: 0;
 }
 .eyelashes-left {
-  top: 35px;
+  top: 36px;
   left: 30px;
   transform: rotate(90deg);
 }
 .eyelashes-left::before {
-  top: -16px;
+  top: -15px;
   transform: rotate(15deg);
 }
 .eyelashes-left::after {
-  top: 16px;
+  top: 15px;
   transform: rotate(-15deg);
 }
 .eyelashes-right {
@@ -68,11 +71,11 @@ body {
   transform: rotate(-90deg);
 }
 .eyelashes-right::before {
-  top: -16px;
+  top: -15px;
   transform: rotate(-15deg);
 }
 .eyelashes-right::after {
-  top: 16px;
+  top: 15px;
   transform: rotate(15deg);
 }
 
@@ -83,22 +86,29 @@ body {
 }
 
 .eye{
-  background: linear-gradient(white, #bbb);
+  background: #f5f5f5;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   margin: 25px;
   position: relative;
-  z-index: 2;
 }
+
+.animationEye{
+  border-radius: 50%;
+  background: #0077ff;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+}
+
 .iris{
-  position: relative;
+  position: absolute;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   background: linear-gradient(#00e1ff, #0066ff);
-  top: 10px;
-  left: 10px;
 }
 
 .pupils{
@@ -113,7 +123,7 @@ body {
 
 .pupil_highlight{
   position: relative;
-  background: #eee;
+  background: white;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -146,9 +156,9 @@ body {
   height: 10px;
   border-radius: 50%;
   top: 10px;
-  left: 90px;
+  left: 50%;
+  transform: translateX(-50%);
   position: relative;
-  z-index: 4;
 }
 
 .nose_point{
@@ -167,9 +177,9 @@ body {
   height: 15px;
   border-radius: 10% 10% 50% 50%;
   top: 20px;
-  left: 87px;
+  left: 50%;
+  transform: translateX(-50%);
   position: relative;
-  z-index: 5;
 }
 
 .chin_hair{
@@ -181,22 +191,25 @@ body {
 .chin_hair_left{
   width: 4px;
   height: 15px;
-  left: 90px;
+  left: 89px;
   top: 53px;
+  transform: rotate(-10deg);
 }
 
 .chin_hair_middle{
   width: 5px;
   height: 23px;
-  left: 98px;
+    left: 50%;
+    transform: translateX(-50%);
   top: 30px;
 }
 
 .chin_hair_right{
   width: 4px;
   height: 15px;
-  left: 107px;
+  left: 106px;
   top: 15px;
+  transform: rotate(10deg);
 }
 
 .ears{
@@ -212,7 +225,7 @@ body {
 }
 
 .left_ear{
-  transform: scale(1,-1);
+  transform: rotate(90deg);
   left:-20px;
   top: -20px;
   background: #505050;
@@ -244,7 +257,7 @@ body {
 
 .cat__whiskers-left, .cat__whiskers-right {
     position: relative;
-    z-index: 3;
+    z-index: 1;
 }
 .cat__whiskers-left, .cat__whiskers-right, .cat__whiskers-left::after, .cat__whiskers-right::after, .cat__whiskers-left::before, .cat__whiskers-right::before {
     width: 100px;
@@ -290,7 +303,6 @@ body {
   transform: rotate(80deg);
   bottom: 45px;
   left: 20px;
-  z-index: 1;
 }
 
 .facemark_right{
@@ -302,7 +314,6 @@ body {
   transform: rotate(-80deg);
   bottom: 45px;
   left: 160px;
-  z-index: 1;
 }
 
 .body{
@@ -342,7 +353,7 @@ body {
   height: 60px;
   background: #bbb;
   top: 50px;
-  left: 180px;
+  left: 179px;
   transform: rotate(-15deg);
   border-radius: 80% 70% 70% 80%;
 }
@@ -363,15 +374,18 @@ body {
   background: white;
   border-radius: 40% 40% 20% 20%;
   top: 90px;
-  left: 50px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .legs{
   position: relative;
   display: flex;
+  width: 0;
+  height: 0;
 }
 
-.leg{
+.front_leg{
   position: relative;
   width: 50px;
   height: 180px;
@@ -417,7 +431,6 @@ body {
 }
 
 .tail{
-  z-index: 1;
   position: relative;
   width: 40px;
   height: 300px;

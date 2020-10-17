@@ -2,7 +2,6 @@ html{
   scroll-behavior: smooth;
 }
 
-
 .frontend {
   height: 90vh;
   padding-top: 105px;
@@ -10,7 +9,6 @@ html{
   background-size: cover;
   background-position:bottom;
 }
-
 
 .navbar-brand {
   font-weight: 700;
@@ -83,7 +81,6 @@ footer {
   border: 1px solid #ffffff;
   box-shadow: 0px 16px 35px 0px rgba(0, 0, 2, 0.08);
 }
-
 
 .egg {
   width: 150px;

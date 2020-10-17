@@ -1,10 +1,10 @@
 @font-face {
   font-family: "Poppins";
-  src        : url("Poppins-Light.ttf");
+  src: url("Poppins-Light.ttf");
 }
 
 body {
-  font-family: Poppins, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
 }
@@ -458,7 +458,8 @@ h4 {
 /* EFFECTS ANIMATIONS */
 
 .reflex-box {
-  -webkit-box-reflect: below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0%, transparent), to(rgba(250, 250, 250, 0.2)));
+  -webkit-box-reflect: below 5px;
+  -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0%, transparent), to(rgba(250, 250, 250, 0.2)));
 }
 
 .grow {
@@ -470,18 +471,18 @@ h4 {
 }
 
 .fadeoutleft {
-  opacity  : 0;
-  overflow : hidden;
+  opacity: 0;
+  overflow: hidden;
   transform: translateX(-90%);
 }
 
 .myfadeOut {
-  opacity   : 0;
+  opacity: 0;
   transition: all 0.5s ease-in-out;
 }
 
 .fadeinright {
-  opacity  : 0;
-  overflow : hidden;
+  opacity: 0;
+  overflow: hidden;
   transform: translateX(90%);
 }

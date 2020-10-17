@@ -1,19 +1,41 @@
+.container{
+  padding: 0 3rem 3rem 3rem;
+}
+
 .catBox {
   background: #e8eded;
   border-radius: 10px;
   padding-top: 50px;
   padding-left: 65px;
   padding-bottom: 100px;
+  transform: scale(.95);
 }
 
 .cattributes {
   padding: 25px;
   background: #fff;
   border-radius: 10px;
+  transform: scale(.95);
 }
 
 .dnaDiv {
   position: absolute;
   left:20px;
   bottom: 5px;
+}
+
+.tab{
+  margin-bottom: 15px;
+}
+
+.bottomBtn{
+  bottom: 5px;
+  left: 25px;
+  position: absolute;
+}
+
+#createKitty{
+  bottom: 5px;
+  right: 25px;
+  position: absolute;
 }
