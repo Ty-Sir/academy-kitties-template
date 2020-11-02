@@ -91,6 +91,7 @@ function eyeVariation(num) {
   }
 };
 
+let eye = $('.eye');
 let iris = $('.iris');
 let iris_left = $('.iris_left');
 let iris_right = $('.iris_right');
@@ -98,15 +99,16 @@ let pupil = $('.pupils');
 let highlight = $('.pupil_highlight');
 
 function basicEyes() {
+  eye.css({'width': '50px', 'height': '50px'});
   iris.css({'top': '10px', 'left': '50%', 'width': '30px', 'height': '30px','border-radius': '50%', 'transform': 'translateX(-50%)'});
-  pupil.css({'width': '25px', 'height': '25px',  'border-radius': '50%', 'top': '2px', 'transform': 'rotate(0deg)'});
+  pupil.css({'width': '25px', 'height': '25px',  'border-radius': '50%', 'top': '2px', 'transform': 'rotate(0deg)', 'margin': 'auto'});
   highlight.css({'width': '10px', 'height': '10px', 'bottom': '25px', 'border-radius': '50%', 'left': '0', 'transform': 'rotate(0deg)'});
 };
 
 function tallBoys() {
   iris.css({'width': '10px', 'height': '40px', 'top': '4px'});
   pupil.css({'width': '5px', 'height': '35px'});
-  highlight.css({'width': '5px', 'height': '5px', 'bottom': '33px'});
+  highlight.css({'width': '4px', 'height': '10px', 'bottom': '33px'});
 };
 
 function lookingLeft() {
@@ -128,13 +130,13 @@ function wonky(){
 function catEyes(){
   iris.css({'height': '40px', 'width': '40px', 'top': '5px'});
   pupil.css({'border-radius': '90% 0 90% 0', 'transform': 'rotate(-45deg)', 'top': '7px'});
-  highlight.css({'border-radius': '50%','left': '13px', 'bottom': '23px', 'height': '7px', 'width': '7px','transform': 'rotate(-25deg)'});
+  highlight.css({'border-radius': '90% 0% 90% 0','left': '10px', 'bottom': '20px','transform': 'rotate(-45deg)'});
 };
 
 function roboto(){
   iris.css({'width': '40px', 'height': '20px', 'border-radius': '10%', 'top': '15px'});
-  pupil.css({'width': '33px', 'height': '15px', 'border-radius': '10%', 'transform': 'rotate(-180deg)'});
-  highlight.css({'width': '5px', 'height': '3px', 'border-radius': '10%', 'bottom': '12px', 'left': '10px', 'transform': 'rotate(0deg)'});
+  pupil.css({'width': '33px', 'height': '15px', 'border-radius': '10%'});
+  highlight.css({'width': '5px', 'height': '3px', 'border-radius': '10%', 'bottom': '12px', 'left': '10px'});
 };
 
 //marking patterns
@@ -244,7 +246,6 @@ function allHeadMarkings(){
 };
 
 function shouldersAndChin() {
-  chin_hair.css('display', 'block');
   sidemark_left.css('display', 'block');
   sidemark_right.css('display', 'block');
 };

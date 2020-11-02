@@ -1,16 +1,64 @@
 pragma solidity ^0.5.12;
 
+import "./Ownable.sol";
 import "./IERC721.sol";
 
-contract CatContract is IERC721 {
 
-  string private _name = "CatCoin";
-  string private _symbol = "CC";
+contract CatContract is  IERC721, Ownable {
+
+  uint256 public constant gen0CreationLimit = 10;
+  string private constant _name = "CatCoin";
+  string private constant _symbol = "CC";
+
+  event Birth(address owner, uint256 tokenID, uint256 momID, uint256 dadID, uint256 genes);
+
+  struct Cat{
+    uint256 genes;
+    uint64 birthTime;
+    uint32 momID;
+    uint32 dadID;
+    uint16 generation;
+  }
 
   Cat[] cats;
 
+  mapping (uint256 => address) ownerID;
   mapping (address => uint256) ownership;
-  mapping (uint256 => address) public ownerID;
+
+  uint256 public gen0Counter;
+
+  function createGen0Cat(uint256 _genes) public onlyOwner returns(uint256){
+    // require(gen0Counter < gen0CreationLimit);
+
+    gen0Counter++;
+
+    return  _createKitty(0, 0, 0, _genes, msg.sender);
+  }
+
+  function _createKitty(uint256 _momID, uint256 _dadID, uint256 _generation, uint256 _genes, address owner) private returns (uint256){
+    Cat memory cat = Cat(
+        _genes,
+        uint64(now),
+        uint32(_momID),
+        uint32(_dadID),
+        uint16(_generation));
+
+    uint256 newTokenID = cats.length;
+    cats.push(cat);
+
+    emit Birth(owner, newTokenID, _momID, _dadID, _genes);
+
+    _transfer(address(0), owner, newTokenID);
+
+    return newTokenID;
+  }
+
+  function getKitty(uint256 _tokenID) external view returns(address owner, uint256 genes, uint256 birthTime, uint256 momID, uint256 dadID, uint256 generation){
+    require(_tokenID < cats.length, "That cat doesn't exist...yet");
+    Cat storage cat = cats[_tokenID];
+
+    return (ownerID[_tokenID], cat.genes, cat.birthTime, cat.momID, cat.dadID, cat.generation);
+  }
 
   function balanceOf(address owner) external view returns (uint256 balance){
     return ownership[owner];
@@ -28,19 +76,42 @@ contract CatContract is IERC721 {
     return _symbol;
   }
 
-  function ownerOf(uint256 tokenId) external view returns (address owner){
-    return ownerID[tokenId];
+  function ownerOf(uint256 _tokenID) external view returns (address owner){
+    require(_tokenID < cats.length, "That cat doesn't exist...yet");
+    return ownerID[_tokenID];
   }
 
-  function transfer(address to, uint256 tokenId) external{
-    require(to != address(0),"Cannot Send to Zero Address.");
-    require(to != address(this), "You Cannot Send to the Contract Address.");
-    require(ownerID[tokenId] == msg.sender, "You Must Be The Owner.");
+  function transfer(address _to, uint256 _tokenID) external{
+    require(_to != address(0),"Cannot Send to Zero Address.");
+    require(_to != address(this), "You Cannot Send to the Contract Address.");
+    require(_owns(msg.sender, _tokenID), "You Must Be The Owner.");
 
-    ownership[msg.sender] --;
-    ownership[to] ++;
-    ownerID[tokenId] = to;
-    
-    emit Transfer(msg.sender, to, tokenId);
+    _transfer(msg.sender, _to, _tokenID);
   }
+
+  function _transfer(address _from, address _to, uint256 _tokenID) private{
+    ownership[_to] ++;
+    ownerID[_tokenID] = _to;
+
+    if (_from != address(0)){
+      ownership[_from] --;
+    }
+
+    emit Transfer(_from, _to, _tokenID);
+  }
+
+  function _owns(address _claimant, uint256 _tokenID) internal view returns(bool){
+    return ownerID[_tokenID] == _claimant;
+  }
+
+  function getMyCats(address owner) public view returns(uint[] memory){
+    uint[] memory ownedCats = new uint[](ownership[owner]);
+    for (uint i = 0; i < cats.length; i++){
+        if(ownerID[i] == owner){
+            ownedCats[i] = i;
+        }
+    }
+    return ownedCats;
+  }
+  
 }

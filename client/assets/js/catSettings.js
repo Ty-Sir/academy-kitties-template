@@ -28,20 +28,24 @@ $( document ).ready(function() {
   $('#dnaanimation').html(defaultDNA.animation);
   $('#dnaspecial').html(defaultDNA.lastNum);
 
-  $('#cattributes').css({'display': 'none'});
+  $('#cattributes').css('display', 'none');
   renderCat(defaultDNA)
 });
 
 //cattributes button
-$('#cattributesBtn').on('click',function(){
-  $('#cattributes').css({'display': 'block'})
-  $('#catColors').css({'display': 'none'})
+$('#cattributesBtn').click(function(){
+  $('#cattributes').css('display', 'block');
+  $('#catColors').css('display', 'none');
+  $('#colorBtn').removeClass('active');
+  $('#cattributesBtn').addClass('active');
 });
 
 //colors button
-$('#colorBtn').on('click',function(){
-  $('#cattributes').css({'display': 'none'})
-  $('#catColors').css({'display': 'block'})
+$('#colorBtn').click(function(){
+  $('#cattributes').css('display', 'none')
+  $('#catColors').css('display', 'block')
+  $('#colorBtn').addClass('active');
+  $('#cattributesBtn').removeClass('active');
 });
 
 //random numbers 10-98
@@ -49,6 +53,12 @@ function randomNum98() {
   let num = Math.floor(Math.random()*89)+10;
   return num
 };
+
+//random numbers 10-89
+function randomNum89(){
+  let num = Math.floor(Math.random()*79)+10;
+  return num
+}
 
 //random numbers 1-7
 function randomNum7() {
@@ -65,7 +75,7 @@ function randomNum9() {
 //random kitty button
 $('#randomBtn').on('click',function(){
   let randomDNA = {
-    "headColor": randomNum98(),
+    "headColor": randomNum89(),
     "mouthColor": randomNum98(),
     "eyesColor": randomNum98(),
     "earsColor": randomNum98(),

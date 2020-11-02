@@ -3,28 +3,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ty's Cat Factory</title>
-    <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <script src="assets/bootstrap/js/popper.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="assets/css/mystyle.css">
     <link rel="stylesheet" href="assets/css/cats.css">
     <link rel="stylesheet" href="assets/css/colors.css">
     <link rel="stylesheet" href="assets/css/factory.css">
     <link rel="stylesheet" href="assets/css/frontend.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
+    <script src="assets/bootstrap/js/popper.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/web3.min.js"></script>
+    <script src="assets/js/abi.js"></script>
   </head>
   <body>
-    <div class="container" style="margin-top: 3vh; margin-bottom: 10vh;">
-      <div align="center">
-        <h1 class="c-white">Cat-Factory</h1>
-        <p class="c-white">Create Your Custom Cat</p>
+    <nav class="nav navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand pageName" href="homepage.html">Ty's Cat Factory</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse nav-list" id="navbarNavDropdown">
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Marketplace</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="catalouge.html"><em>Cat</em>alouge</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="factory.html">Factory <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
       </div>
+    </nav>
+
+    <header>
+      <div class="title" align="center">
+        <h1 style="margin-top: 3vh;">Cat-Factory</h1>
+        <p>Create Your Custom Cat</p>
+      </div>
+    </header>
+
+    <div class="container col-12 main" style="margin-bottom: 13vh;">
+
 
       <div class="row">
         <!-- Box with cat in it -->
-        <div class="col-lg-5 catBox light-b-shadow">
+        <div class="col-lg-5 catBox shadow-lg">
           <!--start of cat-->
           <div class="cat">
 
@@ -141,18 +172,24 @@
                <span id="dnaspecial"></span>
             </b>
           </div>
-        </div> <!-- end of catBOx -->
+        </div> <!-- end of catBox -->
 
         <!-- box with sliders in it-->
-        <div class="col-lg-7 cattributes light-b-shadow">
-        <!-- toggle buttons -->
-          <button type="button" id="colorBtn" class="btn shadow-sm btn-light tab">Colors</button>
-          <button type="button" id="cattributesBtn" class="btn shadow-sm btn-light tab">Cattributes</button>
-        <!-- Cat color sliders -->
+        <div class="col-lg-7  cattributes shadow-lg">
+          <!-- toggle buttons -->
+          <ul class="nav nav-pills nav-fill mb-3">
+            <li class="nav-item">
+              <a type="button" id="colorBtn" class="nav-link active tabs mr-0">Colors</a>
+            </li>
+            <li class="nav-item">
+              <a type="button" id="cattributesBtn" class="nav-link tabs mr-0">Cattributes</a>
+            </li>
+          </ul>
+          <!-- Cat color sliders -->
           <div id="catColors">
             <div class="form-group">
               <label for="formControlRange"><b>Head | Body | Legs</b><span class="badge badge-dark ml-2" id="headCode"></span></label>
-              <input type="range" min="10" max="98" class="form-control-range" id="bodyColor">
+              <input type="range" min="10" max="89" class="form-control-range" id="bodyColor">
             </div>
             <div class="form-group">
               <label for="formControlRange"><b>Mouth | Belly | Tail</b><span class="badge badge-dark ml-2" id="mouthCode"></span></label>
@@ -173,40 +210,46 @@
               <label for="formControlRange"><b>Eye Shape</b><span class="badge badge-dark ml-2" id="eyeName"></span></label>
               <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
             </div>
-            <div class="form-group"> <!--check to see if it can go past 10 -->
+            <div class="form-group">
               <label for="formControlRange"><b>Marking Pattern</b><span class="badge badge-dark ml-2" id="markingName"></span></label>
               <input type="range" min="0" max="9" class="form-control-range" id="markingShape">
             </div>
-            <div class="form-group">
-              <label for="formControlRange"><b>Middle Marking Color</b><span class="badge badge-dark ml-2" id="decorationMidCode"></span></label>
-              <input type="range" min="10" max="98" class="form-control-range" id="decorationMidColor">
-            </div>
-            <div class="form-group">
-              <label for="formControlRange"><b>Side Marking Color</b><span class="badge badge-dark ml-2" id="decorationSidesCode"></span></label>
-              <input type="range" min="10" max="98" class="form-control-range" id="decorationSidesColor">
-            </div>
+            <!--two half sized sliders for marking colors-->
+            <form class="form-inline form-group">
+              <div class="form-group col-6 pl-0">
+                <label for="formControlRange" class="mb-2"><b>Middle Marking Color</b><span class="badge badge-dark ml-2" id="decorationMidCode"></span></label>
+                <input type="range" min="10" max="98" class="form-control-range" id="decorationMidColor">
+              </div>
+              <div class="form-group col-6 pr-0">
+                <label for="formControlRange" class="mb-2"><b>Side Marking Color</b><span class="badge badge-dark ml-2" id="decorationSidesCode"></span></label>
+                <input type="range" min="10" max="98" class="form-control-range" id="decorationSidesColor">
+              </div>
+            </form>
+
             <div class="form-group">
               <label for="formControlRange"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
               <input type="range" min="1" max="7" class="form-control-range" id="animation">
             </div>
           </div>
-          <!-- random and default buttons -->
-          <div class="bottomBtn">
-            <button type="button" id="randomBtn" class="btn btn-sm btn-outline-primary shadow">Random Cat</button>
-            <button type="button" id="defaultBtn" class="btn btn-sm btn-secondary shadow">Default Cat</button>
+          <!-- random, default, and create cat buttons -->
+          <div class="cattributesButtons">
+            <button type="button" id="randomBtn" class="btn btn-primary btn-lg pt-4 pb-4">Random Cat</button>
+            <button type="button" id="defaultBtn" class="btn btn-secondary btn-lg ml-2 pt-4 pb-4">Default Cat</button>
+            <button type="button" id="createKitty" class="btn btn-success btn-lg pt-4 pb-4 float-right">Create Cat</button>
           </div>
-          <!--create cat button-->
-          <button type="button" id="createKitty" class="btn btn-sm shadow btn-success">Create Cat</button>
         </div><!-- end of cattributes-->
 
-      </div><!-- end of row -->
-
+      </div><!-- end of row - ie. catBox & cattributes -->
+      <div class="alert alert-success p-4 mt-2" role="alert" id="eventAlert" style="display: none;"></div>
       <br>
     </div><!-- end of container -->
+    <div class="background"></div>
+
     <footer align="left">
       <p>Tyler Siravo - Cat Factory 2020</p>
     </footer>
   </body>
+  <script src="assets/js/index.js"></script>
   <script src="assets/js/colors.js"></script>
   <script src="assets/js/catSettings.js"></script>
   <script src="assets/js/catFactory.js"></script>

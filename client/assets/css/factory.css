@@ -1,9 +1,30 @@
-.container{
-  padding: 0 3rem 3rem 3rem;
+.background{
+  opacity: .7;
+  width: 98%;
+  height: 80vh;
+  border-radius: 150px 150px 0 0;
+  background-image: linear-gradient(145deg, #2eb0c7 0%, #254ea1 100%);
+  position: absolute;
+  top: 21%;
+  left: 1%;
+  z-index: 1;
+}
+
+.container {
+  transform: scale(.75);
+  z-index: 2;
+}
+
+.title{
+  padding-top: 4em;
+  width: 100%;
+  height: 20vh;
+  border-radius: 0 0 20% 20%;
+  background-image: linear-gradient(145deg, #fad05c 0%, #fa5c5c 100%);
 }
 
 .catBox {
-  background: #e8eded;
+  background: white;
   border-radius: 10px;
   padding-top: 50px;
   padding-left: 65px;
@@ -24,18 +45,18 @@
   bottom: 5px;
 }
 
-.tab{
-  margin-bottom: 15px;
+.tabs {
+  border: 1px solid #eee;
 }
 
-.bottomBtn{
-  bottom: 5px;
-  left: 25px;
-  position: absolute;
+.cattributesButtons{
+  margin-top: 8rem;
 }
 
-#createKitty{
-  bottom: 5px;
-  right: 25px;
-  position: absolute;
+#colorBtn,#cattributesBtn{
+  padding: 17px 55px;
+}
+
+#colorBtn:hover,#cattributesBtn:hover{
+  transform: none;
 }

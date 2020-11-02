@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background: linear-gradient(145deg, #2eb0c7 0%, #254ea1 100%);
+  /* background: linear-gradient(145deg, #2eb0c7 0%, #254ea1 100%); */
 }
 
 .cat{
@@ -118,7 +118,6 @@ body {
   border-radius: 50%;
   position: relative;
   margin: auto;
-  top: 2px;
 }
 
 .pupil_highlight{
@@ -199,15 +198,15 @@ body {
 .chin_hair_middle{
   width: 5px;
   height: 23px;
-    left: 50%;
-    transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
   top: 30px;
 }
 
 .chin_hair_right{
   width: 4px;
   height: 15px;
-  left: 106px;
+  left: 107px;
   top: 15px;
   transform: rotate(10deg);
 }
