@@ -1,6 +1,6 @@
 var colors = Object.values(allColors());
 
-var defaultDNA = {
+let defaultDNA = {
   "headColor": 10,
   "mouthColor": 61,
   "eyesColor": 28,

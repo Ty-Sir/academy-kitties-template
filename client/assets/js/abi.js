@@ -36,7 +36,7 @@ var abi = [
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "kittenID",
+        "name": "tokenID",
         "type": "uint256"
       },
       {
@@ -142,12 +142,17 @@ var abi = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_id",
+        "name": "_tokenID",
         "type": "uint256"
       }
     ],
     "name": "getKitty",
     "outputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
         "name": "genes",
@@ -249,7 +254,7 @@ var abi = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "tokenId",
+        "name": "_tokenID",
         "type": "uint256"
       }
     ],
@@ -275,7 +280,7 @@ var abi = [
       },
       {
         "internalType": "uint256",
-        "name": "_tokenId",
+        "name": "_tokenID",
         "type": "uint256"
       }
     ],

@@ -13,6 +13,7 @@ function genColors(){
     return colors
 };
 
+
 //changing colors
 function headColor(color,code) {
   $('.head, .body, .front_leg, .back_leg').css('background', '#' + color)  //This changes the color of the cat

@@ -28,7 +28,7 @@ contract CatContract is  IERC721, Ownable {
   uint256 public gen0Counter;
 
   function createGen0Cat(uint256 _genes) public onlyOwner returns(uint256){
-    // require(gen0Counter < gen0CreationLimit);
+    require(gen0Counter < gen0CreationLimit);
 
     gen0Counter++;
 
@@ -104,14 +104,14 @@ contract CatContract is  IERC721, Ownable {
     return ownerID[_tokenID] == _claimant;
   }
 
+
   function getMyCats(address owner) public view returns(uint[] memory){
-    uint[] memory ownedCats = new uint[](ownership[owner]);
-    for (uint i = 0; i < cats.length; i++){
-        if(ownerID[i] == owner){
-            ownedCats[i] = i;
-        }
-    }
-    return ownedCats;
+      uint[] memory ownedCats = new uint[](ownership[owner]);
+      for (uint i = 0; i < cats.length; i++){
+        require(ownerID[i] == owner, "Owner of token ID must match owner address");
+        ownedCats[i] = i;
+      }
+      return ownedCats;
   }
-  
+
 }

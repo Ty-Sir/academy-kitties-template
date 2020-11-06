@@ -105,6 +105,8 @@ body {
 
 .iris{
   position: absolute;
+  left: 20%;
+  top: 20%;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -117,7 +119,7 @@ body {
   height: 25px;
   border-radius: 50%;
   position: relative;
-  margin: auto;
+  transform: translate(10%, 10%);
 }
 
 .pupil_highlight{

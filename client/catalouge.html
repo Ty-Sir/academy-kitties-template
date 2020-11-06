@@ -3,11 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalouge</title>
+    <title>Ty's Cat Factory - Catalouge</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/mystyle.css">
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/catalouge.css">
+    <link rel="stylesheet" href="assets/css/cats.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/nav.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
@@ -49,7 +51,15 @@
     </header>
 
     <main>
-      <div class="catDivs"></div>
+      <div class="container-fluid">
+        <div class="row catDivs"></div>
+      </div>
+
+      <div class="arrow">
+        <div id="top-arrow">
+          <div id="bottom-arrow"></div>
+        </div>
+      </div>
     </main>
 
   </div> <!-- end of container -->
@@ -57,6 +67,7 @@
     <p>Tyler Siravo - Cat Factory 2020</p>
   </footer>
   </body>
+<script src="assets/js/colors.js"></script>
 <script type="text/javascript" src="assets/js/index.js"></script>
 <script type="text/javascript" src="assets/js/catalouge.js"></script>
 </html>

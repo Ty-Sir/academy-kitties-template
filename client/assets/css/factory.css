@@ -10,6 +10,18 @@
   z-index: 1;
 }
 
+@media (max-width: 991px) {
+  .background{
+    height:140vh;
+  }
+}
+
+@media (max-width: 515px) {
+  .background{
+    height:150vh;
+  }
+}
+
 .container {
   transform: scale(.75);
   z-index: 2;
