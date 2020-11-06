@@ -140,7 +140,7 @@ function catDiv(id){
 //arrow (appears when 4 or more cats are owned) dissapears when scrolled
 $(window).scroll(function() {
   let scroll = $(window).scrollTop();
-  if (scroll >= 200) {
+  if (scroll >= 150) {
     $(".arrow").css('display', 'none');
   }
 });

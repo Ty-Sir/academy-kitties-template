@@ -1,9 +1,13 @@
 .title{
   padding-top: 4em;
   width: 100%;
-  height: 20vh;
+  height: 12em;
   border-radius: 0 0 20% 20%;
   background-image: linear-gradient(145deg, #fad05c 0%, #fa5c5c 100%);
+}
+
+#catalouge-title{
+  margin-top: .75em;
 }
 
 .catBox {
@@ -45,9 +49,9 @@ a #makeSomeHereBtn{
 }
 
 .arrow{
-  position: absolute;
-  left: 80vh;
-  top: 75vh;
+  position: fixed;
+  left: 45%;
+  top: 75%;
   z-index: 3;
 }
 
