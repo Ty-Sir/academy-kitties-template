@@ -21,14 +21,14 @@
   </head>
   <body>
     <nav class="nav navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <a class="navbar-brand pageName" href="homepage.html">Ty's Cat Factory</a>
+      <a class="navbar-brand pageName" href="index.html">Ty's Cat Factory</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse nav-list" id="navbarNavDropdown">
-        <ul class="navbar-nav navbar-right">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="homepage.html">Home</a>
+            <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Marketplace</a>
@@ -188,46 +188,46 @@
           <!-- Cat color sliders -->
           <div id="catColors">
             <div class="form-group">
-              <label for="formControlRange"><b>Head | Body | Legs</b><span class="badge badge-dark ml-2" id="headCode"></span></label>
+              <label for="bodyColor"><b>Head | Body | Legs</b><span class="badge badge-dark ml-2" id="headCode"></span></label>
               <input type="range" min="10" max="89" class="form-control-range" id="bodyColor">
             </div>
             <div class="form-group">
-              <label for="formControlRange"><b>Mouth | Belly | Tail</b><span class="badge badge-dark ml-2" id="mouthCode"></span></label>
+              <label for="mouthColor"><b>Mouth | Belly | Tail</b><span class="badge badge-dark ml-2" id="mouthCode"></span></label>
               <input type="range" min="10" max="98" class="form-control-range" id="mouthColor">
             </div>
             <div class="form-group">
-              <label for="formControlRange"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyeCode"></span></label>
+              <label for="eyesColor"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyeCode"></span></label>
               <input type="range" min="10" max="98" class="form-control-range" id="eyesColor">
             </div>
             <div class="form-group">
-              <label for="formControlRange"><b>Ears | Paws</b><span class="badge badge-dark ml-2" id="earsCode"></span></label>
+              <label for="earsColor"><b>Ears | Paws</b><span class="badge badge-dark ml-2" id="earsCode"></span></label>
               <input type="range" min="10" max="98" class="form-control-range" id="earsColor">
             </div>
           </div>
           <!-- cattribute sliders -->
           <div id="cattributes">
             <div class="form-group">
-              <label for="formControlRange"><b>Eye Shape</b><span class="badge badge-dark ml-2" id="eyeName"></span></label>
+              <label for="eyeShape"><b>Eye Shape</b><span class="badge badge-dark ml-2" id="eyeName"></span></label>
               <input type="range" min="1" max="7" class="form-control-range" id="eyeShape">
             </div>
             <div class="form-group">
-              <label for="formControlRange"><b>Marking Pattern</b><span class="badge badge-dark ml-2" id="markingName"></span></label>
+              <label for="markingShape"><b>Marking Pattern</b><span class="badge badge-dark ml-2" id="markingName"></span></label>
               <input type="range" min="0" max="9" class="form-control-range" id="markingShape">
             </div>
             <!--two half sized sliders for marking colors-->
             <form class="form-inline form-group">
               <div class="form-group col-6 pl-0">
-                <label for="formControlRange" class="mb-2"><b>Middle Marking Color</b><span class="badge badge-dark ml-2" id="decorationMidCode"></span></label>
+                <label for="decorationMidColor" class="mb-2"><b>Middle Marking Color</b><span class="badge badge-dark ml-2" id="decorationMidCode"></span></label>
                 <input type="range" min="10" max="98" class="form-control-range" id="decorationMidColor">
               </div>
               <div class="form-group col-6 pr-0">
-                <label for="formControlRange" class="mb-2"><b>Side Marking Color</b><span class="badge badge-dark ml-2" id="decorationSidesCode"></span></label>
+                <label for="decorationSidesColor" class="mb-2"><b>Side Marking Color</b><span class="badge badge-dark ml-2" id="decorationSidesCode"></span></label>
                 <input type="range" min="10" max="98" class="form-control-range" id="decorationSidesColor">
               </div>
             </form>
 
             <div class="form-group">
-              <label for="formControlRange"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
+              <label for="animation"><b>Animations</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
               <input type="range" min="1" max="7" class="form-control-range" id="animation">
             </div>
           </div>
@@ -241,6 +241,7 @@
 
       </div><!-- end of row - ie. catBox & cattributes -->
       <div class="alert alert-success p-4 mt-2" role="alert" id="eventAlert" style="display: none;"></div>
+
       <br>
     </div><!-- end of container -->
     <div class="background"></div>
@@ -249,7 +250,7 @@
       <p>Tyler Siravo - Cat Factory 2020</p>
     </footer>
   </body>
-  <script src="assets/js/index.js"></script>
+  <script src="assets/js/factory.js"></script>
   <script src="assets/js/colors.js"></script>
   <script src="assets/js/catSettings.js"></script>
   <script src="assets/js/catFactory.js"></script>

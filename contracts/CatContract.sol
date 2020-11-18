@@ -2,13 +2,19 @@ pragma solidity ^0.5.12;
 
 import "./Ownable.sol";
 import "./IERC721.sol";
-
+import  "./IERC721Receiver.sol";
 
 contract CatContract is  IERC721, Ownable {
 
   uint256 public constant gen0CreationLimit = 10;
   string private constant _name = "CatCoin";
   string private constant _symbol = "CC";
+
+  bytes4 internal constant MAGIC_ERC721_RECEIVED = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
+
+  bytes4 private constant _INTERFACE_ID_721 = 0x80ac58cd;
+
+  bytes4 private constant _INTERFACE_ID_165 = 0x01ffc9a7;
 
   event Birth(address owner, uint256 tokenID, uint256 momID, uint256 dadID, uint256 genes);
 
@@ -22,8 +28,11 @@ contract CatContract is  IERC721, Ownable {
 
   Cat[] cats;
 
-  mapping (uint256 => address) ownerID;
-  mapping (address => uint256) ownership;
+  mapping (uint256 => address) private ownerID;
+  mapping (address => uint256) private ownership;
+
+  mapping (uint256 => address) public kittyIndexToApproved;
+  mapping (address => mapping (address => bool)) private _operatorApprovals;
 
   uint256 public gen0Counter;
 
@@ -95,6 +104,7 @@ contract CatContract is  IERC721, Ownable {
 
     if (_from != address(0)){
       ownership[_from] --;
+      delete kittyIndexToApproved[_tokenID];
     }
 
     emit Transfer(_from, _to, _tokenID);
@@ -104,14 +114,86 @@ contract CatContract is  IERC721, Ownable {
     return ownerID[_tokenID] == _claimant;
   }
 
-
-  function getMyCats(address owner) public view returns(uint[] memory){
-      uint[] memory ownedCats = new uint[](ownership[owner]);
-      for (uint i = 0; i < cats.length; i++){
-        require(ownerID[i] == owner, "Owner of token ID must match owner address");
-        ownedCats[i] = i;
+  function getMyCats() external view returns(uint[] memory){
+    uint[] memory ownedCats = new uint[](ownership[owner]);
+    for (uint i = 0; i < cats.length; i++){
+        if (ownerID[i] == msg.sender){
+          ownedCats[i] = i;
+        }
       }
-      return ownedCats;
+    return ownedCats;
   }
 
+  function approve(address _approved, uint256 _tokenID) external{
+    require(msg.sender == owner || _operatorApprovals[msg.sender][_approved] == true, "Must be owner or operator.");
+
+    kittyIndexToApproved[_tokenID] = _approved;
+
+    emit Approval(msg.sender, _approved, _tokenID);
+  }
+
+  function setApprovalForAll(address _operator, bool _approved) external{
+    require(_operator != msg.sender, "The owner can't be the operator");
+
+    _operatorApprovals[msg.sender][_operator] = _approved;
+
+    emit ApprovalForAll(msg.sender, _operator, _approved);
+  }
+
+  function getApproved(uint256 _tokenID) external view returns (address){
+    require(_tokenID < cats.length, "That token/cat doesn't exist.");
+    return kittyIndexToApproved[_tokenID];
+  }
+
+  function isApprovedForAll(address _owner, address _operator) external view returns (bool){
+    return _operatorApprovals[_owner][_operator];
+  }
+
+  function transferFrom(address _from, address _to, uint256 _tokenID) external{
+    require(msg.sender == _from || _operatorApprovals[_from][msg.sender] == true || kittyIndexToApproved[_tokenID] == msg.sender, "msg.sender must be current owner, an authorized operator, or the approved address of token");
+    require(ownerID[_tokenID] == owner && owner == _from, "_from must be current owner");
+    require(_to != address(0), "Cannot send to zero address");
+    require(_tokenID < cats.length, "That token doesn't exist.");
+
+    _transfer(_from, _to, _tokenID);
+  }
+
+  function safeTransferFrom(address _from, address _to, uint256 _tokenID, bytes memory _data) public{
+    require(msg.sender == _from || _operatorApprovals[_from][msg.sender] == true || kittyIndexToApproved[_tokenID] == msg.sender, "msg.sender must be current owner, an authorized operator, or the approved address of token");
+    require(ownerID[_tokenID] == owner && owner == _from, "_from must be current owner");
+    require(_to != address(0), "Cannot send to zero address");
+    require(_tokenID < cats.length, "That token doesn't exist.");
+
+    _safeTransfer(_from, _to, _tokenID, _data);
+  }
+
+  function safeTransferFrom(address _from, address _to, uint256 _tokenID) public{
+    safeTransferFrom(_from, _to, _tokenID, "");
+  }
+
+  function _safeTransfer(address _from, address _to, uint256 _tokenID, bytes memory _data) internal{
+    _transfer(_from, _to, _tokenID);
+    require(_checkERC721Support(_from, _to, _tokenID, _data));
+  }
+
+  function _checkERC721Support(address _from, address _to, uint256 _tokenID, bytes memory _data) internal returns(bool){
+    if(!_isContract(_to)){
+      return true;
+    }
+
+    bytes4 returnData = IERC721Receiver(_to).onERC721Received(msg.sender, _from, _tokenID, _data);
+    return returnData == MAGIC_ERC721_RECEIVED;
+  }
+
+  function _isContract(address _to) view internal returns (bool){
+    uint32 size;
+    assembly{
+        size := extcodesize(_to)
+    }
+    return size > 0;
+  }
+
+  function supportsInterface(bytes4 _interfaceID) external pure returns (bool){
+    return (_interfaceID == _INTERFACE_ID_721 || _interfaceID == _INTERFACE_ID_165);
+  }
 }

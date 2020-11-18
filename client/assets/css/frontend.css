@@ -2,22 +2,12 @@ html{
   scroll-behavior: smooth;
 }
 
-.frontend {
+/* .frontend {
   height: 90vh;
   padding-top: 105px;
   background: url('../images/banner.png') no-repeat;
   background-size: cover;
   background-position:bottom;
-}
-
-
-.nav-link b {
-  color:#000000;
-  transition: 0.3s ease-in;
-}
-
-.nav-link b:hover {
-  color: #ed5b0d;
 }
 
 .catGroup {
@@ -43,15 +33,6 @@ html{
 .middleBox {
   margin-top: 80px;
   margin-bottom: 120px;
-}
-
-footer {
-  position: static;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  padding: 4vh;
-  background: #F8F8F8;
 }
 
 .featureBox {
@@ -82,7 +63,7 @@ footer {
 }
 
 /* BUTTONS */
-
+/* 
 .red-btn {
   background-image: -webkit-linear-gradient(0deg, #f14437 0%, #ed5b0d 99%);
   color: #ffffff;
@@ -167,4 +148,4 @@ footer {
 	to {
 		transform: translateY(-2560px);
 	}
-}
+}  */

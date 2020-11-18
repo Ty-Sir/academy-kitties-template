@@ -1,32 +1,98 @@
-//time allowed for async func to load - wouldn't work without
-//calls addCat and the calls to the contract
-setTimeout(function(){
-  getCats();
-},100);
+let web3 = new Web3(Web3.givenProvider);
+
+let instance;
+let user;
+let contractAddress = "0xd309FcdC27B52c00bfc88EbABa5448A9Ea2D49E1";//enter the catcontract address after you migrate
+
+$(document).ready(function(){
+  window.ethereum.enable().then(function(accounts){
+    instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+    user = accounts[0];
+    getCats();
+  })
+});
+
+//needs to be async otherwise ownedCats will be one behind
+async function getCats(){
+  let ownedCats = await instance.methods.getMyCats().call({from:user});
+    console.log(ownedCats);
+
+  //message when no cats are owned
+  if(ownedCats.length === 0){
+    let textIfNoCats = "<p class='noCatText shadow'>Uh-oh...you don't have any cats! 🙀<br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a></p>"
+    $('.catDivs').append(textIfNoCats);
+  }
+
+  //blinking arrow to show to scroll down
+  if(ownedCats.length > 3){
+    $('#top-arrow').addClass('top-arrow-animation');
+    $('#bottom-arrow').addClass('bottom-arrow-animation');
+  }
+
+  for(i = 0; i < ownedCats.length; i++){
+    let cat = await instance.methods.getKitty(ownedCats[i]).call();
+    addCat(cat[1], cat[2], cat[3], cat[4], cat[5], i);
+    console.log(cat);
+  }
+};
 
 //geneString === genes from catBox, id === tokenID
-function addCat(geneString, id){
+function addCat(geneString, birthTime, momID, dadID, gen, id){
   let catsDna = catDna(geneString);
   console.log(catsDna);
   catDiv(id);
   renderCat(catsDna, id)
-  $('#genes' + id).html("DNA: " + geneString)
+  $('#birth' + id).html("Birthday: " + timeConverter(birthTime));
+  $('#tokenID' + id).html("Token ID: " + id);
+  $('#genes' + id).html("DNA: " + seperateGeneString(geneString));
+  $('#gen' + id).html("GEN: " + gen);
+  $('#dadID' + id).html("Dad: " + dadID);
+  $('#momID' + id).html("Mom: " + momID);
 };
+
+//converts unix to readable date/time
+function timeConverter(UNIX_timestamp){
+  let birth = new Date(UNIX_timestamp * 1000);
+  let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let year = birth.getFullYear();
+  let month = months[birth.getMonth()];
+  let date = birth.getDate();
+  let hour = birth.getHours();
+  let min = birth.getMinutes() < 10 ? '0' + birth.getMinutes() : birth.getMinutes();
+  let sec = birth.getSeconds() < 10 ? '0' + birth.getSeconds() : birth.getSeconds();
+  let birthday = date + ' ' + month + ', ' + year + ' ' + ' at ' + hour + ':' + min + ':' + sec ;
+  return birthday;
+}
+
+//spereate gene string for better readability
+function seperateGeneString(genes){
+  let a = genes.substring(0, 2) + " " +
+          genes.substring(2, 4) + " " +
+          genes.substring(4, 6) + " " +
+          genes.substring(6, 8) + " " +
+          genes.substring(8, 9) + " " +
+          genes.substring(9, 10) + " " +
+          genes.substring(10, 12) + " " +
+          genes.substring(12, 14) + " " +
+          genes.substring(14, 15) + " " +
+          genes.substring(15, 16) + " ";
+  return a;
+}
 
 //genes split up for functions to read
 function catDna(geneString){
   let genes = {
-      "headColor": geneString.substring(0, 2),
-      "mouthColor": geneString.substring(2, 4),
-      "eyesColor": geneString.substring(4, 6),
-      "earsColor": geneString.substring(6, 8),
+      headColor: geneString.substring(0, 2),
+      mouthColor: geneString.substring(2, 4),
+      eyesColor: geneString.substring(4, 6),
+      earsColor: geneString.substring(6, 8),
       //Cattributes
-      "eyesShape": geneString.substring(8, 9),
-      "decorationPattern": geneString.substring(9, 10),
-      "decorationMidColor": geneString.substring(10, 12),
-      "decorationSidesColor": geneString.substring(12, 14),
-      "animation": geneString.substring(14, 15),
-      "lastNum": geneString.substring(15, 16)
+      eyesShape: geneString.substring(8, 9),
+      decorationPattern: geneString.substring(9, 10),
+      decorationMidColor: geneString.substring(10, 12),
+      decorationSidesColor: geneString.substring(12, 14),
+      animation: geneString.substring(14, 15),
+      lastNum: geneString.substring(15, 16)
   }
   return genes
 };
@@ -90,9 +156,9 @@ function catDiv(id){
 
                             <div class="mouth mouth` + id + `"></div>
 
-                            <div class="chin_hair chin_hair_left chin_hair_left` + id + `"></div>
-                            <div class="chin_hair chin_hair_middle chin_hair_middle` + id + `"></div>
-                            <div class="chin_hair chin_hair_right chin_hair_right` + id + `"></div>
+                            <div class="chin_hair chin_hair`+ id +` chin_hair_left chin_hair_left` + id + `"></div>
+                            <div class="chin_hair chin_hair`+ id +` chin_hair_middle chin_hair_middle` + id + `"></div>
+                            <div class="chin_hair chin_hair`+ id +` chin_hair_right chin_hair_right` + id + `"></div>
                           </div>
 
                           <div class="body body` + id + `">
@@ -130,19 +196,38 @@ function catDiv(id){
                           <div class="tail tail` + id + `"></div>
 
                         </div>
-                          <div class='genes' id='genes`+id+`'></div>
-
+                            <div class='birth' id='birth` + id + `'></div>
+                            <div class='tokenID' id='tokenID` + id + `'></div>
+                            <div class='gen' id='gen` + id + `'></div>
+                            <div class='genes' id='genes` + id + `'></div>
+                            <div class='dadID' id='dadID` + id + `'></div>
+                            <div class='momID' id='momID` + id + `'></div>
                       </div>`
 
   $('.catDivs').append(catCard);
 };
 
-//arrow (appears when 4 or more cats are owned) dissapears when scrolled
+//arrows (appears when 4 or more cats are owned) dissapears when scrolled
 $(window).scroll(function() {
   let scroll = $(window).scrollTop();
   if (scroll >= 150) {
     $(".arrow").css('display', 'none');
   }
+});
+
+//back-to-top btn appear and disappear
+$(window).scroll(function() {
+  let scroll = $(window).scrollTop();
+  if (scroll >= 500) {
+    $("#back-to-top").css('display', 'block');
+  } else{
+    $("#back-to-top").css('display', 'none');
+  }
+});
+
+//back-to-top btn functionality
+$('#back-to-top').click(function(){
+  $('html, body').animate({scrollTop:0}, 'slow');
 });
 
 //drawing the cat
@@ -331,7 +416,7 @@ function markingPattern(gene, id) {
         shouldersAndChin(id)
         break
       case '7':
-        chinHair()
+        chinHair(id)
         singleChin(id)
         break
       case '8':

@@ -10,20 +10,72 @@
   margin-top: .75em;
 }
 
+#back-to-top{
+  left: 46%;
+  top: 10%;
+  width: 8rem;
+  height: 3rem;
+  color: #363636;
+  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
+  border-radius: 15px;
+  opacity: .5;
+  border: none;
+  display: none;
+}
+
+#back-to-top:hover{
+  opacity: 1;
+}
+
 .catBox {
   background: white;
   border-radius: 10px;
   padding-top: 50px;
   padding-left: 65px;
-  padding-bottom: 150px;
+  padding-bottom: 280px;
   transform: scale(.75);
+}
+
+.birth{
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  bottom: 8.5em;
+}
+
+.tokenID{
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  bottom: 7em;
 }
 
 .genes{
   font-size: 20px;
   position: absolute;
   left: 20px;
-  bottom: 20px;
+  bottom: 5.5em;
+}
+
+.gen{
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  bottom: 4em;
+}
+
+.dadID{
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  bottom: 2.5em;
+}
+
+.momID{
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  bottom: 1em;
 }
 
 #makeSomeHereBtn{
@@ -31,7 +83,6 @@
   height: 4rem;
   background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
   border-radius: 15px;
-  cursor: pointer;
   transition: transform .3s ease-out;
   border: none;
   margin-top: 15px;
@@ -43,9 +94,12 @@
   transform: scale(1.1);
 }
 
-a #makeSomeHereBtn{
-  color: #363636;
-  text-decoration: none;
+@media (max-width: 640px) {
+  #makeSomeHereBtn{
+    width: 10rem;
+    height: 3rem;
+    font-size: 14px;
+  }
 }
 
 .arrow{
@@ -69,6 +123,18 @@ a #makeSomeHereBtn{
   border-width: 0 20px 20px 0;
   display: inline-block;
   padding: 20px;
+}
+
+.noCatText{
+  font-size: 20px;
+  text-align: center;
+  transform: translateY(-20%);
+  padding: 8em 2em;
+  margin: 10em auto auto;
+  width: 50%;
+  background: #eee;
+  border-radius: 15px;
+  height: 20em;
 }
 
 .top-arrow-animation{
