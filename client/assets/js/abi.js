@@ -480,11 +480,6 @@ var abi = [
         "internalType": "uint256",
         "name": "_tokenID",
         "type": "uint256"
-      },
-      {
-        "internalType": "bytes",
-        "name": "_data",
-        "type": "bytes"
       }
     ],
     "name": "safeTransferFrom",
@@ -510,6 +505,11 @@ var abi = [
         "internalType": "uint256",
         "name": "_tokenID",
         "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_data",
+        "type": "bytes"
       }
     ],
     "name": "safeTransferFrom",
@@ -537,6 +537,32 @@ var abi = [
     ],
     "payable": false,
     "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_dadID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_momID",
+        "type": "uint256"
+      }
+    ],
+    "name": "breed",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

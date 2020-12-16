@@ -62,7 +62,7 @@ contract CatContract is  IERC721, Ownable {
     return newTokenID;
   }
 
-  function getKitty(uint256 _tokenID) external view returns(address owner, uint256 genes, uint256 birthTime, uint256 momID, uint256 dadID, uint256 generation){
+  function getKitty(uint256 _tokenID) public view returns(address owner, uint256 genes, uint256 birthTime, uint256 momID, uint256 dadID, uint256 generation){
     require(_tokenID < cats.length, "That cat doesn't exist...yet");
     Cat storage cat = cats[_tokenID];
 
@@ -114,9 +114,9 @@ contract CatContract is  IERC721, Ownable {
     return ownerID[_tokenID] == _claimant;
   }
 
-  function getMyCats() external view returns(uint[] memory){
-    uint[] memory ownedCats = new uint[](ownership[owner]);
-    for (uint i = 0; i < cats.length; i++){
+  function getMyCats() external view returns(uint256[] memory){
+    uint256[] memory ownedCats = new uint256[](ownership[msg.sender]);
+    for (uint256 i = 0; i < cats.length; i++){
         if (ownerID[i] == msg.sender){
           ownedCats[i] = i;
         }
@@ -125,7 +125,7 @@ contract CatContract is  IERC721, Ownable {
   }
 
   function approve(address _approved, uint256 _tokenID) external{
-    require(msg.sender == owner || _operatorApprovals[msg.sender][_approved] == true, "Must be owner or operator.");
+    require(_owns(msg.sender, _tokenID), "Must be owner or operator.");
 
     kittyIndexToApproved[_tokenID] = _approved;
 
@@ -150,8 +150,8 @@ contract CatContract is  IERC721, Ownable {
   }
 
   function transferFrom(address _from, address _to, uint256 _tokenID) external{
-    require(msg.sender == _from || _operatorApprovals[_from][msg.sender] == true || kittyIndexToApproved[_tokenID] == msg.sender, "msg.sender must be current owner, an authorized operator, or the approved address of token");
-    require(ownerID[_tokenID] == owner && owner == _from, "_from must be current owner");
+    require(msg.sender == _from || _operatorApprovals[_from][msg.sender] || kittyIndexToApproved[_tokenID] == msg.sender, "msg.sender must be current owner, an authorized operator, or the approved address of token");
+    require(ownerID[_tokenID] == _from, "_from must be current owner");
     require(_to != address(0), "Cannot send to zero address");
     require(_tokenID < cats.length, "That token doesn't exist.");
 
@@ -159,15 +159,15 @@ contract CatContract is  IERC721, Ownable {
   }
 
   function safeTransferFrom(address _from, address _to, uint256 _tokenID, bytes memory _data) public{
-    require(msg.sender == _from || _operatorApprovals[_from][msg.sender] == true || kittyIndexToApproved[_tokenID] == msg.sender, "msg.sender must be current owner, an authorized operator, or the approved address of token");
-    require(ownerID[_tokenID] == owner && owner == _from, "_from must be current owner");
+    require(msg.sender == _from || _operatorApprovals[_from][msg.sender] || kittyIndexToApproved[_tokenID] == msg.sender, "msg.sender must be current owner, an authorized operator, or the approved address of token");
+    require(ownerID[_tokenID] == _from, "_from must be current owner");
     require(_to != address(0), "Cannot send to zero address");
     require(_tokenID < cats.length, "That token doesn't exist.");
 
     _safeTransfer(_from, _to, _tokenID, _data);
   }
 
-  function safeTransferFrom(address _from, address _to, uint256 _tokenID) public{
+  function safeTransferFrom(address _from, address _to, uint256 _tokenID) external{
     safeTransferFrom(_from, _to, _tokenID, "");
   }
 
@@ -195,5 +195,39 @@ contract CatContract is  IERC721, Ownable {
 
   function supportsInterface(bytes4 _interfaceID) external pure returns (bool){
     return (_interfaceID == _INTERFACE_ID_721 || _interfaceID == _INTERFACE_ID_165);
+  }
+
+  function breed(uint256 _dadID, uint256 _momID) public returns (uint256){
+    require(_owns(msg.sender, _dadID) && _owns(msg.sender, _momID), "You must own both cats to breed.");
+
+    //had to look ahead for these two lines and the gen algo
+    //could not find anything online to help
+    (,uint256 _dadDna,,,,uint256 dadGen) = getKitty(_dadID);
+    (,uint256 _momDna,,,,uint256 momGen) = getKitty(_momID);
+
+    uint256 newDna = _mixDna(_dadDna, _momDna);
+
+    uint256 babyGen = 0;
+
+    if (dadGen < momGen){
+       babyGen = momGen + 1;
+       babyGen /= 2;
+    } else if (dadGen > momGen){
+        babyGen = dadGen + 1;
+        babyGen /= 2;
+    } else {
+        babyGen = dadGen + 1;
+    }
+
+    _createKitty(_momID, _dadID, babyGen, newDna, msg.sender);
+  }
+
+  function _mixDna(uint256 _dadDna, uint256 _momDna) internal pure returns (uint256){
+    uint256 dadHalf = _dadDna / 100000000;
+    uint256 momHalf = _momDna % 100000000;
+
+    uint256 newDna = (dadHalf * 100000000) + momHalf;
+
+    return newDna;
   }
 }

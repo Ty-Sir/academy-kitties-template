@@ -2,7 +2,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let instance;
 let user;
-let contractAddress = "0xd309FcdC27B52c00bfc88EbABa5448A9Ea2D49E1";//enter the catcontract address after you migrate
+let contractAddress = "0x38983a3Cc2C4c1dc52805e7B97709Ed3428E656D";//enter the catcontract address after you migrate
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
@@ -19,7 +19,7 @@ $(document).ready(function(){
       let genes = event.returnValues.genes;
       $('#eventAlert').css("display", "block");
       $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
-                              '<span aria-hidden="true" id="close-icon">&times;</span>' +
+                            '<span aria-hidden="true" id="close-icon">&times;</span>' +
                             '</button>' +
                             '<big>' + '<a href="catalouge.html">Click here to see your cat!</a>' + '</big>' +
                             '<br>' + '<br>' +

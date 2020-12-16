@@ -28,54 +28,108 @@
 }
 
 .catBox {
-  background: white;
+  background: transparent;
   border-radius: 10px;
   padding-top: 50px;
   padding-left: 65px;
-  padding-bottom: 280px;
+  padding-bottom: 200px;
   transform: scale(.75);
 }
 
-.birth{
-  font-size: 20px;
+.cat-data{
+  padding: 10px 10px 10px 20px;
   position: absolute;
-  left: 20px;
-  bottom: 8.5em;
+  width: inherit;
+  height: 200px;
+  display: none;
+  z-index: 2;
+  background: #eee;
+  border-radius: 0 0 10px 10px;
+  left: 0;
+  top: 530px;
 }
 
-.tokenID{
+.cat-data-btn{
+  position: absolute;
+  right: 20px;
+  bottom: 1em;
+  border: 1px solid #eee;
+}
+
+.cat-data-btn:hover{
+  background: #eee;
+}
+
+.info-font-size{
   font-size: 20px;
   position: absolute;
+}
+
+.birth{
   left: 20px;
-  bottom: 7em;
+  bottom: 4.5em;
 }
 
 .genes{
-  font-size: 20px;
-  position: absolute;
   left: 20px;
-  bottom: 5.5em;
+  bottom: 3em;
 }
 
 .gen{
-  font-size: 20px;
-  position: absolute;
   left: 20px;
-  bottom: 4em;
+  bottom: 1.5em;
 }
 
-.dadID{
+.popup-font{
   font-size: 20px;
-  position: absolute;
-  left: 20px;
-  bottom: 2.5em;
 }
 
-.momID{
-  font-size: 20px;
-  position: absolute;
-  left: 20px;
-  bottom: 1em;
+@media (max-width: 1200px) {
+  .info-font-size{
+    font-size: 17px;
+  }
+
+  .cat-data-btn{
+    transform: scale(.8);
+    right: 7px;
+    bottom: .7em;
+  }
+
+  .catBox{
+    padding-bottom: 180px;
+  }
+
+  .popup-font{
+    font-size: 17px;
+  }
+
+  .birth-popup{
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 991px) {
+  .info-font-size{
+    font-size: 20px;
+  }
+
+  .cat-data-btn{
+    transform: scale(1);
+    right: 20px;
+    bottom: 1em;
+  }
+
+  .catBox{
+    padding-bottom: 200px;
+  }
+
+  .popup-font{
+    font-size: 20px;
+  }
+
+  .birth-popup{
+    padding-top: 0;
+  }
 }
 
 #makeSomeHereBtn{
