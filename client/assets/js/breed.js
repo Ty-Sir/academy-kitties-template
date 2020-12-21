@@ -2,7 +2,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let instance;
 let user;
-let contractAddress = "0x38983a3Cc2C4c1dc52805e7B97709Ed3428E656D";//enter the catcontract address after you migrate
+let contractAddress = "0x71d4F2AF0169cb3FbaD4495AF277E3A8ef3a37d2";//enter the catcontract address after you migrate
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
