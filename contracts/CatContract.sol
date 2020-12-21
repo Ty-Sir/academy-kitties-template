@@ -222,12 +222,39 @@ contract CatContract is  IERC721, Ownable {
     _createKitty(_momID, _dadID, babyGen, newDna, msg.sender);
   }
 
-  function _mixDna(uint256 _dadDna, uint256 _momDna) internal pure returns (uint256){
-    uint256 dadHalf = _dadDna / 100000000;
-    uint256 momHalf = _momDna % 100000000;
+  function _mixDna(uint256 _dadDna, uint256 _momDna) internal view returns (uint256){
+    uint256[8] memory geneArray;
 
-    uint256 newDna = (dadHalf * 100000000) + momHalf;
+    uint8 random = uint8(now % 255); //num: 0-255, binary:00000000-11111111
+    uint256 i = 1;
+    uint256 index = 7;
 
-    return newDna;
+    for(i = 1; i <= 128; i=i*2){
+      if(index == 1){
+        geneArray[1] = uint8(now * 89) + 10;
+      } else if(index == 3){
+        geneArray[3] = uint8(now * 89) + 10;
+      } else if(index == 6){
+          geneArray[6] = uint8(now * 7) + 1;
+      } else if(random & i != 0){
+        geneArray[index] = uint8(_momDna % 100);
+      } else{
+        geneArray[index] = uint8(_dadDna % 100);
+      }
+      _momDna = _momDna / 100;
+      _dadDna = _dadDna / 100;
+
+      index = index - 1;
+    }
+
+    uint256 newGene;
+
+    for(i = 0; i < 8; i++){
+      newGene = newGene + geneArray[i];
+      if(i != 7){
+        newGene = newGene * 100;
+      }
+    }
+    return newGene;
   }
 }
