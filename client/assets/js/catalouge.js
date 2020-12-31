@@ -2,7 +2,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let instance;
 let user;
-let contractAddress = "0x71d4F2AF0169cb3FbaD4495AF277E3A8ef3a37d2";//enter the catcontract address after you migrate
+let contractAddress = "0x03df6FcFC4ddfc186c9E0a225c54Ca614b1F69E6";//enter the catcontract address after you migrate
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
@@ -55,8 +55,14 @@ function addCat(geneString, birthTime, momID, dadID, gen, id){
     $('#genes-popup' + id).html("DNA: " + seperateGeneString(geneString));
     $('#gen-popup' + id).html("GEN: " + gen);
     $('#tokenID-popup' + id).html("Token ID: " + id).css('display', 'block');
-    $('#dadID-popup' + id).html("Dad ID: " + dadID).css('display', 'block');
-    $('#momID-popup' + id).html("Mom ID: " + momID).css('display', 'block');
+    $('#dadID-popup' + id).html("First Parent ID: " + dadID).css('display', 'block');
+    $('#momID-popup' + id).html("Second Parent ID: " + momID).css('display', 'block');
+
+    if(gen == 0){
+      $('#dadID-popup' + id).css('display', 'none');
+      $('#momID-popup' + id).css('display', 'none');
+      $('#cat-data' + id).css('height', '150px');
+    };
 
     $('#birth' + id).css('display', 'none');
     $('#genes' + id).css('display', 'none');
@@ -241,7 +247,7 @@ function catDiv(id){
 
                       </div>`
 
-  $('.catDivs').append(catCard);
+  $('.catDivs').prepend(catCard);
 };
 
 //arrows (appears when 4 or more cats are owned) dissapears when scrolled

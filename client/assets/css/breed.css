@@ -59,7 +59,7 @@
 
 .choose-cat:hover{
   cursor: pointer;
-  border: 2px solid #528bff;
+  border: 2px solid #528bff !important;
 }
 
 #firstCatId{
@@ -116,6 +116,10 @@
   height: 20em;
 }
 
+.alert-text{
+  font-size: 18px;
+}
+
 #makeSomeHereBtn{
   width: 15rem;
   height: 4rem;
@@ -138,4 +142,20 @@
     height: 3rem;
     font-size: 14px;
   }
+}
+
+.info-font-size{
+  font-size: 20px;
+  position: absolute;
+  width: 300px;
+}
+
+.gen{
+  left: 0;
+  bottom: 15px;
+}
+
+.tokenID{
+  left: 0;
+  bottom: -15px;
 }

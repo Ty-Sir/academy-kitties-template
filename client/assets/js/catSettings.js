@@ -48,12 +48,6 @@ $('#colorBtn').click(function(){
   $('#cattributesBtn').removeClass('active');
 });
 
-//random numbers 10-98
-function randomNum98() {
-  let num = Math.floor(Math.random()*89)+10;
-  return num
-};
-
 //random numbers 10-89
 function randomNum89(){
   let num = Math.floor(Math.random()*79)+10;
@@ -76,13 +70,13 @@ function randomNum9() {
 $('#randomBtn').on('click',function(){
   let randomDNA = {
     "headColor": randomNum89(),
-    "mouthColor": randomNum98(),
-    "eyesColor": randomNum98(),
-    "earsColor": randomNum98(),
+    "mouthColor": randomNum89(),
+    "eyesColor": randomNum89(),
+    "earsColor": randomNum89(),
     "eyesShape": randomNum7(),
     "decorationPattern": randomNum9(),
-    "decorationMidColor": randomNum98(),
-    "decorationSidesColor": randomNum98(),
+    "decorationMidColor": randomNum89(),
+    "decorationSidesColor": randomNum89(),
     "animation": randomNum7(),
   }
   renderCat(randomDNA);

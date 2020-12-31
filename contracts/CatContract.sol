@@ -46,11 +46,11 @@ contract CatContract is  IERC721, Ownable {
 
   function _createKitty(uint256 _momID, uint256 _dadID, uint256 _generation, uint256 _genes, address owner) private returns (uint256){
     Cat memory cat = Cat(
-        _genes,
-        uint64(now),
-        uint32(_momID),
-        uint32(_dadID),
-        uint16(_generation));
+      uint256(_genes),
+      uint64(now),
+      uint32(_momID),
+      uint32(_dadID),
+      uint16(_generation));
 
     uint256 newTokenID = cats.length;
     cats.push(cat);
@@ -226,21 +226,30 @@ contract CatContract is  IERC721, Ownable {
     uint256[8] memory geneArray;
 
     uint8 random = uint8(now % 255); //num: 0-255, binary:00000000-11111111
+    uint8 randomIndex = uint8(now % 8);
     uint256 i = 1;
     uint256 index = 7;
 
     for(i = 1; i <= 128; i=i*2){
-      if(index == 1){
-        geneArray[1] = uint8(now * 89) + 10;
-      } else if(index == 3){
-        geneArray[3] = uint8(now * 89) + 10;
-      } else if(index == 6){
-          geneArray[6] = uint8(now * 7) + 1;
+      if(randomIndex == 4 && (random & i != 0)){
+        geneArray[4] = uint8(now % 69) + 10;
+        geneArray[index] = uint8(_momDna % 100);
+
+      } else if(randomIndex == 7 && (random & i != 0)){
+        geneArray[7] = uint8(now % 69) + 10;
+        geneArray[index] = uint8(_dadDna % 100);
+
+      } else if(index == randomIndex){
+        geneArray[randomIndex] = uint8(now % 79) + 10;
+
       } else if(random & i != 0){
         geneArray[index] = uint8(_momDna % 100);
+
       } else{
         geneArray[index] = uint8(_dadDna % 100);
+
       }
+
       _momDna = _momDna / 100;
       _dadDna = _dadDna / 100;
 

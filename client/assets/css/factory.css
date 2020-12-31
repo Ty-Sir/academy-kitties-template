@@ -76,3 +76,11 @@
 #colorBtn:hover,#cattributesBtn:hover{
   transform: none;
 }
+
+.alert{
+  display: none;
+}
+
+.alert-text{
+  font-size: 18px;
+}

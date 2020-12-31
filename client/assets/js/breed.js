@@ -2,14 +2,14 @@ let web3 = new Web3(Web3.givenProvider);
 
 let instance;
 let user;
-let contractAddress = "0x71d4F2AF0169cb3FbaD4495AF277E3A8ef3a37d2";//enter the catcontract address after you migrate
+let contractAddress = "0x03df6FcFC4ddfc186c9E0a225c54Ca614b1F69E6";//enter the catcontract address after you migrate
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
     instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
     user = accounts[0];
     getCats();
-  })
+  });
 });
 
 //needs to be async otherwise ownedCats will be one behind
@@ -27,8 +27,8 @@ async function getCats(){
 
   for(i = 0; i < ownedCats.length; i++){
     let cat = await instance.methods.getKitty(ownedCats[i]).call();
-    addCat(cat[1], i);
     chooseCats(i);
+    addCat(cat[1], cat[5], i);
     console.log(cat);
   };
 };
@@ -48,13 +48,19 @@ $('#catsModal1').on('hidden.bs.modal', function(){
   $('#catsModal2').modal('hide');
 });
 
+//manually closes 1st modal when cat is chosen
+$('#catsModal1').click(function(){
+  $('#catsModal1').modal('hide');
+});
+
 function helperForFirstModal(id){
   //if both cats have the same ID -- user must choose a new one
   //message displayed in div where needs to be corrected
-  if($('#firstCatId').html() === $('#secondCatId').html()){
-    $('#choose-first-cat').html('The cats must be different,' + '<br>' + 'choose another one.');
-    $('#choose-second-cat').html($('#catBox' + id));
-    $('#catsModal1').modal('hide');
+  if($('#firstCatId').text() === $('#secondCatId').text()){
+    $('#choose-first-cat').html('The cats must be different,<br>choose again. 😺');
+    $('#choose-second-cat').removeClass('choose-cat');
+    $('#choose-second-cat').addClass('choose-first-cat-first');
+    $('#choose-second-cat').html("Choose Second Cat");
   };
 };
 
@@ -68,21 +74,16 @@ function chooseFirstCat(id){
       console.log("first id: " + id);
       $('#choose-first-cat').html($('#catBox' + id));
 
-      $('#firstCatId').html(id);
+      $('#firstCatId').text(id);
       console.log('span 1: ' + $('#firstCatId').text());
-
-      helperForFirstModal(id);
 
       $('#catBox' + id).css('margin-right', '180px');
       $('#choose-first-cat').css('border', '2px solid #528bff');
+
+      helperForFirstModal(id);
     });
   });
 };
-
-//manually closes 2nd modal when cat is chosen
-$('#catsModal2').click(function(){
-  $('#catsModal2').modal('hide');
-});
 
 //saving 2nd modal html before opening-like in first(above)
 let secondModalHtml = '';
@@ -95,16 +96,23 @@ $('#choose-second-cat').click(function(){
 
 $('#catsModal2').on('hidden.bs.modal', function(){
   //when modal closed--adding old html to allow for choosing a different cat without getting the most recent chosen one deleted
-  $('#catsModal2').html(secondModalHtml);
   $('#catsModal1').html(firstModalHtml);
+  $('#catsModal2').html(secondModalHtml);
+});
+
+//manually closes 2nd modal when cat is chosen
+$('#catsModal2').click(function(){
+  $('#catsModal2').modal('hide');
 });
 
 function helperForSecondModal(id){
   //if both cats have the same ID -- user must choose a new one
   //message displayed in div where needs to be corrected
-  if($('#secondCatId').html() === $('#firstCatId').html()){
-    $('#choose-second-cat').html('The cats must be different,' + '<br>' + 'choose another one.');
-    $('#choose-first-cat').html($('#catBox' + id));
+  if($('#secondCatId').text() === $('#firstCatId').text()){
+    $('#choose-first-cat').html('The cats must be different,<br>choose again. 😺');
+    $('#choose-second-cat').removeClass('choose-cat');
+    $('#choose-second-cat').addClass('choose-first-cat-first');
+    $('#choose-second-cat').html("Choose Second Cat");
   };
 };
 
@@ -115,13 +123,13 @@ function chooseSecondCat(id){
       console.log("second id: " + id);
       $('#choose-second-cat').html($('#catBox' + id));
 
-      $('#secondCatId').html(id);
+      $('#secondCatId').text(id);
       console.log('span 2: ' + $('#secondCatId').text());
-
-      helperForSecondModal(id);
 
       $('#catBox' + id).css('margin-right', '180px');
       $('#choose-second-cat').css('border', '2px solid #528bff');
+
+      helperForSecondModal(id);
     });
   });
 };
@@ -133,18 +141,37 @@ function chooseCats(id){
 };
 
 //require both catIDs to be selected before allowed to breed
-$('body').click(function(){
-  if($('#firstCatId').text() !== '' && $('#secondCatId').text() !== ''){
-    $('#breedBtn').addClass('breedReady');
+$('.cats-container').click(function(){
+  if(($('#firstCatId').text() === $('#secondCatId').text())){
+    $('#breedBtn').removeClass('breedReady');
+    $('#breedBtn').addClass('breedNotReady');
+
+    $('#firstCatId').text('');
+    $('#secondCatId').text('');
+
+    $('#choose-first-cat').css('border', 'none');
+    $('#choose-second-cat').css('border', 'none');
+
+  } else if($('#firstCatId').text() !== '' && $('#secondCatId').text() !== ''){
     $('#breedBtn').removeClass('breedNotReady');
+    $('#breedBtn').addClass('breedReady');
+
+  } else {
+    $('#breedBtn').removeClass('breedReady');
+    $('#breedBtn').addClass('breedNotReady');
   };
 });
 
 //geneString === genes from catBox, id === tokenID
-function addCat(geneString, id){
+function addCat(geneString, gen, id){
   let catsDna = catDna(geneString);
   console.log(catsDna);
+  console.log('Gen: ' + gen);
   catDiv(id);
+
+  $('.gen' + id).html("GEN: " + gen);
+  $('.tokenID' + id).html("Token ID: " + id);
+
   renderCat(catsDna, id);
 };
 
@@ -166,20 +193,26 @@ $('#breedBtn').click(function(){
   //emits birth event
   instance.events.Birth().on('data', function(event){
     console.log(event);
-    let owner = event.returnValues.owner;
-    let tokenID = event.returnValues.tokenID;
-    let genes = event.returnValues.genes;
-    $('#eventAlert').css({'display': 'block', 'width': '80%', 'margin': 'auto'});
-    $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
-                          '<span aria-hidden="true" id="close-icon">&times;</span>' +
-                          '</button>' +
-                          '<big>' + '<a href="catalouge.html">Click here to see your cat!</a>' + '</big>' +
-                          '<br>' + '<br>' +
-                          '<big>' + "Owner: " + '</big>' + owner +
-                          '<big>' + " Kitten ID: " + '</big>' + tokenID +
-                          '<big>' + " Genes: " + '</big>' + genes);
-    closeIcon();
-  }).on('error', console.error);
+
+    window.location.href = "catalouge.html";
+
+    //..does this below make sense?
+  }).on('error', function(error){
+      console.log(error);
+      let owner = event.returnValues.owner;
+      let tokenID = event.returnValues.tokenID;
+      let genes = event.returnValues.genes;
+      $('#eventAlert').css("display", "block");
+      $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
+                            '<span aria-hidden="true" id="close-icon">&times;</span>' +
+                            '</button>' +
+                            '<big>' + '<a href="catalouge.html">Click here to see your cat!</a>' + '</big>' +
+                            '<br>' + '<br>' +
+                            '<big>' + "Owner: " + '</big>' + owner +
+                            '<big>' + " Kitten ID: " + '</big>' + tokenID +
+                            '<big>' + " Genes: " + '</big>' + genes);
+      closeIcon();
+  });
 });
 
 //close-icon button for birth alert
@@ -306,8 +339,10 @@ function catDiv(id){
                       <div class="tail tail` + id + `"></div>
 
                     </div>
+                    <div class='gen` + id + ` gen info-font-size'></div>
+                    <div class='tokenID` + id + ` tokenID info-font-size'></div>
 
                   </div>`
 
-  $('.catDivs').append(catCard);
+  $('.catDivs').prepend(catCard);
 };
