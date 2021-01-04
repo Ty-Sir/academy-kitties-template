@@ -230,17 +230,15 @@ contract CatContract is  IERC721, Ownable {
     uint256 i = 1;
     uint256 index = 7;
 
-    for(i = 1; i <= 128; i=i*2){
-      if(randomIndex == 4 && (random & i != 0)){
-        geneArray[4] = uint8(now % 69) + 10;
-        geneArray[index] = uint8(_momDna % 100);
+    for(i = 1; i <= 128; i *= 2){
+      if(randomIndex == 4 && index == 4){
+        geneArray[4] = uint8(now % 70) + 10;
 
-      } else if(randomIndex == 7 && (random & i != 0)){
-        geneArray[7] = uint8(now % 69) + 10;
-        geneArray[index] = uint8(_dadDna % 100);
+      } else if(randomIndex == 7 && index == 7){
+        geneArray[7] = uint8(now % 70) + 10;
 
       } else if(index == randomIndex){
-        geneArray[randomIndex] = uint8(now % 79) + 10;
+        geneArray[randomIndex] = uint8(now % 80) + 10;
 
       } else if(random & i != 0){
         geneArray[index] = uint8(_momDna % 100);
@@ -250,18 +248,18 @@ contract CatContract is  IERC721, Ownable {
 
       }
 
-      _momDna = _momDna / 100;
-      _dadDna = _dadDna / 100;
+      _momDna /= 100;
+      _dadDna /= 100;
 
-      index = index - 1;
+      index--;
     }
 
     uint256 newGene;
 
     for(i = 0; i < 8; i++){
-      newGene = newGene + geneArray[i];
+      newGene += geneArray[i];
       if(i != 7){
-        newGene = newGene * 100;
+        newGene *= 100;
       }
     }
     return newGene;
