@@ -225,12 +225,11 @@ contract CatContract is  IERC721, Ownable {
   function _mixDna(uint256 _dadDna, uint256 _momDna) internal view returns (uint256){
     uint256[8] memory geneArray;
 
-    uint8 random = uint8(now % 255); //num: 0-255, binary:00000000-11111111
+    uint8 random = uint8(now % 256); //num: 0-255, binary:00000000-11111111
     uint8 randomIndex = uint8(now % 8);
-    uint256 i = 1;
     uint256 index = 7;
 
-    for(i = 1; i <= 128; i *= 2){
+    for(uint256 i = 1; i <= 128; i *= 2){
       if(randomIndex == 4 && index == 4){
         geneArray[4] = uint8(now % 70) + 10;
 
@@ -256,7 +255,7 @@ contract CatContract is  IERC721, Ownable {
 
     uint256 newGene;
 
-    for(i = 0; i < 8; i++){
+    for(uint256 i = 0; i < 8; i++){
       newGene += geneArray[i];
       if(i != 7){
         newGene *= 100;
