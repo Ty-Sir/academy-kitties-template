@@ -36,6 +36,10 @@ contract CatContract is  IERC721, Ownable {
 
   uint256 public gen0Counter;
 
+  constructor() public{
+    _createKitty(0, 0, 0, uint256(-1), address(0));
+  }
+
   function createGen0Cat(uint256 _genes) public onlyOwner returns(uint256){
     require(gen0Counter < gen0CreationLimit);
 
