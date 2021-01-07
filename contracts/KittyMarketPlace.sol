@@ -31,16 +31,17 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
 
   function getOffer(uint256 _tokenID) public view returns (address seller, uint256 price, uint256 index, uint256 tokenID, bool active){
     Offer storage offer = tokenIDToOffer[_tokenID];
+    require(offer.active == true, "This cat is not for sale");
 
     return (offer.seller, offer.price, offer.index, offer.tokenID, offer.active);
   }
 
   function getAllTokenOnSale() public view returns(uint256[] memory listOfOffers){
+    if(offers.length == 0){
+        return new uint256[](0);
+    } else{
     uint256[] memory forSaleCats = new uint256[](offers.length);
 
-    if(offers.length == 0){
-      return new uint256[](0);
-    } else{
     for(uint256 i = 0; i < offers.length; i++){
       if(offers[i].active == true){
         forSaleCats[i] = offers[i].tokenID;
@@ -61,8 +62,7 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
       uint256(_price),
       uint256(offers.length),
       uint256(_tokenID),
-      bool(true)
-    );
+      bool(true));
 
     tokenIDToOffer[_tokenID] = offer;
 
@@ -78,7 +78,7 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
   function removeOffer(uint256 _tokenID) public{
     Offer memory offer = tokenIDToOffer[_tokenID];
 
-    require(offer.seller == msg.sender, "Must be the seller/owner to remove an offer");
+    require(_owns(msg.sender, _tokenID), "Must be the seller/owner to remove an offer");
 
     delete offers[offer.index];
     tokenIDToOffer[_tokenID].active = false;
