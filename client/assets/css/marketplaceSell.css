@@ -1,0 +1,154 @@
+#welcomeBoxTitle{
+  font-size: 35px;
+  padding-bottom: 20px;
+}
+
+.welcomeBox{
+  font-size: 20px;
+  text-align: center;
+  transform: translateY(-20%);
+  padding: 6em 2em;
+  margin: 10em auto auto;
+  width: 50%;
+  background: #eee;
+  border-radius: 15px;
+  height: 20em;
+}
+
+#setApprovalBtn{
+  width: 15rem;
+  height: 4rem;
+  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
+  border-radius: 15px;
+  transition: transform .3s ease-out;
+  border: none;
+  margin-top: 15px;
+}
+
+#setApprovalBtn:hover{
+  background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
+  color: white;
+  transform: scale(1.1);
+}
+
+.noCatText{
+  font-size: 20px;
+  text-align: center;
+  transform: translateY(-20%);
+  padding: 5em 2em;
+  margin: 10em auto auto;
+  width: 50%;
+  background: #eee;
+  border-radius: 15px;
+  height: 20em;
+}
+
+#makeSomeHereBtn{
+  width: 15rem;
+  height: 4rem;
+  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
+  border-radius: 15px;
+  transition: transform .3s ease-out;
+  border: none;
+  margin-top: 15px;
+}
+
+#makeSomeHereBtn:hover{
+  background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
+  color: white;
+  transform: scale(1.1);
+}
+
+#continueToMarketplaceBtn{
+  width: 18rem;
+  height: 4rem;
+  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
+  border-radius: 15px;
+  transition: transform .3s ease-out;
+  border: none;
+  margin-top: 5px;
+}
+
+#continueToMarketplaceBtn:hover{
+  background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
+  color: white;
+  transform: scale(1.1);
+}
+
+.catBox {
+  background: transparent;
+  border-radius: 10px;
+  padding-top: 50px;
+  padding-left: 100px;
+  padding-bottom: 170px;
+  transform: scale(.75);
+  max-width: 100%;
+}
+
+.info-font-size{
+  font-size: 20px;
+  position: absolute;
+  width: 300px;
+}
+
+.gen{
+  left: 8px;
+  bottom: 40px;
+}
+
+.tokenID{
+  left: 8px;
+  bottom: 15px;
+}
+
+.offer-amount{
+  font-size: 20px;
+  width: 150px;
+  height: 50px;
+  position: relative;
+  transform: translate(33%, -110%);
+}
+
+.createOffer{
+  height: 50px;
+  transform: translate(70%, -115%);
+}
+
+.remove-offer-group{
+  display: none;
+  height: 50px;
+  transform: translate(12%, -115%);
+}
+
+.removeOffer{
+  height: 50px;
+}
+
+.catPrice{
+  font-size: 20px;
+}
+
+.alert{
+  display: none;
+  margin: auto;
+}
+
+.alert-text{
+  font-size: 18px;
+}
+
+.rareDNA{
+  opacity: .7;
+  background-color: #fff721;
+  width: 6em;
+  text-align: center;
+  padding: 3px 3px;
+  display: none;
+  border: 2px solid;
+  border-radius: 15px;
+  position: absolute;
+  font-size: 40px;
+  left: 2em;
+  top: -10%;
+  box-shadow: 0 5px 10px #fc0307;
+}
