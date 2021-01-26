@@ -1,22 +1,24 @@
 //drawing the cat
 function renderCat(genes, id){
-  headColor(genes.headColor, id)
+  headColor(genes.headColor, id);
 
-  mouthColor(genes.mouthColor, id)
+  mouthColor(genes.mouthColor, id);
 
-  eyesColor(genes.eyesColor, id)
+  eyesColor(genes.eyesColor, id);
 
-  earsColor(genes.earsColor, id)
+  earsColor(genes.earsColor, id);
 
-  eyeVariation(genes.eyesShape, id)
+  eyeVariation(genes.eyesShape, id);
 
-  markingPattern(genes.decorationPattern, id)
+  markingPattern(genes.decorationPattern, id);
 
-  decorationMidColor(genes.decorationMidColor, id)
+  decorationMidColor(genes.decorationMidColor, id);
 
-  decorationSidesColor(genes.decorationSidesColor, id)
+  decorationSidesColor(genes.decorationSidesColor, id);
 
-  animationVariation(genes.animation, id)
+  animationVariation(genes.animation, id);
+
+  backgroundVariation(genes.backgrounds, id);
 };
 
 var colors = Object.values(allColors());
@@ -24,32 +26,32 @@ var colors = Object.values(allColors());
 //changing colors
 function headColor(gene, id) {
   let color = colors[gene];
-  $('.head' + id + ', .body' + id + ', .front_leg' + id + ', .back_leg' + id).css('background', '#' + color)  //This changes the color of the cat
+  $('.head' + id + ', .body' + id + ', .front_leg' + id + ', .back_leg' + id).css('background', '#' + color);  //This changes the color of the cat
 };
 
 function mouthColor(gene, id) {
   let color = colors[gene];
-  $('.mouth' + id + ', .belly' + id + ', .tail' + id).css('background', '#' + color)
+  $('.mouth' + id + ', .belly' + id + ', .tail' + id).css('background', '#' + color);
 };
 
 function eyesColor(gene, id) {
   let color = colors[gene];
-  $('.iris' + id).css('background', '#' + color)
+  $('.iris' + id).css('background', '#' + color);
 };
 
 function earsColor(gene, id) {
   let color = colors[gene];
-  $('.ear' + id + ', .back_paw' + id + ', .front_paw' + id).css('background', '#' + color)
+  $('.ear' + id + ', .back_paw' + id + ', .front_paw' + id).css('background', '#' + color);
 };
 
 function decorationMidColor(gene, id) {
   let color = colors[gene];
-  $('.chin_hair_middle' + id + ', .head_marking' + id).css('background', '#' + color)
+  $('.chin_hair_middle' + id + ', .head_marking' + id).css('background', '#' + color);
 };
 
 function decorationSidesColor(gene, id) {
   let color = colors[gene];
-  $('.chin_hair_left' + id + ', .chin_hair_right' + id + ', .facemark_left' + id + ', .facemark_right' + id + ', .sidemark_left' + id + ', .sidemark_right' + id + ', .sidemark_left_dot' + id + ', .sidemark_right_dot' + id).css('background', '#' + color)
+  $('.chin_hair_left' + id + ', .chin_hair_right' + id + ', .facemark_left' + id + ', .facemark_right' + id + ', .sidemark_left' + id + ', .sidemark_right' + id + ', .sidemark_left_dot' + id + ', .sidemark_right_dot' + id).css('background', '#' + color);
 };
 
 //eye variations
@@ -57,31 +59,31 @@ function eyeVariation(gene, id) {
   switch (gene) {
     case '1':
       basicEyes(id)
-      break
+      break;
     case '2':
       basicEyes(id)
       tallBoys(id)
-      break
+      break;
     case '3':
       basicEyes(id)
-      lookingLeft(id)
-      break
+      lookingLeft(id);
+      break;
     case '4':
-      basicEyes(id)
-      pipSqueak(id)
-      break
+      basicEyes(id);
+      pipSqueak(id);
+      break;
     case '5':
-      basicEyes(id)
-      wonky(id)
-      break
+      basicEyes(id);
+      wonky(id);
+      break;
     case '6':
-      basicEyes(id)
-      catEyes(id)
-      break
+      basicEyes(id);
+      catEyes(id);
+      break;
     case '7':
-      basicEyes(id)
-      roboto(id)
-      break
+      basicEyes(id);
+      roboto(id);
+      break;
   }
 };
 
@@ -157,44 +159,44 @@ function roboto(id){
 function markingPattern(gene, id) {
     switch (gene) {
       case '0':
-        chinHair(id)
-        break
+        chinHair(id);
+        break;
       case '1':
-        chinHair(id)
-        cheeky(id)
+        chinHair(id);
+        cheeky(id);
         break
       case '2':
-        chinHair(id)
-        shoulders(id)
-        break
+        chinHair(id);
+        shoulders(id);
+        break;
       case '3':
-        chinHair(id)
-        naked(id)
-        break
+        chinHair(id);
+        naked(id);
+        break;
       case '4':
-        chinHair(id)
-        headLine(id)
-        break
+        chinHair(id);
+        headLine(id);
+        break;
       case '5':
-        chinHair(id)
-        allHeadMarkings(id)
-        break
+        chinHair(id);
+        allHeadMarkings(id);
+        break;
       case '6':
-        chinHair(id)
-        shouldersAndChin(id)
-        break
+        chinHair(id);
+        shouldersAndChin(id);
+        break;
       case '7':
-        chinHair(id)
-        singleChin(id)
-        break
+        chinHair(id);
+        singleChin(id);
+        break;
       case '8':
-        chinHair(id)
-        singleChinAndHeadLine(id)
-        break
+        chinHair(id);
+        singleChinAndHeadLine(id);
+        break;
       case '9':
-        chinHair(id)
-        allMarkings(id)
-        break
+        chinHair(id);
+        allMarkings(id);
+        break;
     }
 };
 
@@ -294,25 +296,25 @@ function allMarkings(id) {
 function animationVariation(gene, id) {
   switch (gene) {
     case '1':
-      animationType1(id)
+      animationType1(id);
       break;
     case '2':
-      animationType2(id)
+      animationType2(id);
       break;
     case '3':
-      animationType3(id)
+      animationType3(id);
       break;
     case '4':
-      animationType4(id)
+      animationType4(id);
       break;
     case '5':
-      animationType5(id)
+      animationType5(id);
       break;
     case '6':
-      animationType6(id)
+      animationType6(id);
       break;
     case '7':
-      animationType7(id)
+      animationType7(id);
       break;
   }
 };
@@ -373,4 +375,80 @@ function animationType7(id) {
   $('.iris' + id).addClass('blinkEdit');
   $('.pupils' + id).addClass('blinkEdit');
   $('.pupil_highlight' + id).addClass('blinkEdit');
+};
+
+//last num backgrounds
+function backgroundVariation(gene, id) {
+  switch (gene) {
+    case '0':
+      catBackgroundDefault(id);
+      break;
+    case '1':
+      catBackgroundOne(id);
+      break;
+    case '2':
+      catBackgroundTwo(id);
+      break;
+    case '3':
+    catBackgroundThree(id);
+      break;
+    case '4':
+      catBackgroundFour(id);
+      break;
+    case '5':
+      catBackgroundFive(id);
+      break;
+    case '6':
+      catBackgroundSix(id);
+      break;
+    case '7':
+      catBackgroundSeven(id);
+      break;
+    case '8':
+      catBackgroundEight(id);
+      break;
+    case '9':
+      catBackgroundNine(id);
+      break;
+  }
+};
+
+function catBackgroundDefault(id){
+  $('.cat-background' + id).css('background-image', 'none');
+};
+
+function catBackgroundOne(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/8BFTrwf/cat-background-1.png")');
+};
+
+function catBackgroundTwo(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/C2v6NhL/cat-background-2.png")');
+};
+
+function catBackgroundThree(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/VBY2GSF/cat-background-3.png")');
+};
+
+function catBackgroundFour(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/x82kjgk/cat-background-4.png")');
+};
+
+function catBackgroundFive(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/Zd1dDTS/cat-background-5.png")');
+};
+
+function catBackgroundSix(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/Mn92B7d/cat-background-6.png")');
+};
+
+function catBackgroundSeven(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/MCgYb5m/cat-background-7.png")');
+};
+
+function catBackgroundEight(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/M7qcL1s/cat-background-8.png")');
+};
+
+function catBackgroundNine(id){
+  $('.cat-background' + id).css('background-image', 'url("https://i.ibb.co/27SQnnM/cat-background-9.png")');
 };
