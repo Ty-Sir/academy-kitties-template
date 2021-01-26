@@ -1,12 +1,13 @@
 let web3 = new Web3(Web3.givenProvider);
 
-let instance;
+let catContractInstance;
 let user;
-let contractAddress = "0x03df6FcFC4ddfc186c9E0a225c54Ca614b1F69E6";//enter the catcontract address after you migrate
+let catContractAddress = "0x895104a81B87cBBAf6466076A67fe41a02e5cC9e";//enter the catcontract address after you migrate
+let newTokenID;
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
-    instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+    catContractInstance = new web3.eth.Contract(abi.CatContract, catContractAddress, {from: accounts[0]});
     user = accounts[0];
     getCats();
   });
@@ -14,8 +15,8 @@ $(document).ready(function(){
 
 //needs to be async otherwise ownedCats will be one behind
 async function getCats(){
-  let ownedCats = await instance.methods.getMyCats().call({from:user});
-    console.log(ownedCats);
+  let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
+  console.log(ownedCats);
 
   //message when less than 2 cats are owned
   if(ownedCats.length < 2){
@@ -26,9 +27,10 @@ async function getCats(){
   };
 
   for(i = 0; i < ownedCats.length; i++){
-    let cat = await instance.methods.getKitty(ownedCats[i]).call();
-    chooseCats(i);
-    addCat(cat[1], cat[5], i);
+    let cat = await catContractInstance.methods.getKitty(ownedCats[i]).call();
+    let newTokenID = ownedCats[i];
+    chooseCats(i, newTokenID);
+    addCat(cat[1], cat[5], i, newTokenID);
     console.log(cat);
   };
 };
@@ -64,17 +66,17 @@ function helperForFirstModal(id){
   };
 };
 
-function chooseFirstCat(id){
+function chooseFirstCat(id, newTokenID){
   //when 1st modal is opened
   $('#catsModal1').on('shown.bs.modal', function(){
     $('#firstCatDivs #catBox' + id).click(function(){
       $('#choose-second-cat').removeClass('choose-first-cat-first');
       $('#choose-second-cat').addClass('choose-cat');
 
-      console.log("first id: " + id);
+      console.log("first id: " + newTokenID);
       $('#choose-first-cat').html($('#catBox' + id));
 
-      $('#firstCatId').text(id);
+      $('#firstCatId').text(newTokenID);
       console.log('span 1: ' + $('#firstCatId').text());
 
       $('#catBox' + id).css('margin-right', '180px');
@@ -116,14 +118,14 @@ function helperForSecondModal(id){
   };
 };
 
-function chooseSecondCat(id){
+function chooseSecondCat(id, newTokenID){
   //when 2nd modal is opened
   $('#catsModal2').on('shown.bs.modal', function(){
     $('#secondCatDivs #catBox' + id).click(function(){
-      console.log("second id: " + id);
+      console.log("second id: " + newTokenID);
       $('#choose-second-cat').html($('#catBox' + id));
 
-      $('#secondCatId').text(id);
+      $('#secondCatId').text(newTokenID);
       console.log('span 2: ' + $('#secondCatId').text());
 
       $('#catBox' + id).css('margin-right', '180px');
@@ -135,9 +137,9 @@ function chooseSecondCat(id){
 };
 
 //called in async getCats() in beginning
-function chooseCats(id){
-  chooseFirstCat(id);
-  chooseSecondCat(id);
+function chooseCats(id, newTokenID){
+  chooseFirstCat(id, newTokenID);
+  chooseSecondCat(id, newTokenID);
 };
 
 //require both catIDs to be selected before allowed to breed
@@ -162,17 +164,23 @@ $('.cats-container').click(function(){
   };
 });
 
-//geneString === genes from catBox, id === tokenID
-function addCat(geneString, gen, id){
+//geneString === genes from catBox, id === tokenID, newTokenID === the new ID now that id: 0 == constructor cat owned by address(0)
+function addCat(geneString, gen, id, newTokenID){
   let catsDna = catDna(geneString);
   console.log(catsDna);
   console.log('Gen: ' + gen);
   catDiv(id);
 
   $('.gen' + id).html("GEN: " + gen);
-  $('.tokenID' + id).html("Token ID: " + id);
+  $('.tokenID' + id).html("Token ID: " + newTokenID);
 
   renderCat(catsDna, id);
+
+  if(geneString.substring(0, 2) > 89 || geneString.substring(2, 4) > 89 || geneString.substring(4, 6) > 89 || geneString.substring(6, 8) > 89 ||
+      geneString.substring(10, 12) > 89 || geneString.substring(12, 14) > 89){
+    console.log('bignumber here');
+    $('.rareDNA' + id).css('display', 'block');
+  };
 };
 
 //breed button -- emits birth event when successfully breeds
@@ -184,14 +192,14 @@ $('#breedBtn').click(function(){
 
   //if cat IDs somehow end of the same- breed btn wont work
   if(firstCatId !== secondCatId){
-    let newGenCat = instance.methods.breed(firstCatId, secondCatId).send({from:user});
+    let newGenCat = catContractInstance.methods.breed(firstCatId, secondCatId).send({from:user});
     console.log(newGenCat);
   } else{
     alert('The cats must be different.');
   };
 
   //emits birth event
-  instance.events.Birth().on('data', function(event){
+  catContractInstance.events.Birth().on('data', function(event){
     console.log(event);
 
     window.location.href = "catalouge.html";
@@ -235,14 +243,14 @@ function catDna(geneString){
       decorationMidColor: geneString.substring(10, 12),
       decorationSidesColor: geneString.substring(12, 14),
       animation: geneString.substring(14, 15),
-      lastNum: geneString.substring(15, 16)
-  }
-  return genes
+      backgrounds: geneString.substring(15, 16)
+  };
+  return genes;
 };
 
 //html for dynamically displayed cats
 function catDiv(id){
-  let catCard =  `<div class="col-lg-4 catBox" id="catBox`+id+`">
+  let catCard =  `<div class="col-lg-4 catBox" id="catBox` + id + `">
 
                     <div class="cat cat` + id + `">
 
@@ -337,6 +345,10 @@ function catDiv(id){
                       </div>
 
                       <div class="tail tail` + id + `"></div>
+
+                      <div class="cat-background cat-background` + id + `"></div>
+
+                      <div class="rareDNA rareDNA` + id + `">Rare DNA</div>
 
                     </div>
                     <div class='gen` + id + ` gen info-font-size'></div>
