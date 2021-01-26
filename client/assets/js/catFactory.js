@@ -1,7 +1,7 @@
 //Random color
 function getColor() {
     var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return randomColor
+    return randomColor;
 };
 
 function genColors(){
@@ -9,85 +9,84 @@ function genColors(){
     for(var i = 10; i < 99; i ++){
       var color = getColor()
       colors[i] = color
-    }
-    return colors
+    };
+    return colors;
 };
-
 
 //changing colors
 function headColor(color,code) {
-  $('.head, .body, .front_leg, .back_leg').css('background', '#' + color)  //This changes the color of the cat
-  $('#headCode').html('code: '+ code) //This updates text of the badge next to the slider
-  $('#dnabody').html(code) //This updates the body color part of the DNA that is displayed below the cat
+  $('.head, .body, .front_leg, .back_leg').css('background', '#' + color);  //This changes the color of the cat
+  $('#headCode').html('code: '+ code); //This updates text of the badge next to the slider
+  $('#dnabody').html(code); //This updates the body color part of the DNA that is displayed below the cat
 };
 
 function mouthColor(color,code) {
-  $('.mouth, .belly, .tail').css('background', '#' + color)
-  $('#mouthCode').html('code: '+ code)
-  $('#dnamouth').html(code)
+  $('.mouth, .belly, .tail').css('background', '#' + color);
+  $('#mouthCode').html('code: '+ code);
+  $('#dnamouth').html(code);
 };
 
 function eyesColor(color,code) {
-  $('.iris').css('background', '#' + color)
-  $('#eyeCode').html('code: '+ code)
-  $('#dnaeyes').html(code)
+  $('.iris').css('background', '#' + color);
+  $('#eyeCode').html('code: '+ code);
+  $('#dnaeyes').html(code);
 };
 
 function earsColor(color,code) {
-  $('.ear, .back_paw, .front_paw').css('background', '#' + color)
-  $('#earsCode').html('code: '+ code)
-  $('#dnaears').html(code)
+  $('.ear, .back_paw, .front_paw').css('background', '#' + color);
+  $('#earsCode').html('code: '+ code);
+  $('#dnaears').html(code);
 };
 
 function decorationMidColor(color,code) {
-  $('.chin_hair_middle, .head_marking').css('background', '#' + color)
-  $('#decorationMidCode').html('code: '+ code)
-  $('#dnadecorationMid').html(code)
+  $('.chin_hair_middle, .head_marking').css('background', '#' + color);
+  $('#decorationMidCode').html('code: '+ code);
+  $('#dnadecorationMid').html(code);
 };
 
 function decorationSidesColor(color,code) {
-  $('.chin_hair_left, .chin_hair_right, .facemark_left, .facemark_right, .sidemark_left, .sidemark_right, .sidemark_left_dot, .sidemark_right_dot').css('background', '#' + color)
-  $('#decorationSidesCode').html('code: '+ code)
-  $('#dnadecorationSides').html(code)
+  $('.chin_hair_left, .chin_hair_right, .facemark_left, .facemark_right, .sidemark_left, .sidemark_right, .sidemark_left_dot, .sidemark_right_dot').css('background', '#' + color);
+  $('#decorationSidesCode').html('code: '+ code);
+  $('#dnadecorationSides').html(code);
 };
 
 //eye variations
 function eyeVariation(num) {
-  $('#dnashape').html(num)
+  $('#dnashape').html(num);
   switch (num) {
     case 1:
-      basicEyes()
-      $('#eyeName').html('Basic')
-      break
+      basicEyes();
+      $('#eyeName').html('Basic');
+      break;
     case 2:
-      basicEyes()
-      $('#eyeName').html('Tall-Boys')
-      tallBoys()
+      basicEyes();
+      $('#eyeName').html('Tall-Boys');
+      tallBoys();
       break
     case 3:
-      basicEyes()
-      $('#eyeName').html('Looking Left')
-      lookingLeft()
-      break
+      basicEyes();
+      $('#eyeName').html('Looking Left');
+      lookingLeft();
+      break;
     case 4:
-      basicEyes()
-      $("#eyeName").html("Pip Squeak")
-      pipSqueak()
-      break
+      basicEyes();
+      $("#eyeName").html("Pip Squeak");
+      pipSqueak();
+      break;
     case 5:
-      basicEyes()
-      $("#eyeName").html("Wonky")
-      wonky()
-      break
+      basicEyes();
+      $("#eyeName").html("Wonky");
+      wonky();
+      break;
     case 6:
-      basicEyes()
-      $("#eyeName").html("Cat Eyes")
-      catEyes()
-      break
+      basicEyes();
+      $("#eyeName").html("Cat Eyes");
+      catEyes();
+      break;
     case 7:
-      basicEyes()
-      $("#eyeName").html("Mr. Roboto")
-      roboto()
+      basicEyes();
+      $("#eyeName").html("Mr. Roboto");
+      roboto();
       break
   }
 };
@@ -142,57 +141,57 @@ function roboto(){
 
 //marking patterns
 function markingPattern(num) {
-    $('#dnadecoration').html(num)
+    $('#dnadecoration').html(num);
     switch (num) {
       case 0:
-        chinHair()
-        $('#markingName').html('Chin Hair')
-        break
+        chinHair();
+        $('#markingName').html('Chin Hair');
+        break;
       case 1:
-        chinHair()
-        $('#markingName').html('Cheeky')
-        cheeky()
-        break
+        chinHair();
+        $('#markingName').html('Cheeky');
+        cheeky();
+        break;
       case 2:
-        chinHair()
-        $('#markingName').html('Shoulders')
-        shoulders()
-        break
+        chinHair();
+        $('#markingName').html('Shoulders');
+        shoulders();
+        break;
       case 3:
-        chinHair()
-        $('#markingName').html('Naked')
-        naked()
-        break
+        chinHair();
+        $('#markingName').html('Naked');
+        naked();
+        break;
       case 4:
-        chinHair()
-        $('#markingName').html('Head Line')
-        headLine()
-        break
+        chinHair();
+        $('#markingName').html('Head Line');
+        headLine();
+        break;
       case 5:
-        chinHair()
-        $('#markingName').html('All Head Markings')
-        allHeadMarkings()
-        break
+        chinHair();
+        $('#markingName').html('All Head Markings');
+        allHeadMarkings();
+        break;
       case 6:
-        chinHair()
-        $('#markingName').html('Shoulders and Chin Hair')
-        shouldersAndChin()
-        break
+        chinHair();
+        $('#markingName').html('Shoulders and Chin Hair');
+        shouldersAndChin();
+        break;
       case 7:
-        chinHair()
-        $('#markingName').html('Single Chin Hair')
-        singleChin()
-        break
+        chinHair();
+        $('#markingName').html('Single Chin Hair');
+        singleChin();
+        break;
       case 8:
-        chinHair()
-        $('#markingName').html('Single Chin Hair and Head Line')
-        singleChinAndHeadLine()
-        break
+        chinHair();
+        $('#markingName').html('Single Chin Hair and Head Line');
+        singleChinAndHeadLine();
+        break;
       case 9:
-        chinHair()
-        $('#markingName').html('All Markings')
-        allMarkings()
-        break
+        chinHair();
+        $('#markingName').html('All Markings');
+        allMarkings();
+        break;
     }
 };
 
@@ -272,32 +271,32 @@ function animationVariation(num) {
   $('#dnaanimation').html(num);
   switch (num) {
     case 1:
-      animationType1()
-      $('#animationName').html('Pulsing Eyes')
+      animationType1();
+      $('#animationName').html('Pulsing Eyes');
       break;
     case 2:
-      animationType2()
-      $('#animationName').html("Ping!")
+      animationType2();
+      $('#animationName').html("Ping!");
       break;
     case 3:
-      animationType3()
-      $('#animationName').html("Ear Wiggle")
+      animationType3();
+      $('#animationName').html("Ear Wiggle");
       break;
     case 4:
-      animationType4()
-      $('#animationName').html("Head Wobble")
+      animationType4();
+      $('#animationName').html("Head Wobble");
       break;
     case 5:
-      animationType5()
-      $('#animationName').html("Tail Wag")
+      animationType5();
+      $('#animationName').html("Tail Wag");
       break;
     case 6:
-      animationType6()
-      $('#animationName').html("Levitate")
+      animationType6();
+      $('#animationName').html("Levitate");
       break;
     case 7:
-      animationType7()
-      $('#animationName').html("Blink Blink")
+      animationType7();
+      $('#animationName').html("Blink Blink");
       break;
   }
 };
@@ -358,4 +357,91 @@ function animationType7() {
   $('.iris').addClass('blinkEdit');
   $('.pupils').addClass('blinkEdit');
   $('.pupil_highlight').addClass('blinkEdit');
+};
+
+//last num backgrounds
+function backgroundVariation(num) {
+  $('#dnabackground').html(num);
+  switch (num) {
+    case 0:
+      catBackgroundDefault();
+      $('#backgroundName').html('None');
+      break;
+    case 1:
+      catBackgroundOne();
+      $('#backgroundName').html('Blue Clouds');
+      break;
+    case 2:
+      catBackgroundTwo();
+      $('#backgroundName').html('Red Clouds');
+      break;
+    case 3:
+      catBackgroundThree();
+      $('#backgroundName').html('Magenta Clouds');
+      break;
+    case 4:
+      catBackgroundFour();
+      $('#backgroundName').html('Yellow Watercolor');
+      break;
+    case 5:
+      catBackgroundFive();
+      $('#backgroundName').html('Blue Watercolor');
+      break;
+    case 6:
+      catBackgroundSix();
+      $('#backgroundName').html('Red Watercolor');
+      break;
+    case 7:
+      catBackgroundSeven();
+      $('#backgroundName').html('Blue 3-D Squiggle');
+      break;
+    case 8:
+      catBackgroundEight();
+      $('#backgroundName').html('Yellow 3-D Squiggle');
+      break;
+    case 9:
+      catBackgroundNine();
+      $('#backgroundName').html('Red 3-D Squiggle');
+      break;
+  }
+};
+
+function catBackgroundDefault(){
+  $('.cat-background').css('background-image', 'none');
+};
+
+function catBackgroundOne(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/8BFTrwf/cat-background-1.png")');
+};
+
+function catBackgroundTwo(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/C2v6NhL/cat-background-2.png")');
+};
+
+function catBackgroundThree(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/VBY2GSF/cat-background-3.png")');
+};
+
+function catBackgroundFour(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/x82kjgk/cat-background-4.png")');
+};
+
+function catBackgroundFive(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/Zd1dDTS/cat-background-5.png")');
+};
+
+function catBackgroundSix(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/Mn92B7d/cat-background-6.png")');
+};
+
+function catBackgroundSeven(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/MCgYb5m/cat-background-7.png")');
+};
+
+function catBackgroundEight(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/M7qcL1s/cat-background-8.png")');
+};
+
+function catBackgroundNine(){
+  $('.cat-background').css('background-image', 'url("https://i.ibb.co/27SQnnM/cat-background-9.png")');
 };
