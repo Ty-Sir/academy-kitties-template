@@ -4,6 +4,7 @@ import "./CatContract.sol";
 import "./Ownable.sol";
 import "./IKittyMarketPlace.sol";
 
+
 contract KittyMarketPlace is Ownable, IKittyMarketPlace {
   CatContract private _CatContract;
 
@@ -19,19 +20,17 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
 
   mapping(uint256 => Offer) tokenIDToOffer;
 
-  event MarketTransaction(string TxType, address owner, uint256 tokenID);
+  function setKittyContract(address _CatContractAddress) public onlyOwner{
+    _CatContract = CatContract(_CatContractAddress);
+  }
 
   constructor(address _CatContractAddress) public {
     setKittyContract(_CatContractAddress);
   }
 
-  function setKittyContract(address _CatContractAddress) public onlyOwner{
-    _CatContract = CatContract(_CatContractAddress);
-  }
-
   function getOffer(uint256 _tokenID) public view returns (address seller, uint256 price, uint256 index, uint256 tokenID, bool active){
+    require(tokenIDToOffer[_tokenID].active == true, "This cat is not for sale");
     Offer storage offer = tokenIDToOffer[_tokenID];
-    require(offer.active == true, "This cat is not for sale");
 
     return (offer.seller, offer.price, offer.index, offer.tokenID, offer.active);
   }
@@ -52,17 +51,12 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
   }
 
   function setOffer(uint256 _price, uint256 _tokenID) public{
-    require(_owns(msg.sender, _tokenID), "You must own the cat");
+    require(_CatContract._owns(msg.sender, _tokenID) == true, "You must own the cat");
     require(tokenIDToOffer[_tokenID].active == false, "Cannot double sell the cat");
     require(_CatContract.isApprovedForAll(msg.sender, address(this)), "Contract must be approved operator for offer to be created");
     require(_price > 0, "No free cats here buddy");
 
-    Offer memory offer = Offer(
-      address(msg.sender),
-      uint256(_price),
-      uint256(offers.length),
-      uint256(_tokenID),
-      bool(true));
+    Offer memory offer = Offer(msg.sender, _price, offers.length, _tokenID, true);
 
     tokenIDToOffer[_tokenID] = offer;
 
@@ -71,34 +65,29 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
     emit MarketTransaction("Offer Created", msg.sender, _tokenID);
   }
 
-  function _owns(address _claimant, uint256 _tokenID) internal view returns(bool){
-    return _CatContract.ownerOf(_tokenID) == _claimant;
-  }
 
   function removeOffer(uint256 _tokenID) public{
-    Offer memory offer = tokenIDToOffer[_tokenID];
+    require(tokenIDToOffer[_tokenID].seller == msg.sender, "Must be the seller/owner to remove an offer");
 
-    require(_owns(msg.sender, _tokenID), "Must be the seller/owner to remove an offer");
-
-    delete offers[offer.index];
-    tokenIDToOffer[_tokenID].active = false;
+    offers[tokenIDToOffer[_tokenID].index].active = false;
+    delete tokenIDToOffer[_tokenID];
 
     emit MarketTransaction("Offer Removed", msg.sender, _tokenID);
   }
 
 
   function buyKitty(uint256 _tokenID) public payable{
+    require(tokenIDToOffer[_tokenID].price == msg.value, "Payment must be equal to price of cat");
+    require(tokenIDToOffer[_tokenID].active == true, "Offer must be active");
+
     Offer memory offer = tokenIDToOffer[_tokenID];
 
-    require(offer.price == msg.value, "Payment must be equal to price of cat");
-    require(offer.active == true, "Offer must be active");
-
-    delete offers[offer.index];
-    tokenIDToOffer[_tokenID].active = false;
+    offers[tokenIDToOffer[_tokenID].index].active = false;
+    delete tokenIDToOffer[_tokenID];
 
     offer.seller.transfer(offer.price);
 
-    _CatContract.transferFrom(tokenIDToOffer[_tokenID].seller, msg.sender, _tokenID);
+    _CatContract.transferFrom(offer.seller, msg.sender, _tokenID);
 
     emit MarketTransaction("Cat Bought", msg.sender, _tokenID);
   }
