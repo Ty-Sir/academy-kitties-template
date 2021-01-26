@@ -1,15 +1,3 @@
-.title{
-  padding-top: 4em;
-  width: 100%;
-  height: 12em;
-  border-radius: 0 0 20% 20%;
-  background-image: linear-gradient(145deg, #fad05c 0%, #fa5c5c 100%);
-}
-
-#breed-title{
-  margin-top: .75em;
-}
-
 .catBox {
   padding-top: 50px;
   padding-left: 65px;
@@ -36,6 +24,7 @@
 .choose-first-cat-first{
   height: 30em;
   width: 20em;
+  padding-bottom: 15px;
   border-radius: 15px;
   background: #ddd;
   margin: 30px auto;
@@ -49,6 +38,7 @@
 .choose-cat{
   height: 30em;
   width: 20em;
+  padding-bottom: 15px;
   border-radius: 15px;
   background: white;
   margin: 30px auto;
@@ -152,10 +142,26 @@
 
 .gen{
   left: 0;
-  bottom: 15px;
+  bottom: -5px;
 }
 
 .tokenID{
   left: 0;
-  bottom: -15px;
+  bottom: -30px;
+}
+
+.rareDNA{
+  opacity: .7;
+  background-color: #fff721;
+  width: 6em;
+  text-align: center;
+  padding: 3px 3px;
+  display: none;
+  border: 2px solid;
+  border-radius: 15px;
+  position: absolute;
+  font-size: 40px;
+  left: 1.2em;
+  top: -10%;
+  box-shadow: 0 5px 10px #fc0307;
 }
