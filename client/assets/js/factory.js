@@ -1,22 +1,23 @@
 let web3 = new Web3(Web3.givenProvider);
 
-let instance;
+let catContractInstance;
 let user;
-let contractAddress = "0x03df6FcFC4ddfc186c9E0a225c54Ca614b1F69E6";//enter the catcontract address after you migrate
+let catContractAddress = "0x895104a81B87cBBAf6466076A67fe41a02e5cC9e";//enter the catcontract address after you migrate
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
-    instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+    catContractInstance = new web3.eth.Contract(abi.CatContract, catContractAddress, {from: accounts[0]});
     user = accounts[0];
 
-    console.log(instance);
+    console.log(catContractInstance);
 
     //emits event on webpage
-    instance.events.Birth().on('data', function(event){
+    catContractInstance.events.Birth().on('data', function(event){
       console.log(event);
       let owner = event.returnValues.owner;
       let tokenID = event.returnValues.tokenID;
       let genes = event.returnValues.genes;
+
       $('#eventAlert').css("display", "block");
       $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
                               '<span aria-hidden="true" id="close-icon">&times;</span>' +
@@ -41,11 +42,11 @@ function closeIcon(){
 //create cat button
 $('#createKitty').click(function(){
   let dnaStr = getDna();
-  instance.methods.createGen0Cat(dnaStr).send({}, function(error, txHash){
+  catContractInstance.methods.createGen0Cat(dnaStr).send({}, function(error, txHash){
     if(error)
       console.log(error);
     else
       console.log(txHash);
       console.log(dnaStr);
-  })
+  });
 });
