@@ -6,7 +6,6 @@
     <title>Ty's Cat Factory - Homepage</title>
     <link rel="stylesheet" href="assets/css/homepage.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/mystyle.css">
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/nav.css">
     <link rel="stylesheet" href="assets/css/footer.css">
@@ -27,8 +26,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Marketplace</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Marketplace</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="marketplaceSell.html">Sell My Cats</a>
+              <a class="dropdown-item" href="marketplaceBuy.html">Buy Cats</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="catalouge.html"><em>Cat</em>alouge</a>
@@ -61,16 +64,16 @@
           <h3 class="card-title cardTitle">Buy & Sell Cats</h3>
           <p class="card-text cardInfo">Buy new cats or sell your own in a crypto-currency powered marketplace!</p>
         </div>
-        <a class="buttonLink" href="#"><button type="button" class="cardBtn" id="buyBtn">Buy & Sell!</button></a>
+        <a class="buttonLink" href="marketplaceBuy.html"><button type="button" class="cardBtn" id="buyBtn">Buy & Sell!</button></a>
       </div>
 
       <div class="featureCard shadow-sm" style="width: 18rem;">
         <img class="cardImg" src="https://i.ibb.co/RSWLFpy/four-ty-coins.png" alt="Four made up silver colored 'Ty Coins'.">
         <div class="card-body cardText">
-          <h3 class="card-title cardTitle">Earn Rewards</h3>
-          <p class="card-text cardInfo">Start a new collection of unique cats! Earn special kitties from breeding them.</p>
+          <h3 class="card-title cardTitle">Start a Collection</h3>
+          <p class="card-text cardInfo">Start a new collection of unique cats! You can even earn special kitties from breeding them.</p>
         </div>
-        <a class="buttonLink" href="catalouge.html"><button type="button" class="cardBtn" id="earnBtn">Start Earning!</button></a>
+        <a class="buttonLink" href="catalouge.html"><button type="button" class="cardBtn" id="earnBtn">Start Collecting!</button></a>
       </div>
 
       <div class="featureCard shadow-sm" style="width: 18rem;">
