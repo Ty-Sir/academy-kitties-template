@@ -56,7 +56,9 @@ contract CatContract is  IERC721, Ownable {
       uint32(_dadID),
       uint16(_generation));
 
-    uint256 newTokenID = cats.length;
+    uint256 newTokenID = 1;
+    newTokenID = cats.length;
+
     cats.push(cat);
 
     emit Birth(owner, newTokenID, _momID, _dadID, _genes);
@@ -114,15 +116,17 @@ contract CatContract is  IERC721, Ownable {
     emit Transfer(_from, _to, _tokenID);
   }
 
-  function _owns(address _claimant, uint256 _tokenID) internal view returns(bool){
+  function _owns(address _claimant, uint256 _tokenID) public view returns(bool){
     return ownerID[_tokenID] == _claimant;
   }
 
-  function getMyCats() external view returns(uint256[] memory){
-    uint256[] memory ownedCats = new uint256[](ownership[msg.sender]);
+  function getMyCats(address _owner) external view returns(uint256[] memory){
+    uint256[] memory ownedCats = new uint256[](ownership[_owner]);
+    uint256 counter = 0;
     for (uint256 i = 0; i < cats.length; i++){
-        if (ownerID[i] == msg.sender){
-          ownedCats[i] = i;
+        if (ownerID[i] == _owner){
+          ownedCats[counter] = i;
+          counter++;
         }
       }
     return ownedCats;
@@ -204,8 +208,6 @@ contract CatContract is  IERC721, Ownable {
   function breed(uint256 _dadID, uint256 _momID) public returns (uint256){
     require(_owns(msg.sender, _dadID) && _owns(msg.sender, _momID), "You must own both cats to breed.");
 
-    //had to look ahead for these two lines and the gen algo
-    //could not find anything online to help
     (,uint256 _dadDna,,,,uint256 dadGen) = getKitty(_dadID);
     (,uint256 _momDna,,,,uint256 momGen) = getKitty(_momID);
 
@@ -241,7 +243,7 @@ contract CatContract is  IERC721, Ownable {
         geneArray[7] = uint8(now % 70) + 10;
 
       } else if(index == randomIndex){
-        geneArray[randomIndex] = uint8(now % 80) + 10;
+        geneArray[randomIndex] = uint8(now % 89) + 10;
 
       } else if(random & i != 0){
         geneArray[index] = uint8(_momDna % 100);
