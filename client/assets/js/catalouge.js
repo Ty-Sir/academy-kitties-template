@@ -1,12 +1,13 @@
 let web3 = new Web3(Web3.givenProvider);
 
-let instance;
+let catContractInstance;
 let user;
-let contractAddress = "0x03df6FcFC4ddfc186c9E0a225c54Ca614b1F69E6";//enter the catcontract address after you migrate
+let catContractAddress = "0x895104a81B87cBBAf6466076A67fe41a02e5cC9e";
+let newTokenID;
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
-    instance = new web3.eth.Contract(abi, contractAddress, {from: accounts[0]});
+    catContractInstance = new web3.eth.Contract(abi.CatContract, catContractAddress, {from: accounts[0]});
     user = accounts[0];
     getCats();
   })
@@ -14,34 +15,38 @@ $(document).ready(function(){
 
 //needs to be async otherwise ownedCats will be one behind
 async function getCats(){
-  let ownedCats = await instance.methods.getMyCats().call({from:user});
-    console.log(ownedCats);
+  let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
+  console.log(ownedCats);
 
   //message when no cats are owned
   if(ownedCats.length === 0){
     let textIfNoCats = "<p class='noCatText shadow'>Uh-oh...you don't have any cats! 🙀<br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a></p>"
     $('.catDivs').append(textIfNoCats);
-  }
+  };
 
   //blinking arrow to show to scroll down
   if(ownedCats.length > 3){
     $('#top-arrow').addClass('top-arrow-animation');
     $('#bottom-arrow').addClass('bottom-arrow-animation');
-  }
+  };
 
   for(i = 0; i < ownedCats.length; i++){
-    let cat = await instance.methods.getKitty(ownedCats[i]).call();
-    addCat(cat[1], cat[2], cat[3], cat[4], cat[5], i);
+    let cat = await catContractInstance.methods.getKitty(ownedCats[i]).call();
+    let newTokenID = ownedCats[i];
+    addCat(cat[1], cat[2], cat[3], cat[4], cat[5], i, newTokenID);
     console.log(cat);
-  }
+    console.log(i);
+  };
 };
 
 //geneString === genes from catBox, id === tokenID
-function addCat(geneString, birthTime, momID, dadID, gen, id){
+function addCat(geneString, birthTime, momID, dadID, gen, id, newTokenID){
   let catsDna = catDna(geneString);
   console.log(catsDna);
   catDiv(id);
-  renderCat(catsDna, id)
+
+  renderCat(catsDna, id);
+
   $('#birth' + id).html("Birthday: " + timeConverter(birthTime));
   $('#genes' + id).html("DNA: " + seperateGeneString(geneString));
   $('#gen' + id).html("GEN: " + gen);
@@ -54,7 +59,7 @@ function addCat(geneString, birthTime, momID, dadID, gen, id){
     $('#birth-popup' + id).html("Birthday: " + timeConverter(birthTime));
     $('#genes-popup' + id).html("DNA: " + seperateGeneString(geneString));
     $('#gen-popup' + id).html("GEN: " + gen);
-    $('#tokenID-popup' + id).html("Token ID: " + id).css('display', 'block');
+    $('#tokenID-popup' + id).html("Token ID: " + newTokenID).css('display', 'block');
     $('#dadID-popup' + id).html("First Parent ID: " + dadID).css('display', 'block');
     $('#momID-popup' + id).html("Second Parent ID: " + momID).css('display', 'block');
 
@@ -78,6 +83,17 @@ function addCat(geneString, birthTime, momID, dadID, gen, id){
     $('#genes' + id).css('display', 'block');
     $('#gen' + id).css('display', 'block');
   });
+
+  if(geneString.substring(0, 2) > 89 || geneString.substring(2, 4) > 89 || geneString.substring(4, 6) > 89 || geneString.substring(6, 8) > 89 ||
+      geneString.substring(10, 12) > 89 || geneString.substring(12, 14) > 89){
+    console.log('bignumber here');
+    $('#catBox' + id).removeClass('shadow-lg');
+    $('#cat-data' + id).removeClass('shadow');
+    $('#cat-data' + id).addClass('rare-colors-databox');
+    $('#catBox' + id).addClass('rare-colors');
+    $('.rareDNA' + id).css('display', 'block');
+    $('.rareDNA' + id).addClass('rareDNA-animation');
+  };
 };
 
 //converts unix to readable date/time
@@ -92,7 +108,7 @@ function timeConverter(UNIX_timestamp){
   let sec = birth.getSeconds() < 10 ? '0' + birth.getSeconds() : birth.getSeconds();
   let birthday = date + ' ' + month + ', ' + year + ' ' + hour + ':' + min + ':' + sec ;
   return birthday;
-}
+};
 
 //seperate gene string for better readability
 function seperateGeneString(genes){
@@ -107,7 +123,7 @@ function seperateGeneString(genes){
           genes.substring(14, 15) + " " +
           genes.substring(15, 16) + " ";
   return a;
-}
+};
 
 //genes split up for functions to read
 function catDna(geneString){
@@ -122,15 +138,14 @@ function catDna(geneString){
       decorationMidColor: geneString.substring(10, 12),
       decorationSidesColor: geneString.substring(12, 14),
       animation: geneString.substring(14, 15),
-      lastNum: geneString.substring(15, 16)
-  }
-  return genes
+      backgrounds: geneString.substring(15, 16)
+  };
+  return genes;
 };
 
 //html for dynamically displayed cats
 function catDiv(id){
-      let catCard =  `<div class="col-lg-4 catBox shadow-lg" id="catBox`+id+`">
-
+      let catCard =  `<div class="col-lg-4 catBox shadow-lg" id="catBox` + id + `">
                         <div class="cat cat` + id + `">
 
                           <div class="ears">
@@ -225,6 +240,10 @@ function catDiv(id){
 
                           <div class="tail tail` + id + `"></div>
 
+                          <div class="cat-background cat-background` + id + `"></div>
+
+                          <div class="rareDNA rareDNA`+id+`">Rare DNA</div>
+
                         </div>
 
                         <div class='birth info-font-size' id='birth` + id + `'></div>
@@ -255,7 +274,7 @@ $(window).scroll(function() {
   let scroll = $(window).scrollTop();
   if (scroll >= 150) {
     $(".arrow").css('display', 'none');
-  }
+  };
 });
 
 //back-to-top btn appear and disappear
@@ -265,7 +284,7 @@ $(window).scroll(function() {
     $("#back-to-top").css('display', 'block');
   } else{
     $("#back-to-top").css('display', 'none');
-  }
+  };
 });
 
 //back-to-top btn functionality
