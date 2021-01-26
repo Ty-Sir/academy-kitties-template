@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ty's Cat Factory - Catalouge</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/mystyle.css">
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/catalouge.css">
     <link rel="stylesheet" href="assets/css/cats.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/title.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
     <script src="assets/bootstrap/js/popper.js"></script>
@@ -30,8 +30,12 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Marketplace</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Marketplace</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="marketplaceSell.html">Sell My Cats</a>
+              <a class="dropdown-item" href="marketplaceBuy.html">Buy Cats</a>
+            </div>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="catalouge.html"><em>Cat</em>alouge <span class="sr-only">(current)</span></a>
@@ -48,11 +52,11 @@
 
     <header>
       <div class="title" align="center">
-        <h1 id="catalouge-title"><em>Cat</em>alouge</h1>
+        <h1 id="title"><em>Cat</em>alouge</h1>
         <p>Your Collection of Cats</p>
       </div>
     </header>
-    
+
     <button class="fixed-top" type="button" id="back-to-top">Back to Top</button>
 
     <main>
