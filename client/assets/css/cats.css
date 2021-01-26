@@ -216,6 +216,7 @@ body {
 .ears{
   position: relative;
   top: 15px;
+  z-index: 1;
 }
 
 .ear{
@@ -441,8 +442,21 @@ body {
   left: 180px;
   background: #505050;
   transition: transform .4s ease-out;
+  z-index: 1;
 }
 
 .tail:hover{
   transform: rotate(30deg);
+}
+
+.cat-background{
+  position: relative;
+  bottom: 224%;
+  left: -48%;
+  transform: scale(.78);
+  margin: auto;
+  height: 650px;
+  width: 500px;
+  background-repeat: no-repeat;
+  border-radius: 7%;
 }
