@@ -148,7 +148,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"TxType\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenID\",\"type\":\"uint256\"}],\"name\":\"MarketTransaction\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"buyKitty\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getAllTokenOnSale\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"listOfOffers\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"getOffer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"tokenID\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"removeOffer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_CatContractAddress\",\"type\":\"address\"}],\"name\":\"setKittyContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"setOffer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"buyKitty(uint256)\":{\"notice\":\"Executes the purchase of _tokenId. Sends the funds to the seller and transfers the token using transferFrom in Kittycontract. Emits the MarketTransaction event with txType \\\"Buy\\\". Requirement: The msg.value needs to equal the price of _tokenId Requirement: There must be an active offer for _tokenId\"},\"getAllTokenOnSale()\":{\"notice\":\"Get all tokenId's that are currently for sale. Returns an empty arror if none exist.\"},\"getOffer(uint256)\":{\"notice\":\"Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.\"},\"removeOffer(uint256)\":{\"notice\":\"Removes an existing offer. Emits the MarketTransaction event with txType \\\"Remove offer\\\" Requirement: Only the seller of _tokenId can remove an offer.\"},\"setKittyContract(address)\":{\"notice\":\"Set the current KittyContract address and initialize the instance of catcontract. Requirement: Only the contract owner can call.\"},\"setOffer(uint256,uint256)\":{\"notice\":\"Creates a new offer for _tokenId for the price _price. Emits the MarketTransaction event with txType 'Offer Created' Requirement: Only the owner of _tokenId can create an offer. Requirement: There can only be one active offer for a token at a time. Requirement: Marketplace contract (this) needs to be an approved operator when the offer is created.\"}}}},\"settings\":{\"compilationTarget\":{\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IKittyMarketPlace.sol\":\"IKittyMarketPlace\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/CatContract.sol\":{\"keccak256\":\"0xbe5d8d17d5a0dd9e924e32489a38fd78d5f6146cb40bbb0e50477172b4469775\",\"urls\":[\"bzz-raw://26f9d629935835e3d1a8f9ca3aa8773d8edacf483cbeff5020263492e8a4654b\",\"dweb:/ipfs/QmVQsJu5FqXxc3QTvsscC7FhRBWjWFVVCUucVN4zu5KDsD\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IERC721.sol\":{\"keccak256\":\"0xe6b750f30aeb9386641e76878882ebad5d225371ad226a28f4a9b8e440a7fc72\",\"urls\":[\"bzz-raw://6cdc1f27dea4582fc9d2c5028a77f10f71f0fe0575033652544739dbdafa04e8\",\"dweb:/ipfs/QmNqYPAjQA2VSm5usLgCGYvAp2cVuM7UFLVP3qU7HXGfdR\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IERC721Receiver.sol\":{\"keccak256\":\"0x983cf40b0f2ea2fd96c313f4df138b25191e576a29b2168916a9494239c100c9\",\"urls\":[\"bzz-raw://444b0f05507afc9b4b09ec68ec9cdb84fd4c79f6d61278709d27c72d7df24024\",\"dweb:/ipfs/QmTE81HZyEWV4GpD2KBgiaGgUax1YdWW3wTG7sKz2D7Gy2\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IKittyMarketPlace.sol\":{\"keccak256\":\"0xa0f949523e7672c9d4e1ad347456f3e519c2063546611bcbc29b8ea638710fc3\",\"urls\":[\"bzz-raw://2d4f20fd65558d69bc44a0d30d195056c28c3fe333a6f1493ac04a6ec222c914\",\"dweb:/ipfs/QmdXmfRkR43iyCY7csrtmSXTLo1RKZiGYtsujjj8HjWZ7q\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/Ownable.sol\":{\"keccak256\":\"0x317552670cfae00728ab371aa9f43c696b16c37658c6270ca5b0bc4f0adcd6d3\",\"urls\":[\"bzz-raw://46c2c804b3c25d3c41b19ad2fbcc55b60c1b20fd04bf777efd41737ecaa4fdb8\",\"dweb:/ipfs/QmQ1qw2dNZGvgfzUShimhHHVqtBCf7ThyekzQxbh1hAx3Y\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"TxType\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenID\",\"type\":\"uint256\"}],\"name\":\"MarketTransaction\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"buyKitty\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getAllTokenOnSale\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"listOfOffers\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"getOffer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"tokenID\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"active\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"removeOffer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_CatContractAddress\",\"type\":\"address\"}],\"name\":\"setKittyContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_price\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_tokenID\",\"type\":\"uint256\"}],\"name\":\"setOffer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"buyKitty(uint256)\":{\"notice\":\"Executes the purchase of _tokenId. Sends the funds to the seller and transfers the token using transferFrom in Kittycontract. Emits the MarketTransaction event with txType \\\"Buy\\\". Requirement: The msg.value needs to equal the price of _tokenId Requirement: There must be an active offer for _tokenId\"},\"getAllTokenOnSale()\":{\"notice\":\"Get all tokenId's that are currently for sale. Returns an empty arror if none exist.\"},\"getOffer(uint256)\":{\"notice\":\"Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.\"},\"removeOffer(uint256)\":{\"notice\":\"Removes an existing offer. Emits the MarketTransaction event with txType \\\"Remove offer\\\" Requirement: Only the seller of _tokenId can remove an offer.\"},\"setKittyContract(address)\":{\"notice\":\"Set the current KittyContract address and initialize the instance of catcontract. Requirement: Only the contract owner can call.\"},\"setOffer(uint256,uint256)\":{\"notice\":\"Creates a new offer for _tokenId for the price _price. Emits the MarketTransaction event with txType 'Offer Created' Requirement: Only the owner of _tokenId can create an offer. Requirement: There can only be one active offer for a token at a time. Requirement: Marketplace contract (this) needs to be an approved operator when the offer is created.\"}}}},\"settings\":{\"compilationTarget\":{\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IKittyMarketPlace.sol\":\"IKittyMarketPlace\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/CatContract.sol\":{\"keccak256\":\"0xf91467506a0ce67c6e8d8d0c3fa7d7cca97f23042d5087b8ba82b4f61f199bda\",\"urls\":[\"bzz-raw://8b9ff90c908dea70457568b54589bd3c439dfbe9deac8885c86684e032d07887\",\"dweb:/ipfs/QmfPoAUfiniMa3W72LEAUsGvN8LXshtQHYPcQTSRoPBrkF\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IERC721.sol\":{\"keccak256\":\"0xe6b750f30aeb9386641e76878882ebad5d225371ad226a28f4a9b8e440a7fc72\",\"urls\":[\"bzz-raw://6cdc1f27dea4582fc9d2c5028a77f10f71f0fe0575033652544739dbdafa04e8\",\"dweb:/ipfs/QmNqYPAjQA2VSm5usLgCGYvAp2cVuM7UFLVP3qU7HXGfdR\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IERC721Receiver.sol\":{\"keccak256\":\"0x983cf40b0f2ea2fd96c313f4df138b25191e576a29b2168916a9494239c100c9\",\"urls\":[\"bzz-raw://444b0f05507afc9b4b09ec68ec9cdb84fd4c79f6d61278709d27c72d7df24024\",\"dweb:/ipfs/QmTE81HZyEWV4GpD2KBgiaGgUax1YdWW3wTG7sKz2D7Gy2\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IKittyMarketPlace.sol\":{\"keccak256\":\"0xa0f949523e7672c9d4e1ad347456f3e519c2063546611bcbc29b8ea638710fc3\",\"urls\":[\"bzz-raw://2d4f20fd65558d69bc44a0d30d195056c28c3fe333a6f1493ac04a6ec222c914\",\"dweb:/ipfs/QmdXmfRkR43iyCY7csrtmSXTLo1RKZiGYtsujjj8HjWZ7q\"]},\"/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/Ownable.sol\":{\"keccak256\":\"0x317552670cfae00728ab371aa9f43c696b16c37658c6270ca5b0bc4f0adcd6d3\",\"urls\":[\"bzz-raw://46c2c804b3c25d3c41b19ad2fbcc55b60c1b20fd04bf777efd41737ecaa4fdb8\",\"dweb:/ipfs/QmQ1qw2dNZGvgfzUShimhHHVqtBCf7ThyekzQxbh1hAx3Y\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -159,14 +159,14 @@
     "absolutePath": "/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IKittyMarketPlace.sol",
     "exportedSymbols": {
       "IKittyMarketPlace": [
-        1269
+        1267
       ]
     },
-    "id": 1270,
+    "id": 1268,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1215,
+        "id": 1213,
         "literals": [
           "solidity",
           "^",
@@ -179,10 +179,10 @@
       {
         "absolutePath": "/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/CatContract.sol",
         "file": "./CatContract.sol",
-        "id": 1216,
+        "id": 1214,
         "nodeType": "ImportDirective",
-        "scope": 1270,
-        "sourceUnit": 1076,
+        "scope": 1268,
+        "sourceUnit": 1074,
         "src": "28:27:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -190,10 +190,10 @@
       {
         "absolutePath": "/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/Ownable.sol",
         "file": "./Ownable.sol",
-        "id": 1217,
+        "id": 1215,
         "nodeType": "ImportDirective",
-        "scope": 1270,
-        "sourceUnit": 1682,
+        "scope": 1268,
+        "sourceUnit": 1680,
         "src": "57:23:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -204,9 +204,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1269,
+        "id": 1267,
         "linearizedBaseContracts": [
-          1269
+          1267
         ],
         "name": "IKittyMarketPlace",
         "nodeType": "ContractDefinition",
@@ -214,20 +214,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 1225,
+            "id": 1223,
             "name": "MarketTransaction",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1224,
+              "id": 1222,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1219,
+                  "id": 1217,
                   "indexed": false,
                   "name": "TxType",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1223,
                   "src": "450:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -236,7 +236,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1218,
+                    "id": 1216,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "450:6:3",
@@ -250,11 +250,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1221,
+                  "id": 1219,
                   "indexed": false,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1223,
                   "src": "465:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -263,7 +263,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1220,
+                    "id": 1218,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "465:7:3",
@@ -278,11 +278,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1223,
+                  "id": 1221,
                   "indexed": false,
                   "name": "tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1223,
                   "src": "480:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -291,7 +291,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1222,
+                    "id": 1220,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "480:7:3",
@@ -311,22 +311,22 @@
           {
             "body": null,
             "documentation": "Set the current KittyContract address and initialize the instance of catcontract.\nRequirement: Only the contract owner can call.",
-            "id": 1230,
+            "id": 1228,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setKittyContract",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1228,
+              "id": 1226,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1227,
+                  "id": 1225,
                   "name": "_CatContractAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1230,
+                  "scope": 1228,
                   "src": "692:27:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -335,7 +335,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1226,
+                    "id": 1224,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "692:7:3",
@@ -352,12 +352,12 @@
               "src": "691:29:3"
             },
             "returnParameters": {
-              "id": 1229,
+              "id": 1227,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "729:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "666:64:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -366,22 +366,22 @@
           {
             "body": null,
             "documentation": "Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.",
-            "id": 1245,
+            "id": 1243,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getOffer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1233,
+              "id": 1231,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1232,
+                  "id": 1230,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "883:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -390,7 +390,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1231,
+                    "id": 1229,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "883:7:3",
@@ -406,15 +406,15 @@
               "src": "882:18:3"
             },
             "returnParameters": {
-              "id": 1244,
+              "id": 1242,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1235,
+                  "id": 1233,
                   "name": "seller",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "925:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -423,7 +423,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1234,
+                    "id": 1232,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "925:7:3",
@@ -438,10 +438,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1237,
+                  "id": 1235,
                   "name": "price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "941:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -450,7 +450,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1236,
+                    "id": 1234,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "941:7:3",
@@ -464,10 +464,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1239,
+                  "id": 1237,
                   "name": "index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "956:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -476,7 +476,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1238,
+                    "id": 1236,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "956:7:3",
@@ -490,10 +490,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1241,
+                  "id": 1239,
                   "name": "tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "971:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -502,7 +502,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1240,
+                    "id": 1238,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "971:7:3",
@@ -516,10 +516,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1243,
+                  "id": 1241,
                   "name": "active",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "988:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -528,7 +528,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1242,
+                    "id": 1240,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "988:4:3",
@@ -543,7 +543,7 @@
               ],
               "src": "923:77:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "865:136:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -552,28 +552,28 @@
           {
             "body": null,
             "documentation": "Get all tokenId's that are currently for sale. Returns an empty arror if none exist.",
-            "id": 1251,
+            "id": 1249,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getAllTokenOnSale",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1246,
+              "id": 1244,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1145:2:3"
             },
             "returnParameters": {
-              "id": 1250,
+              "id": 1248,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1249,
+                  "id": 1247,
                   "name": "listOfOffers",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1251,
+                  "scope": 1249,
                   "src": "1171:29:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -583,7 +583,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 1247,
+                      "id": 1245,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "1171:7:3",
@@ -592,7 +592,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1248,
+                    "id": 1246,
                     "length": null,
                     "nodeType": "ArrayTypeName",
                     "src": "1171:9:3",
@@ -607,7 +607,7 @@
               ],
               "src": "1170:31:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "1119:83:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -616,22 +616,22 @@
           {
             "body": null,
             "documentation": "Creates a new offer for _tokenId for the price _price.\nEmits the MarketTransaction event with txType 'Offer Created'\nRequirement: Only the owner of _tokenId can create an offer.\nRequirement: There can only be one active offer for a token at a time.\nRequirement: Marketplace contract (this) needs to be an approved operator when the offer is created.",
-            "id": 1258,
+            "id": 1256,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setOffer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1256,
+              "id": 1254,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1253,
+                  "id": 1251,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1258,
+                  "scope": 1256,
                   "src": "1631:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -640,7 +640,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1252,
+                    "id": 1250,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1631:7:3",
@@ -654,10 +654,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1255,
+                  "id": 1253,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1258,
+                  "scope": 1256,
                   "src": "1647:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -666,7 +666,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1254,
+                    "id": 1252,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1647:7:3",
@@ -682,12 +682,12 @@
               "src": "1630:34:3"
             },
             "returnParameters": {
-              "id": 1257,
+              "id": 1255,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1673:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "1613:61:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -696,22 +696,22 @@
           {
             "body": null,
             "documentation": "Removes an existing offer.\nEmits the MarketTransaction event with txType \"Remove offer\"\nRequirement: Only the seller of _tokenId can remove an offer.",
-            "id": 1263,
+            "id": 1261,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "removeOffer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1261,
+              "id": 1259,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1260,
+                  "id": 1258,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1263,
+                  "scope": 1261,
                   "src": "1892:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -720,7 +720,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1259,
+                    "id": 1257,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1892:7:3",
@@ -736,12 +736,12 @@
               "src": "1891:18:3"
             },
             "returnParameters": {
-              "id": 1262,
+              "id": 1260,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1918:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "1871:48:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -750,22 +750,22 @@
           {
             "body": null,
             "documentation": "Executes the purchase of _tokenId.\nSends the funds to the seller and transfers the token using transferFrom in Kittycontract.\nEmits the MarketTransaction event with txType \"Buy\".\nRequirement: The msg.value needs to equal the price of _tokenId\nRequirement: There must be an active offer for _tokenId",
-            "id": 1268,
+            "id": 1266,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "buyKitty",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1266,
+              "id": 1264,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1265,
+                  "id": 1263,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1268,
+                  "scope": 1266,
                   "src": "2297:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -774,7 +774,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1264,
+                    "id": 1262,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2297:7:3",
@@ -790,19 +790,19 @@
               "src": "2296:18:3"
             },
             "returnParameters": {
-              "id": 1267,
+              "id": 1265,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2331:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "2279:53:3",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1270,
+        "scope": 1268,
         "src": "389:1946:3"
       }
     ],
@@ -812,14 +812,14 @@
     "absolutePath": "/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/IKittyMarketPlace.sol",
     "exportedSymbols": {
       "IKittyMarketPlace": [
-        1269
+        1267
       ]
     },
-    "id": 1270,
+    "id": 1268,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1215,
+        "id": 1213,
         "literals": [
           "solidity",
           "^",
@@ -832,10 +832,10 @@
       {
         "absolutePath": "/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/CatContract.sol",
         "file": "./CatContract.sol",
-        "id": 1216,
+        "id": 1214,
         "nodeType": "ImportDirective",
-        "scope": 1270,
-        "sourceUnit": 1076,
+        "scope": 1268,
+        "sourceUnit": 1074,
         "src": "28:27:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -843,10 +843,10 @@
       {
         "absolutePath": "/Users/tylersiravo/Documents/GitHub/Solidity-Practice/academy-kitties-template/contracts/Ownable.sol",
         "file": "./Ownable.sol",
-        "id": 1217,
+        "id": 1215,
         "nodeType": "ImportDirective",
-        "scope": 1270,
-        "sourceUnit": 1682,
+        "scope": 1268,
+        "sourceUnit": 1680,
         "src": "57:23:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -857,9 +857,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1269,
+        "id": 1267,
         "linearizedBaseContracts": [
-          1269
+          1267
         ],
         "name": "IKittyMarketPlace",
         "nodeType": "ContractDefinition",
@@ -867,20 +867,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 1225,
+            "id": 1223,
             "name": "MarketTransaction",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1224,
+              "id": 1222,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1219,
+                  "id": 1217,
                   "indexed": false,
                   "name": "TxType",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1223,
                   "src": "450:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -889,7 +889,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1218,
+                    "id": 1216,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "450:6:3",
@@ -903,11 +903,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1221,
+                  "id": 1219,
                   "indexed": false,
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1223,
                   "src": "465:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -916,7 +916,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1220,
+                    "id": 1218,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "465:7:3",
@@ -931,11 +931,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 1223,
+                  "id": 1221,
                   "indexed": false,
                   "name": "tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1225,
+                  "scope": 1223,
                   "src": "480:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -944,7 +944,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1222,
+                    "id": 1220,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "480:7:3",
@@ -964,22 +964,22 @@
           {
             "body": null,
             "documentation": "Set the current KittyContract address and initialize the instance of catcontract.\nRequirement: Only the contract owner can call.",
-            "id": 1230,
+            "id": 1228,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setKittyContract",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1228,
+              "id": 1226,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1227,
+                  "id": 1225,
                   "name": "_CatContractAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1230,
+                  "scope": 1228,
                   "src": "692:27:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -988,7 +988,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1226,
+                    "id": 1224,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "692:7:3",
@@ -1005,12 +1005,12 @@
               "src": "691:29:3"
             },
             "returnParameters": {
-              "id": 1229,
+              "id": 1227,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "729:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "666:64:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1019,22 +1019,22 @@
           {
             "body": null,
             "documentation": "Get the details about a offer for _tokenId. Throws an error if there is no active offer for _tokenId.",
-            "id": 1245,
+            "id": 1243,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getOffer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1233,
+              "id": 1231,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1232,
+                  "id": 1230,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "883:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1043,7 +1043,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1231,
+                    "id": 1229,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "883:7:3",
@@ -1059,15 +1059,15 @@
               "src": "882:18:3"
             },
             "returnParameters": {
-              "id": 1244,
+              "id": 1242,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1235,
+                  "id": 1233,
                   "name": "seller",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "925:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1076,7 +1076,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1234,
+                    "id": 1232,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "925:7:3",
@@ -1091,10 +1091,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1237,
+                  "id": 1235,
                   "name": "price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "941:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1103,7 +1103,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1236,
+                    "id": 1234,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "941:7:3",
@@ -1117,10 +1117,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1239,
+                  "id": 1237,
                   "name": "index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "956:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1129,7 +1129,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1238,
+                    "id": 1236,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "956:7:3",
@@ -1143,10 +1143,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1241,
+                  "id": 1239,
                   "name": "tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "971:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1155,7 +1155,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1240,
+                    "id": 1238,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "971:7:3",
@@ -1169,10 +1169,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1243,
+                  "id": 1241,
                   "name": "active",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1245,
+                  "scope": 1243,
                   "src": "988:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1181,7 +1181,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1242,
+                    "id": 1240,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "988:4:3",
@@ -1196,7 +1196,7 @@
               ],
               "src": "923:77:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "865:136:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -1205,28 +1205,28 @@
           {
             "body": null,
             "documentation": "Get all tokenId's that are currently for sale. Returns an empty arror if none exist.",
-            "id": 1251,
+            "id": 1249,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getAllTokenOnSale",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1246,
+              "id": 1244,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1145:2:3"
             },
             "returnParameters": {
-              "id": 1250,
+              "id": 1248,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1249,
+                  "id": 1247,
                   "name": "listOfOffers",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1251,
+                  "scope": 1249,
                   "src": "1171:29:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1236,7 +1236,7 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 1247,
+                      "id": 1245,
                       "name": "uint256",
                       "nodeType": "ElementaryTypeName",
                       "src": "1171:7:3",
@@ -1245,7 +1245,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1248,
+                    "id": 1246,
                     "length": null,
                     "nodeType": "ArrayTypeName",
                     "src": "1171:9:3",
@@ -1260,7 +1260,7 @@
               ],
               "src": "1170:31:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "1119:83:3",
             "stateMutability": "view",
             "superFunction": null,
@@ -1269,22 +1269,22 @@
           {
             "body": null,
             "documentation": "Creates a new offer for _tokenId for the price _price.\nEmits the MarketTransaction event with txType 'Offer Created'\nRequirement: Only the owner of _tokenId can create an offer.\nRequirement: There can only be one active offer for a token at a time.\nRequirement: Marketplace contract (this) needs to be an approved operator when the offer is created.",
-            "id": 1258,
+            "id": 1256,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setOffer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1256,
+              "id": 1254,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1253,
+                  "id": 1251,
                   "name": "_price",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1258,
+                  "scope": 1256,
                   "src": "1631:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1293,7 +1293,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1252,
+                    "id": 1250,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1631:7:3",
@@ -1307,10 +1307,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1255,
+                  "id": 1253,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1258,
+                  "scope": 1256,
                   "src": "1647:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1319,7 +1319,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1254,
+                    "id": 1252,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1647:7:3",
@@ -1335,12 +1335,12 @@
               "src": "1630:34:3"
             },
             "returnParameters": {
-              "id": 1257,
+              "id": 1255,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1673:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "1613:61:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1349,22 +1349,22 @@
           {
             "body": null,
             "documentation": "Removes an existing offer.\nEmits the MarketTransaction event with txType \"Remove offer\"\nRequirement: Only the seller of _tokenId can remove an offer.",
-            "id": 1263,
+            "id": 1261,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "removeOffer",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1261,
+              "id": 1259,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1260,
+                  "id": 1258,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1263,
+                  "scope": 1261,
                   "src": "1892:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1373,7 +1373,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1259,
+                    "id": 1257,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1892:7:3",
@@ -1389,12 +1389,12 @@
               "src": "1891:18:3"
             },
             "returnParameters": {
-              "id": 1262,
+              "id": 1260,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1918:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "1871:48:3",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1403,22 +1403,22 @@
           {
             "body": null,
             "documentation": "Executes the purchase of _tokenId.\nSends the funds to the seller and transfers the token using transferFrom in Kittycontract.\nEmits the MarketTransaction event with txType \"Buy\".\nRequirement: The msg.value needs to equal the price of _tokenId\nRequirement: There must be an active offer for _tokenId",
-            "id": 1268,
+            "id": 1266,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "buyKitty",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1266,
+              "id": 1264,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1265,
+                  "id": 1263,
                   "name": "_tokenID",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1268,
+                  "scope": 1266,
                   "src": "2297:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1427,7 +1427,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1264,
+                    "id": 1262,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2297:7:3",
@@ -1443,19 +1443,19 @@
               "src": "2296:18:3"
             },
             "returnParameters": {
-              "id": 1267,
+              "id": 1265,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2331:0:3"
             },
-            "scope": 1269,
+            "scope": 1267,
             "src": "2279:53:3",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1270,
+        "scope": 1268,
         "src": "389:1946:3"
       }
     ],
@@ -1467,7 +1467,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.0",
-  "updatedAt": "2021-01-25T17:43:16.019Z",
+  "updatedAt": "2021-02-07T16:11:22.439Z",
   "devdoc": {
     "methods": {}
   },
