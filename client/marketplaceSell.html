@@ -33,8 +33,8 @@
            <li class="nav-item active dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Marketplace</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item active" href="marketplaceSell.html">Sell My Cats<span class="sr-only">(current)</span></a>
-                <a class="dropdown-item" href="marketplaceBuy.html">Buy Cats</a>
+                <a class="dropdown-item active" href="marketplaceSell.html">Set Your Cats For Sale<span class="sr-only">(current)</span></a>
+                <a class="dropdown-item" href="marketplaceBuy.html">View/Buy Cats On Sale</a>
               </div>
             </li>
             <li class="nav-item">
@@ -58,6 +58,29 @@
       </header>
 
       <main>
+        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#removePermissionModal" id="removePermissionFromMarketplaceBtn" type="button">Finished Selling</button>
+
+        <div class="modal" tabindex="-1" role="dialog" id="removePermissionModal">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Are You Sure You are Finished Selling Your Cats?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Once you remove permission from the Marketplace to sell your cats, you will have to re-permit the Marketplace if you'd like to sell again.</p>
+                <p>You will be asked to remove any cat(s) that is/are currently for sale before having permission removed.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="removePermissionBtn" class="btn btn-danger">Remove Permission</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="textIfNoCats"></div>
 
         <div class="col-6 alert alert-success p-3 mt-2" role="alert" id="eventAlert" style="display: none;"></div>
