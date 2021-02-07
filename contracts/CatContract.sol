@@ -6,7 +6,8 @@ import  "./IERC721Receiver.sol";
 
 contract CatContract is  IERC721, Ownable {
 
-  uint256 public constant gen0CreationLimit = 10;
+  uint256 public constant gen0CreationLimit = 30;
+  
   string private constant _name = "CatCoin";
   string private constant _symbol = "CC";
 
@@ -40,7 +41,7 @@ contract CatContract is  IERC721, Ownable {
     _createKitty(0, 0, 0, uint256(-1), address(0));
   }
 
-  function createGen0Cat(uint256 _genes) public onlyOwner returns(uint256){
+  function createGen0Cat(uint256 _genes) public returns(uint256){
     require(gen0Counter < gen0CreationLimit);
 
     gen0Counter++;
