@@ -3,9 +3,11 @@ let web3 = new Web3(Web3.givenProvider);
 let catContractInstance;
 let marketPlaceInstance;
 let user;
-let catContractAddress = "0x895104a81B87cBBAf6466076A67fe41a02e5cC9e";
-let marketPlaceContractAddress = "0x00497874cF16Eb7Bf49Da8B9a5297551A1Aa4079";//enter the catcontract address after you migrate
+let catContractAddress = "0x3e4DCa599A892E726125CcC6b241dCff0b019fa2";
+let marketPlaceContractAddress = "0xF5b32d703Cf30Ca75a122A3916ec497dD8365F28";//enter the catcontract address after you migrate
 let newTokenID;
+
+
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
@@ -35,6 +37,7 @@ $(document).ready(function(){
       closeIcon();
     }).on('error', console.error);
   })
+  $('body').tooltip({ selector:'[data-toggle=tooltip]'});
 });
 
 function closeIcon(){
@@ -42,6 +45,7 @@ function closeIcon(){
     $('#eventAlert').hide();
   });
 };
+
 
 async function checkIfApprovedOnLoad(){
   let checkIfApproved = await catContractInstance.methods.isApprovedForAll(user, marketPlaceContractAddress).call();
@@ -51,20 +55,38 @@ async function checkIfApprovedOnLoad(){
 
   if(checkIfApproved == false){
     setApproval();
+    $('#removePermissionFromMarketplaceBtn').css('display', 'none');
     console.log('is not approved');
 
   } else if(checkIfApproved == true && ownedCats.length == 0){
     noCatsOwned();
+    $('#removePermissionFromMarketplaceBtn').css('display', 'block');
     console.log('is approved but no cats owned');
 
   } else{
     getCats();
+    $('#removePermissionFromMarketplaceBtn').css('display', 'block');
     console.log('is approved and owns cats');
   }
 };
 
+$('#removePermissionBtn').click(async function(){
+  let catsOnSale = await marketPlaceInstance.methods.getAllTokenOnSale().call({from:user});
+  let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
+
+  for(i = 0; i < ownedCats.length; i++){//removes cats for sale so not false advertisements on buying page
+    if(catsOnSale.includes(ownedCats[i])){
+      let remove = await marketPlaceInstance.methods.removeOffer(ownedCats[i]).send();
+    }
+  };
+
+  let removeApprovalForAll = await catContractInstance.methods.setApprovalForAll(marketPlaceContractAddress, false).send();
+  console.log(removeApprovalForAll);
+  window.location.href = 'marketplaceSell.html';
+});
+
 function setApproval(){
-  let setApproved = "<p class='welcomeBox shadow'><span id='welcomeBoxTitle'>Welcome to the Marketplace!</span><br> Let's get you approved to sell your cats! <br> <button type='button' id='setApprovalBtn'>Click Here To Start</button></p>"
+  let setApproved = "<p class='welcomeBox shadow'><span id='welcomeBoxTitle'>Welcome to the Marketplace!</span><br> Please grant the marketplace permission if you'd like to sell your cats!<br> <span class='welcomeBoxSubtext'>(you can always remove permission later on)</span> <br> <button type='button' id='setApprovalBtn'>Click Here To Start</button></p>"
   $('main').append(setApproved);
 
   $('#setApprovalBtn').click(async function(){
@@ -74,9 +96,17 @@ function setApproval(){
   });
 };
 
-function noCatsOwned(){
-  let textIfNoCats = "<p class='noCatText shadow'>Uh-oh...you don't own any cats to sell! 🙀 <br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a><br><br><span class='spaceBelowTopBtn'>Or buy some in the marketplace! 🏪</span><br><a href='marketplaceBuy.html'><button type='button' id='continueToMarketplaceBtn'>Continue to Marketplace</button></a></p>"
-  $('.textIfNoCats').append(textIfNoCats);
+async function noCatsOwned(){
+  let gen0Limit = await catContractInstance.methods.gen0CreationLimit().call();
+  let gen0Created = await catContractInstance.methods.gen0Counter().call();
+
+  if(gen0Created < gen0Limit){
+    let textIfNoCatsAndUnderGen0Limit = "<p class='noCatText shadow'>Uh-oh...you don't own any cats to sell! 🙀 <br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a><br><br><span class='spaceBelowTopBtn'>Or buy some in the marketplace! 🏪</span><br><a href='marketplaceBuy.html'><button type='button' id='continueToMarketplaceBtn'>Continue to Marketplace</button></a></p>"
+    $('.textIfNoCats').append(textIfNoCatsAndUnderGen0Limit);
+  }else{
+    let textIfNoCats = "<p class='noCatText shadow'>Uh-oh...you don't own any cats to sell! 🙀<br><br><span class='spaceBelowTopBtn'>But don't worry you can buy some in the marketplace! 🏪</span><br><br><a href='marketplaceBuy.html'><button type='button' id='continueToMarketplaceBtn'>Continue to Marketplace</button></a></p>"
+    $('.textIfNoCats').append(textIfNoCats);
+  }
 };
 
 async function getCats(){
@@ -91,7 +121,15 @@ async function getCats(){
   };
 };
 
-function addCat(geneString, gen, id, newTokenID){
+async function addCat(geneString, gen, id, newTokenID){
+  let catsOnSale = await marketPlaceInstance.methods.getAllTokenOnSale().call({from:user});
+  console.log(catsOnSale);
+
+  if(catsOnSale.includes(newTokenID)){
+    console.log('active cat(s) found');
+    isActive(newTokenID, id);
+  }
+
   let catsDna = catDna(geneString);
   console.log(catsDna);
   console.log('ID: ' + id);
@@ -103,7 +141,6 @@ function addCat(geneString, gen, id, newTokenID){
   $('.tokenID' + id).html("Token ID: " + newTokenID);
 
   renderCat(catsDna, id);
-  isActive(newTokenID, id);
   setOffer(newTokenID, id);
   removeCatOffer(newTokenID, id);
 
@@ -116,18 +153,27 @@ function addCat(geneString, gen, id, newTokenID){
 
 function setOffer(newTokenID, id){
   $('#createOffer' + id).click(async function(){
-    let price = $('.offer' + id).val();
+    let price = $('.offer' + id).val().match(/^0*(\d+(?:\.(?:(?!0+$)\d)+)?)/)[1]; //removes leading and trailing zeros
     console.log(price);
 
-    let priceInWei = web3.utils.toWei(price, "ether");
-    let setOffer = await marketPlaceInstance.methods.setOffer(priceInWei, newTokenID).send();
-    console.log(setOffer, 'offer set');
-      // window.location.href = "marketplace.html";
-    $('.remove-offer-group' + id).css('display', 'block');
-    $('#cat-price' + id).html("Offered at: " + price + "ETH")
-    $('.offer-group' + id).css('display', 'none');
-    $('html, body').animate({scrollTop:0}, 'slow'); //to show alert
+    if(price < .00001 || price > 300){
+      alert('Max price of 300 and smallest of 0.00001');
+    } else {
+      let priceInWei = web3.utils.toWei(price, "ether");
+      let setOffer = await marketPlaceInstance.methods.setOffer(priceInWei, newTokenID).send();
+      console.log(setOffer, 'offer set');
+        // window.location.href = "marketplace.html";
+      $('.remove-offer-group' + id).css('display', 'block');
+      $('#cat-price' + id).html("Offered at: " + price + "ETH")
+      $('.offer-group' + id).css('display', 'none');
+      $('html, body').animate({scrollTop:0}, 'slow'); //to show alert
+    }
   });
+};
+
+let validate = function(e){ //this is from stackoverflow, still having trouble wrapping my head around it...but it's doing what I wanted
+  let t = e.value;
+  e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 6)) : t;
 };
 
 async function isActive(newTokenID, id){
@@ -280,7 +326,7 @@ async function catDiv(id){
                     </div>
 
                     <div class="offer-group offer-group`+id+`">
-                      <input class="offer`+id+` offer-amount" type="number" placeholder="Enter ETH">
+                      <input class="offer`+id+` offer-amount" type="number" onKeyPress="if(this.value.length==8) return false;" oninput="validate(this)" min="0.00001" max="300" step=".00001" placeholder="Enter ETH" required  data-toggle="tooltip" data-placement="bottom" title="If not a whole number, type 0 before the decimal point">
                       <button type="button" class="btn btn-primary createOffer" id="createOffer`+id+`">Create Offer</button>
                     </div>
 
