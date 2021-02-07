@@ -2,7 +2,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let catContractInstance;
 let user;
-let catContractAddress = "0x895104a81B87cBBAf6466076A67fe41a02e5cC9e";//enter the catcontract address after you migrate
+let catContractAddress = "0x3e4DCa599A892E726125CcC6b241dCff0b019fa2";//enter the catcontract address after you migrate
 let newTokenID;
 
 $(document).ready(function(){
