@@ -3,8 +3,8 @@ let web3 = new Web3(Web3.givenProvider);
 let catContractInstance;
 let marketPlaceInstance;
 let user;
-let catContractAddress = "0x895104a81B87cBBAf6466076A67fe41a02e5cC9e";
-let marketPlaceContractAddress = "0x00497874cF16Eb7Bf49Da8B9a5297551A1Aa4079";//enter the catcontract address after you migrate
+let catContractAddress = "0x3e4DCa599A892E726125CcC6b241dCff0b019fa2";
+let marketPlaceContractAddress = "0xF5b32d703Cf30Ca75a122A3916ec497dD8365F28";//enter the catcontract address after you migrate
 let newTokenID;
 
 $(document).ready(function(){
@@ -44,40 +44,22 @@ function closeIcon(){
 };
 
 async function checkIfApprovedOnLoad(){
-  let checkIfApproved = await catContractInstance.methods.isApprovedForAll(user, marketPlaceContractAddress).call();
-  console.log(checkIfApproved);
-
   let catsForSale = await marketPlaceInstance.methods.getAllTokenOnSale().call();
   console.log(catsForSale);
 
-  if(checkIfApproved == false){
-    setApproval();
-    console.log('is not approved');
-
-  } else if(checkIfApproved == true && catsForSale.length === 0){
+  if(catsForSale.length === 0){
     noCatsForSale();
-    console.log('is approved but no cats have been put for sale yet');
+    console.log('no cats have been put for sale yet');
 
-  } else if(checkIfApproved == true && catsForSale.every(cat => cat == 0)){ //checks to see if every entry in array is a zero
+  } else if(catsForSale.every(cat => cat == 0)){ //checks to see if every entry in array is a zero
     noCatsForSale();
-    console.log('is approved but no cats for sale');
+    console.log('no cats for sale/all have been bought or offer removed');
 
   } else{
     loadForSaleCats();
-    console.log('is approved and cats for sale loaded');
+    console.log('cats for sale loaded');
 
   }
-};
-
-function setApproval(){
-  let setApproved = "<p class='welcomeBox shadow'><span id='welcomeBoxTitle'>Welcome to the Marketplace!</span><br> Let's get you approved to sell and buy cats! <br> <button type='button' id='setApprovalBtn'>Click Here To Start</button></p>"
-  $('main').append(setApproved);
-
-  $('#setApprovalBtn').click(async function(){
-    let approveThisAddress = await catContractInstance.methods.setApprovalForAll(marketPlaceContractAddress, true).send();
-    console.log(approveThisAddress);
-    window.location.href = 'marketplaceBuy.html';
-  });
 };
 
 function noCatsForSale(){
