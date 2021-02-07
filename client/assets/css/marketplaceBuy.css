@@ -1,62 +1,13 @@
-#welcomeBoxTitle{
-font-size: 35px;
-padding-bottom: 20px;
-}
-
-.welcomeBox{
-  font-size: 20px;
-  text-align: center;
-  transform: translateY(-20%);
-  padding: 6em 2em;
-  margin: 10em auto auto;
-  width: 50%;
-  background: #eee;
-  border-radius: 15px;
-  height: 20em;
-}
-
 .noCatsForSaleText{
   font-size: 20px;
   text-align: center;
   transform: translateY(-20%);
   padding: 4em 2em;
   margin: 10em auto auto;
-  width: 50%;
+  width: 60%;
   background: #eee;
   border-radius: 15px;
-  height: 15em;
-}
-
-#makeSomeHereBtn{
-  width: 15rem;
-  height: 4rem;
-  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
-  border-radius: 15px;
-  transition: transform .3s ease-out;
-  border: none;
-  margin-top: 15px;
-}
-
-#makeSomeHereBtn:hover{
-  background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
-  color: white;
-  transform: scale(1.1);
-}
-
-#continueToMarketplaceBtn{
-  width: 18rem;
-  height: 4rem;
-  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
-  border-radius: 15px;
-  transition: transform .3s ease-out;
-  border: none;
-  margin-top: 5px;
-}
-
-#continueToMarketplaceBtn:hover{
-  background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
-  color: white;
-  transform: scale(1.1);
+  height: 20%;
 }
 
 #sellMyCats{
@@ -75,20 +26,12 @@ padding-bottom: 20px;
   transform: scale(1.1);
 }
 
-#setApprovalBtn{
-  width: 15rem;
-  height: 4rem;
-  background: linear-gradient( 145deg, #fad05c 0%, #fa5c5c 100%);
-  border-radius: 15px;
-  transition: transform .3s ease-out;
-  border: none;
-  margin-top: 15px;
-}
-
-#setApprovalBtn:hover{
-  background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
-  color: white;
-  transform: scale(1.1);
+@media (max-width: 660px){
+  #sellMyCats{
+    width: 14rem;
+    height: 3rem;
+    font-size: 16px;
+  }
 }
 
 .catBox {
