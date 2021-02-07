@@ -1,18 +1,21 @@
 #welcomeBoxTitle{
   font-size: 35px;
-  padding-bottom: 20px;
 }
 
 .welcomeBox{
   font-size: 20px;
   text-align: center;
   transform: translateY(-20%);
-  padding: 6em 2em;
+  padding: 3em 2em;
   margin: 10em auto auto;
   width: 50%;
   background: #eee;
   border-radius: 15px;
-  height: 20em;
+  height: 35%;
+}
+
+.welcomeBoxSubtext{
+  font-size: 14px;
 }
 
 #setApprovalBtn{
@@ -31,16 +34,33 @@
   transform: scale(1.1);
 }
 
+@media (max-width: 750px) {
+  #welcomeBoxTitle{
+    font-size: 20px;
+  }
+
+  .welcomeBox{
+    font-size: 12px;
+  }
+
+  #setApprovalBtn{
+    width: 9rem;
+    height: 2rem;
+    font-size: 12px;
+    border-radius: 9px;
+  }
+}
+
 .noCatText{
   font-size: 20px;
   text-align: center;
   transform: translateY(-20%);
   padding: 5em 2em;
   margin: 10em auto auto;
-  width: 50%;
+  width: 60%;
   background: #eee;
   border-radius: 15px;
-  height: 20em;
+  height: 20%;
 }
 
 #makeSomeHereBtn{
@@ -73,6 +93,24 @@
   background: linear-gradient( 145deg, #5ce0fa 0%, #5b8bfc 100%);
   color: white;
   transform: scale(1.1);
+}
+
+@media (max-width: 660px){
+  #makeSomeHereBtn{
+    width: 13rem;
+    height: 3rem;
+    font-size: 16px;
+  }
+  #continueToMarketplaceBtn{
+    width: 14rem;
+    height: 3rem;
+    font-size: 16px;
+  }
+}
+
+#removePermissionFromMarketplaceBtn{
+  margin-top: 1em;
+  margin-left: 3.5em;
 }
 
 .catBox {
