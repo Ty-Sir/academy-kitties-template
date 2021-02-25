@@ -1,18 +1,3 @@
-//Random color
-function getColor() {
-    var randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    return randomColor;
-};
-
-function genColors(){
-    var colors = []
-    for(var i = 10; i < 99; i ++){
-      var color = getColor()
-      colors[i] = color
-    };
-    return colors;
-};
-
 //changing colors
 function headColor(color,code) {
   $('.head, .body, .front_leg, .back_leg').css('background', '#' + color);  //This changes the color of the cat
@@ -349,6 +334,7 @@ function animationType6() {
   $('.mouth').addClass('levitateMouth');
   $('.left_ear').addClass('levitateLeftEar');
   $('.right_ear').addClass('levitateRightEar');
+  $('.cat-background').addClass('staticBackgroundForLevitate');
 };
 
 function animationType7() {
