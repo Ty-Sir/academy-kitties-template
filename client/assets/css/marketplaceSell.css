@@ -7,7 +7,7 @@
   text-align: center;
   transform: translateY(-20%);
   padding: 3em 2em;
-  margin: 10em auto auto;
+  margin: 5em auto auto;
   width: 50%;
   background: #eee;
   border-radius: 15px;
@@ -189,4 +189,8 @@
   left: 2em;
   top: -10%;
   box-shadow: 0 5px 10px #fc0307;
+}
+
+.bold-this-text{
+  font-weight: bold;
 }
