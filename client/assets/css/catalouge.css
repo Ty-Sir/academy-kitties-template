@@ -19,9 +19,10 @@
   background: transparent;
   border-radius: 10px;
   padding-top: 50px;
-  padding-left: 65px;
-  padding-bottom: 220px;
+  padding-left: 100px;
+  padding-bottom: 210px;
   transform: scale(.75);
+  max-width: 100%;
 }
 
 .cat-data{
@@ -70,67 +71,6 @@
 
 .popup-font{
   font-size: 20px;
-}
-
-@media (max-width: 1335px){
-  .cat{
-    transform: scale(.9);
-  }
-}
-
-@media (max-width: 1200px) {
-  .info-font-size{
-    font-size: 17px;
-  }
-
-  .cat-data-btn{
-    transform: scale(.8);
-    right: 7px;
-    bottom: .7em;
-  }
-
-  .catBox{
-    padding-bottom: 180px;
-  }
-
-  .cat{
-    transform: scale(.85);
-  }
-
-  .popup-font{
-    font-size: 17px;
-  }
-
-  .birth-popup{
-    padding-top: 10px;
-  }
-}
-
-@media (max-width: 991px) {
-  .info-font-size{
-    font-size: 20px;
-  }
-
-  .cat-data-btn{
-    transform: scale(1);
-    right: 20px;
-    bottom: 1em;
-  }
-
-  .catBox{
-    padding-bottom: 200px;
-  }
-
-  .cat{
-    transform: scale(.95);
-  }
-  .popup-font{
-    font-size: 20px;
-  }
-
-  .birth-popup{
-    padding-top: 0;
-  }
 }
 
 #makeSomeHereBtn{
@@ -184,12 +124,12 @@
   font-size: 20px;
   text-align: center;
   transform: translateY(-20%);
-  padding: 8em 2em;
-  margin: 10em auto auto;
-  width: 50%;
+  padding: 2em 1em 1em 1em;
+  margin: 5em auto auto;
+  width: 45%;
   background: #eee;
   border-radius: 15px;
-  height: 20em;
+  height: 10em;
 }
 
 .top-arrow-animation{
