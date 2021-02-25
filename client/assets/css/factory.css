@@ -22,6 +22,11 @@
   }
 }
 
+.bold-this-text{
+  font-size: 18px;
+  font-weight: 1000;
+}
+
 .container {
   transform: scale(.75);
   z-index: 2;
@@ -31,13 +36,13 @@
   background: white;
   border-radius: 10px;
   padding-top: 50px;
-  padding-left: 65px;
+  padding-left: 100px;
   padding-bottom: 100px;
   transform: scale(.95);
 }
 
 .cattributes {
-  padding: 25px;
+  padding: 20px;
   background: #fff;
   border-radius: 10px;
   transform: scale(.95);
