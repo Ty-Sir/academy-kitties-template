@@ -5,7 +5,6 @@
     <title>Ty's Cat Factory - Factory</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/cats.css">
-    <link rel="stylesheet" href="assets/css/colors.css">
     <link rel="stylesheet" href="assets/css/factory.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/fonts.css">
@@ -52,12 +51,49 @@
     <header>
       <div class="title" align="center">
         <h1 id="title">Cat-Factory</h1>
-        <p>Create Your Custom Cat - Only 30 Can Be Made Here!</p>
+        <p>Create Your Custom Cat</p>
       </div>
     </header>
 
-    <div class="container col-12 main" style="margin-bottom: 13vh;">
+    <div class="modal" id="openingModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Welcome to the Cat Factory! 😸🎉</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="bold-this-text">Only 30 generation zero cats can be made here!</p>
+            <p id="howManyCatsLeftToMake"></p>
+            <p> Make one while you have the chance!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="continueBtn" class="btn btn-primary">Continue to Make Cats</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="modal" id="ifAllCatsMade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">All 30 generation zero cats have been made! 🙀</h5>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Worry not, you can buy cats here!</p>
+          </div>
+          <div class="modal-footer">
+          <a href="marketplaceBuy.html"><button class="btn btn-primary">Take me to the marketplace</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container col-12 main" style="margin-bottom: 13vh;">
       <div class="row">
         <!-- Box with cat in it -->
         <div class="col-lg-5 catBox shadow-lg">
@@ -250,10 +286,9 @@
             <button type="button" id="createKitty" class="btn btn-success btn-lg pt-4 pb-4 float-right">Create Cat</button>
           </div>
         </div><!-- end of cattributes-->
-
       </div><!-- end of row - ie. catBox & cattributes -->
 
-        <div class="alert alert-success p-4 mt-2" role="alert" id="eventAlert" style="display: none;"></div>
+      <div class="alert alert-success p-4 mt-2" role="alert" id="eventAlert" style="display: none;"></div>
 
       <br>
     </div><!-- end of container -->
