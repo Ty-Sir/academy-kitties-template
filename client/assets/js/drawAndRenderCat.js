@@ -363,6 +363,7 @@ function animationType5(id) {
 
 function animationType6(id) {
   resetAnimation(id);
+  $('.cat-background' + id).addClass('staticBackgroundForLevitate');
   $('.cat' + id).addClass('levitate');
   $('.mouth' + id).addClass('levitateMouth');
   $('.left_ear' + id).addClass('levitateLeftEar');
