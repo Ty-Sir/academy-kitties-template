@@ -181,6 +181,19 @@
   }
 }
 
+.staticBackgroundForLevitate{
+  animation: staticBackgroundForLevitate 6s ease-out infinite;
+}
+
+@keyframes staticBackgroundForLevitate {
+  25% {
+    transform: translateY(20px) scale(.78);
+  }
+  50%{
+    transform: translateY(0) scale(.78);
+  }
+}
+
 .blink{
   animation: blink 5s infinite;
 }
