@@ -4,7 +4,6 @@ import "./CatContract.sol";
 import "./Ownable.sol";
 import "./IKittyMarketPlace.sol";
 
-
 contract KittyMarketPlace is Ownable, IKittyMarketPlace {
   CatContract private _CatContract;
 
@@ -65,7 +64,6 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
     emit MarketTransaction("Offer Created", msg.sender, _tokenID);
   }
 
-
   function removeOffer(uint256 _tokenID) public{
     require(tokenIDToOffer[_tokenID].seller == msg.sender, "Must be the seller/owner to remove an offer");
 
@@ -75,13 +73,13 @@ contract KittyMarketPlace is Ownable, IKittyMarketPlace {
     emit MarketTransaction("Offer Removed", msg.sender, _tokenID);
   }
 
-
   function buyKitty(uint256 _tokenID) public payable{
     require(tokenIDToOffer[_tokenID].price == msg.value, "Payment must be equal to price of cat");
     require(tokenIDToOffer[_tokenID].active == true, "Offer must be active");
 
     Offer memory offer = tokenIDToOffer[_tokenID];
 
+    //delete cat from mapping before payout to prevent reentry attack
     offers[tokenIDToOffer[_tokenID].index].active = false;
     delete tokenIDToOffer[_tokenID];
 
