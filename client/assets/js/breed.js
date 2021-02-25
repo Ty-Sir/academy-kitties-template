@@ -2,7 +2,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let catContractInstance;
 let user;
-let catContractAddress = "0x3e4DCa599A892E726125CcC6b241dCff0b019fa2";//enter the catcontract address after you migrate
+let catContractAddress = "";//enter contract here after migration
 let newTokenID;
 
 $(document).ready(function(){
@@ -15,24 +15,28 @@ $(document).ready(function(){
 
 //needs to be async otherwise ownedCats will be one behind
 async function getCats(){
-  let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
-  console.log(ownedCats);
+  try{
+    let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
+    console.log(ownedCats);
 
-  //message when less than 2 cats are owned
-  if(ownedCats.length < 2){
-    let textIfLessThanTwoCats = "<p class='noCatText shadow'>Uh-oh...🙀 <br> You need at least <b>two</b> cats to make a kitten! <br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a></p>"
-    $('main').append(textIfLessThanTwoCats);
-    $('.cats-container').css('display', 'none');
-    $('#breedBtn').css('display', 'none');
-  };
+    //message when less than 2 cats are owned
+    if(ownedCats.length < 2){
+      let textIfLessThanTwoCats = "<p class='noCatText shadow'>Uh-oh...🙀 <br> You need at least <b>two</b> cats to make a kitten! <br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a></p>"
+      $('main').append(textIfLessThanTwoCats);
+      $('.cats-container').css('display', 'none');
+      $('#breedBtn').css('display', 'none');
+    };
 
-  for(i = 0; i < ownedCats.length; i++){
-    let cat = await catContractInstance.methods.getKitty(ownedCats[i]).call();
-    let newTokenID = ownedCats[i];
-    chooseCats(i, newTokenID);
-    addCat(cat[1], cat[5], i, newTokenID);
-    console.log(cat);
-  };
+    for(i = 0; i < ownedCats.length; i++){
+      let cat = await catContractInstance.methods.getKitty(ownedCats[i]).call();
+      let newTokenID = ownedCats[i];
+      chooseCats(i, newTokenID);
+      addCat(cat[1], cat[5], i, newTokenID);
+      console.log(cat);
+    };
+  } catch(err){
+    console.log(err);
+  }
 };
 
 //saving 1st modal html before opening
@@ -204,7 +208,6 @@ $('#breedBtn').click(function(){
 
     window.location.href = "catalouge.html";
 
-    //..does this below make sense?
   }).on('error', function(error){
       console.log(error);
       let owner = event.returnValues.owner;
@@ -233,17 +236,17 @@ function closeIcon(){
 //genes split up for functions to read
 function catDna(geneString){
   let genes = {
-      headColor: geneString.substring(0, 2),
-      mouthColor: geneString.substring(2, 4),
-      eyesColor: geneString.substring(4, 6),
-      earsColor: geneString.substring(6, 8),
-      //Cattributes
-      eyesShape: geneString.substring(8, 9),
-      decorationPattern: geneString.substring(9, 10),
-      decorationMidColor: geneString.substring(10, 12),
-      decorationSidesColor: geneString.substring(12, 14),
-      animation: geneString.substring(14, 15),
-      backgrounds: geneString.substring(15, 16)
+    headColor: geneString.substring(0, 2),
+    mouthColor: geneString.substring(2, 4),
+    eyesColor: geneString.substring(4, 6),
+    earsColor: geneString.substring(6, 8),
+    //Cattributes
+    eyesShape: geneString.substring(8, 9),
+    decorationPattern: geneString.substring(9, 10),
+    decorationMidColor: geneString.substring(10, 12),
+    decorationSidesColor: geneString.substring(12, 14),
+    animation: geneString.substring(14, 15),
+    backgrounds: geneString.substring(15, 16)
   };
   return genes;
 };
