@@ -453,7 +453,7 @@ body {
   position: relative;
   bottom: 224%;
   left: -48%;
-  transform: scale(.78);
+  transform: scale(.78) translateY(0);
   margin: auto;
   height: 650px;
   width: 500px;
