@@ -2,7 +2,7 @@ let web3 = new Web3(Web3.givenProvider);
 
 let catContractInstance;
 let user;
-let catContractAddress = "0x3e4DCa599A892E726125CcC6b241dCff0b019fa2";
+let catContractAddress = "";//enter contract here after migration
 let newTokenID;
 
 $(document).ready(function(){
@@ -15,28 +15,32 @@ $(document).ready(function(){
 
 //needs to be async otherwise ownedCats will be one behind
 async function getCats(){
-  let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
-  console.log(ownedCats);
+  try{
+    let ownedCats = await catContractInstance.methods.getMyCats(user).call({from:user});
+    console.log(ownedCats);
 
-  //message when no cats are owned
-  if(ownedCats.length === 0){
-    let textIfNoCats = "<p class='noCatText shadow'>Uh-oh...you don't have any cats! 🙀<br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a></p>"
-    $('.catDivs').append(textIfNoCats);
-  };
+    //message when no cats are owned
+    if(ownedCats.length === 0){
+      let textIfNoCats = "<p class='noCatText shadow'>Uh-oh...you don't have any cats! 🙀<br> <a href='factory.html'><button type='button' id='makeSomeHereBtn'>Make Some Here!</button></a></p>"
+      $('.catDivs').append(textIfNoCats);
+    };
 
-  //blinking arrow to show to scroll down
-  if(ownedCats.length > 3){
-    $('#top-arrow').addClass('top-arrow-animation');
-    $('#bottom-arrow').addClass('bottom-arrow-animation');
-  };
+    //blinking arrow to show to scroll down
+    if(ownedCats.length > 3){
+      $('#top-arrow').addClass('top-arrow-animation');
+      $('#bottom-arrow').addClass('bottom-arrow-animation');
+    };
 
-  for(i = 0; i < ownedCats.length; i++){
-    let cat = await catContractInstance.methods.getKitty(ownedCats[i]).call();
-    let newTokenID = ownedCats[i];
-    addCat(cat[1], cat[2], cat[3], cat[4], cat[5], i, newTokenID);
-    console.log(cat);
-    console.log(i);
-  };
+    for(i = 0; i < ownedCats.length; i++){
+      let cat = await catContractInstance.methods.getKitty(ownedCats[i]).call();
+      let newTokenID = ownedCats[i];
+      addCat(cat[1], cat[2], cat[3], cat[4], cat[5], i, newTokenID);
+      console.log(cat);
+      console.log(i);
+    };
+  } catch(err){
+    console.log(err);
+  }
 };
 
 //geneString === genes from catBox, id === tokenID
@@ -128,24 +132,25 @@ function seperateGeneString(genes){
 //genes split up for functions to read
 function catDna(geneString){
   let genes = {
-      headColor: geneString.substring(0, 2),
-      mouthColor: geneString.substring(2, 4),
-      eyesColor: geneString.substring(4, 6),
-      earsColor: geneString.substring(6, 8),
-      //Cattributes
-      eyesShape: geneString.substring(8, 9),
-      decorationPattern: geneString.substring(9, 10),
-      decorationMidColor: geneString.substring(10, 12),
-      decorationSidesColor: geneString.substring(12, 14),
-      animation: geneString.substring(14, 15),
-      backgrounds: geneString.substring(15, 16)
+    headColor: geneString.substring(0, 2),
+    mouthColor: geneString.substring(2, 4),
+    eyesColor: geneString.substring(4, 6),
+    earsColor: geneString.substring(6, 8),
+    //Cattributes
+    eyesShape: geneString.substring(8, 9),
+    decorationPattern: geneString.substring(9, 10),
+    decorationMidColor: geneString.substring(10, 12),
+    decorationSidesColor: geneString.substring(12, 14),
+    animation: geneString.substring(14, 15),
+    backgrounds: geneString.substring(15, 16)
   };
   return genes;
 };
 
 //html for dynamically displayed cats
 function catDiv(id){
-      let catCard =  `<div class="col-lg-4 catBox shadow-lg" id="catBox` + id + `">
+      let catCard =  `<div>
+                      <div class="col-lg-4 catBox shadow-lg" id="catBox` + id + `">
                         <div class="cat cat` + id + `">
 
                           <div class="ears">
@@ -264,7 +269,8 @@ function catDiv(id){
                           <div class='momID-popup popup-font' id='momID-popup` + id + `'></div>
                         </div>
 
-                      </div>`
+                      </div>
+                    <div>`
 
   $('.catDivs').prepend(catCard);
 };
