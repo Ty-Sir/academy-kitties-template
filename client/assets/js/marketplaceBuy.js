@@ -3,16 +3,15 @@ let web3 = new Web3(Web3.givenProvider);
 let catContractInstance;
 let marketPlaceInstance;
 let user;
-let catContractAddress = "0x3e4DCa599A892E726125CcC6b241dCff0b019fa2";
-let marketPlaceContractAddress = "0xF5b32d703Cf30Ca75a122A3916ec497dD8365F28";//enter the catcontract address after you migrate
-let newTokenID;
+let catContractAddress = "";//enter contract here after migration
+let marketPlaceContractAddress = "";//enter contract here after migration
 
 $(document).ready(function(){
   window.ethereum.enable().then(function(accounts){
     catContractInstance = new web3.eth.Contract(abi.CatContract, catContractAddress, {from: accounts[0]});
     marketPlaceInstance = new web3.eth.Contract(abi.KittyMarketPlace, marketPlaceContractAddress, {from: accounts[0]});
     user = accounts[0];
-    checkIfApprovedOnLoad();
+    checkIfCatsForSale();
 
     marketPlaceInstance.events.MarketTransaction().on('data', function(event){
       console.log(event);
@@ -33,7 +32,7 @@ $(document).ready(function(){
                               '<p> Successfully removed cat offered with ID: ' + tokenID + ' </p>');
       }
       closeIcon();
-    }).on('error', console.error);
+    }).on('error', (error, receipt) => console.log(error, receipt));
   })
 });
 
@@ -43,22 +42,23 @@ function closeIcon(){
   });
 };
 
-async function checkIfApprovedOnLoad(){
-  let catsForSale = await marketPlaceInstance.methods.getAllTokenOnSale().call();
-  console.log(catsForSale);
+async function checkIfCatsForSale(){
+  try{
+    let catsForSale = await marketPlaceInstance.methods.getAllTokenOnSale().call();
+    console.log(catsForSale);
 
-  if(catsForSale.length === 0){
-    noCatsForSale();
-    console.log('no cats have been put for sale yet');
-
-  } else if(catsForSale.every(cat => cat == 0)){ //checks to see if every entry in array is a zero
-    noCatsForSale();
-    console.log('no cats for sale/all have been bought or offer removed');
-
-  } else{
-    loadForSaleCats();
-    console.log('cats for sale loaded');
-
+    if(catsForSale.length === 0){
+      noCatsForSale();
+      console.log('no cats have been put for sale yet');
+    } else if(catsForSale.every(cat => cat == 0)){ //checks to see if every entry in array is a zero
+      noCatsForSale();
+      console.log('no cats for sale/all have been bought or offer removed');
+    } else{
+      loadForSaleCats();
+      console.log('cats for sale loaded');
+    }
+  } catch(err){
+    console.log(err);
   }
 };
 
@@ -68,18 +68,22 @@ function noCatsForSale(){
 };
 
 async function loadForSaleCats(){
-  let catsForSale = await marketPlaceInstance.methods.getAllTokenOnSale().call({from:user});
+  try{
+    let catsForSale = await marketPlaceInstance.methods.getAllTokenOnSale().call({from:user});
 
-  for(i = 0; i < catsForSale.length; i++){
-    if(catsForSale[i] != 0){
-      let offer = await marketPlaceInstance.methods.getOffer(catsForSale[i]).call();
-      let cat = await catContractInstance.methods.getKitty(offer.tokenID).call();
-      let newTokenID = catsForSale[i];
+    for(i = 0; i < catsForSale.length; i++){
+      if(catsForSale[i] != 0){
+        let offer = await marketPlaceInstance.methods.getOffer(catsForSale[i]).call();
+        let cat = await catContractInstance.methods.getKitty(offer.tokenID).call();
+        let newTokenID = catsForSale[i];
 
-      console.log(offer.tokenID, offer.price);
-      addCat(cat[1], cat[5], i, newTokenID, offer.seller, offer.price);
-    }
-  };
+        console.log(offer.tokenID, offer.price);
+        addCat(cat[1], cat[5], i, newTokenID, offer.seller, offer.price);
+      }
+    };
+  } catch(err){
+    console.log(err);
+  }
 };
 
 function addCat(geneString, gen, id, newTokenID, seller, price){
@@ -95,7 +99,7 @@ function addCat(geneString, gen, id, newTokenID, seller, price){
   $('#cat-price' + id).html("Price: " + newPrice + "ETH");
 
   renderCat(catsDna, id);
-  buyCat(id, newTokenID);
+  buyCat(id, newTokenID, price);
   checkUserAgainstSeller(id, seller, newTokenID);
   removeCatOffer(newTokenID, id);
 
@@ -106,15 +110,15 @@ function addCat(geneString, gen, id, newTokenID, seller, price){
   };
 };
 
-function buyCat(id, newTokenID){
+function buyCat(id, newTokenID, price){
   $('#buyCat' + id).click(async function(){
-    let offer = await marketPlaceInstance.methods.getOffer(newTokenID).call();
-    let price = offer.price;
-    let seller = offer.seller;
-    console.log(price, seller);
-
-    let buy = await marketPlaceInstance.methods.buyKitty(newTokenID).send({value: price});
-    console.log(buy);
+    await marketPlaceInstance.methods.buyKitty(newTokenID).send({value: price}, (err, txHash) => {
+      if(err){
+        console.log(err.message);
+      }else{
+        console.log(txHash, "cat successfully bought");
+      }
+    });
 
     $('.buy-group' + id).hide();
     $('#catBox' + id).removeClass('shadow');
@@ -133,8 +137,14 @@ function checkUserAgainstSeller(id, seller, newTokenID){
 
 function removeCatOffer(newTokenID, id){
   $('#removeOffer' + id).click(async function(){
-    let remove = await marketPlaceInstance.methods.removeOffer(newTokenID).send();
-    console.log(remove, "offer removed");
+    await marketPlaceInstance.methods.removeOffer(newTokenID).send({}, (err, txHash) => {
+      if(err){
+        console.log(err.message);
+      }else{
+        console.log(txHash, "offer removed");
+      }
+    });
+
     $('#catBox' + id).hide();
     $('.buy-group' + id).hide();
     $('html, body').animate({scrollTop:0}, 'slow'); //to show alert
@@ -161,7 +171,7 @@ function catDna(geneString){
 
 //html for dynamically displayed cats
 async function catDiv(id){
-  let catCard =  `<div class="cat-wrapper">
+  let catCard =  `<div>
                     <div class="col-lg-4 shadow catBox" id="catBox` + id + `">
 
                       <div class="cat cat` + id + `">
