@@ -58,7 +58,7 @@
       </header>
 
       <main>
-        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#removePermissionModal" id="removePermissionFromMarketplaceBtn" type="button">Finished Selling</button>
+        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#removePermissionModal" id="removePermissionFromMarketplaceBtn" type="button">Remove Permission</button>
 
         <div class="modal" tabindex="-1" role="dialog" id="removePermissionModal">
           <div class="modal-dialog modal-lg" role="document">
@@ -76,6 +76,39 @@
               <div class="modal-footer">
                 <button type="button" id="removePermissionBtn" class="btn btn-danger">Remove Permission</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="successfullyApprovedModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Successful!</h5>
+              </div>
+              <div class="modal-body">
+                <p>You have successfully granted permission to the Marketplace.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="approvedContinue">Continue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="successfullyRemovedModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Successful!</h5>
+              </div>
+              <div class="modal-body">
+                <p>You have successfully removed permission from the Marketplace.</p>
+                <p>Check out our breeding page where you can generate rare DNA!</p>
+              </div>
+              <div class="modal-footer">
+                <a href="breed.html"><button type="button" class="btn btn-success">Let's Make Some Kittens</button></a>
               </div>
             </div>
           </div>
