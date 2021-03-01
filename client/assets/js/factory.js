@@ -26,11 +26,11 @@ $(document).ready(function(){
   });
 });
 
-$('.view-in-catalouge').click(function(){
+$('#view-in-catalouge').click(function(){
   window.location.href="catalouge.html";
 });
 
-$('.make-another-one').click(function(){
+$('#make-another-one').click(function(){
   $('#eventAlert').modal('hide');
 });
 
