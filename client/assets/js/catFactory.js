@@ -298,6 +298,7 @@ function resetAnimation() {
   $('.pupil_highlight').removeClass('blinkEdit');
   $('.cat').removeClass('levitate');
   $('.mouth').removeClass('levitateMouth');
+  $('.cat-background').removeClass('staticBackgroundForLevitate');
 };
 
 function animationType1() {
