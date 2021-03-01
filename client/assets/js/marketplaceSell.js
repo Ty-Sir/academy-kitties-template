@@ -106,14 +106,13 @@ function setApproval(){
   $('main').append(setApproved);
 
   $('#setApprovalBtn').click(async function(){
-    let approveThisAddress = await catContractInstance.methods.setApprovalForAll(marketPlaceContractAddress, true).send({}, (err, txHash) => {
+    await catContractInstance.methods.setApprovalForAll(marketPlaceContractAddress, true).send({}, (err, txHash) => {
       if(err){
         console.log(err.message);
       }else{
         console.log(txHash, "Approval Successfully Granted");
       }
     });
-    console.log(approveThisAddress);
 
     $('#successfullyApprovedModal').modal('show');
 
@@ -217,7 +216,7 @@ function setOffer(newTokenID, id){
 
 let validate = function(e){
   let t = e.value;
-  e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 6)) : t;
+  e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 7)) : t;
 };
 
 async function isActive(newTokenID, id){
@@ -247,6 +246,7 @@ function removeCatOffer(newTokenID, id){
     $('.remove-offer-group' + id).css('display', 'none');
     $('.offer-group' + id).css('display', 'block');
     $('html, body').animate({scrollTop:0}, 'slow'); //to show alert
+    $('.offer' + id).val('');
   });
 };
 
@@ -378,8 +378,8 @@ async function catDiv(id){
                     </div>
 
                     <div class="offer-group offer-group`+id+`">
-                      <input class="offer`+id+` offer-amount" type="number" onKeyPress="if(this.value.length==8) return false;" oninput="validate(this)" max="300" step=".25" placeholder="Enter ETH" required>
-                      <button type="submit" class="btn btn-primary createOffer" id="createOffer`+id+`">Create Offer</button>
+                      <input class="offer`+id+` offer-amount" type="number" onKeyPress="if(this.value.length==8) return false;" oninput="validate(this)" max="300" min=".000001" placeholder="Enter ETH" required>
+                      <button class="btn btn-primary createOffer" id="createOffer`+id+`">Create Offer</button>
                     </div>
 
                     <div class="remove-offer-group remove-offer-group`+id+`">
