@@ -247,9 +247,9 @@ function catDiv(id){
 
                           <div class="cat-background cat-background` + id + `"></div>
 
-                          <div class="rareDNA rareDNA`+id+`">Rare DNA</div>
-
                         </div>
+
+                        <div class="rareDNA rareDNA`+id+`">Rare DNA</div>
 
                         <div class='birth info-font-size' id='birth` + id + `'></div>
                         <div class='genes info-font-size' id='genes` + id + `'></div>
