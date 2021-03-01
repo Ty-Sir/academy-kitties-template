@@ -150,8 +150,11 @@ input::-webkit-inner-spin-button {
   width: 150px;
   height: 50px;
   position: relative;
-  transform: translate(3.5rem, -3.5rem);
+  transform: translate(33%, -110%);
   padding-left: 10px;
+  border-width: thin;
+  border-color: #ccc;
+  border-radius: 4px;
 }
 
 .createOffer{
