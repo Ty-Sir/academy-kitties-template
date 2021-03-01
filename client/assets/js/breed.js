@@ -10,8 +10,33 @@ $(document).ready(function(){
     catContractInstance = new web3.eth.Contract(abi.CatContract, catContractAddress, {from: accounts[0]});
     user = accounts[0];
     getCats();
+
+    //emits birth event
+    catContractInstance.events.Birth().on('data', function(event){
+      console.log(event);
+      let owner = event.returnValues.owner;
+      let tokenID = event.returnValues.tokenID;
+      let genes = event.returnValues.genes;
+      $('#eventAlert').css("display", "block");
+      $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
+                            '<span aria-hidden="true" id="close-icon">&times;</span>' +
+                            '</button>' +
+                            '<big>' + '<a href="catalouge.html">Click here to see your cat!</a>' + '</big>' +
+                            '<br>' + '<br>' +
+                            '<big>' + "Owner: " + '</big>' + owner +
+                            '<big>' + " Kitten ID: " + '</big>' + tokenID +
+                            '<big>' + " Genes: " + '</big>' + genes);
+      closeIcon();
+    }).on('error', (error, receipt) => console.log(error, receipt));
   });
 });
+
+//close-icon button for birth alert
+function closeIcon(){
+  $('#close-icon').click(function(){
+    $('#eventAlert').hide();
+  });
+};
 
 //needs to be async otherwise ownedCats will be one behind
 async function getCats(){
@@ -83,7 +108,7 @@ function chooseFirstCat(id, newTokenID){
       $('#firstCatId').text(newTokenID);
       console.log('span 1: ' + $('#firstCatId').text());
 
-      $('#catBox' + id).css('margin-right', '180px');
+      $('#catBox' + id).css('margin-right', '140px');
       $('#choose-first-cat').css('border', '2px solid #528bff');
 
       helperForFirstModal(id);
@@ -132,7 +157,7 @@ function chooseSecondCat(id, newTokenID){
       $('#secondCatId').text(newTokenID);
       console.log('span 2: ' + $('#secondCatId').text());
 
-      $('#catBox' + id).css('margin-right', '180px');
+      $('#catBox' + id).css('margin-right', '140px');
       $('#choose-second-cat').css('border', '2px solid #528bff');
 
       helperForSecondModal(id);
@@ -201,37 +226,7 @@ $('#breedBtn').click(function(){
   } else{
     alert('The cats must be different.');
   };
-
-  //emits birth event
-  catContractInstance.events.Birth().on('data', function(event){
-    console.log(event);
-
-    window.location.href = "catalouge.html";
-
-  }).on('error', function(error){
-      console.log(error);
-      let owner = event.returnValues.owner;
-      let tokenID = event.returnValues.tokenID;
-      let genes = event.returnValues.genes;
-      $('#eventAlert').css("display", "block");
-      $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
-                            '<span aria-hidden="true" id="close-icon">&times;</span>' +
-                            '</button>' +
-                            '<big>' + '<a href="catalouge.html">Click here to see your cat!</a>' + '</big>' +
-                            '<br>' + '<br>' +
-                            '<big>' + "Owner: " + '</big>' + owner +
-                            '<big>' + " Kitten ID: " + '</big>' + tokenID +
-                            '<big>' + " Genes: " + '</big>' + genes);
-      closeIcon();
-  });
 });
-
-//close-icon button for birth alert
-function closeIcon(){
-  $('#close-icon').click(function(){
-    $('#eventAlert').hide();
-  });
-};
 
 //genes split up for functions to read
 function catDna(geneString){
