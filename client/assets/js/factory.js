@@ -14,24 +14,24 @@ $(document).ready(function(){
 
     //emits event on webpage
     catContractInstance.events.Birth().on('data', function(event){
+      $('#eventAlert').modal('show');
       console.log(event);
       let owner = event.returnValues.owner;
       let tokenID = event.returnValues.tokenID;
       let genes = event.returnValues.genes;
 
-      $('#eventAlert').css("display", "block");
-      $('#eventAlert').html('<button type="button" class="close" aria-label="Close">' +
-                              '<span aria-hidden="true" id="close-icon">&times;</span>' +
-                            '</button>' +
-                            '<big>' + '<a href="catalouge.html">Click here to see your cat!</a>' + '</big>' +
-                            '<br>' + '<br>' +
-                            '<big>' + "Owner: " + '</big>' + owner +
-                            '<big>' + " Kitten ID: " + '</big>' + tokenID +
-                            '<big>' + " Genes: " + '</big>' + genes);
-      closeIcon();
-    }).on('error', (error, receipt) => console.log(error, receipt));
-  })
+      $('.eventAlertText').html("Owner: " + owner + '<br>' + " Kitten ID: " + tokenID + '<br>' + " Genes: " + genes);
 
+    }).on('error', (error, receipt) => console.log(error, receipt));
+  });
+});
+
+$('.view-in-catalouge').click(function(){
+  window.location.href="catalouge.html";
+});
+
+$('.make-another-one').click(function(){
+  $('#eventAlert').modal('hide');
 });
 
 async function openingModals(){
@@ -60,13 +60,6 @@ async function openingModals(){
 $('#continueBtn').click(function(){
   $('#openingModal').modal('hide');
 });
-
-//close-icon button for created cat alert
-function closeIcon(){
-  $('#close-icon').click(function(){
-    $('#eventAlert').hide();
-  });
-};
 
 //create cat button
 $('#createKitty').click(function(){
