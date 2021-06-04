@@ -28,4 +28,4 @@ Follow the steps in [this video](https://www.youtube.com/watch?v=nUEBAS5r4Og) to
 Once successfully added you can now simulate users interacting with this dapp locally! 🐱
 
 # License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/Ty-Sir/academy-kitties-template/blob/master/LICENSE)
